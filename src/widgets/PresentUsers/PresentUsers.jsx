@@ -1,29 +1,32 @@
 import {Col, Row} from "react-bootstrap";
-import PropTypes from "prop-types";
 import "./PresentUsers.scss";
 import {useTranslation} from "react-i18next";
+import {useGetPresentUsersQuery} from "../../features/apiSlice";
+import LoadingIcon from "../icons/LoadingIcon";
 
-const PresentUsers = ({
-    users,
-}) => {
+const PresentUsers = () => {
     const { t } = useTranslation();
+    const {
+        data: users,
+        error,
+        isLoading,
+        isSuccess,
+        isError,
+    } = useGetPresentUsersQuery();
 
-    if (users.length === 0) {
-        return (<Row>
-            <Col className="no_users">
+    return (<Row>
+        {isLoading && <Col>
+            <LoadingIcon large />
+        </Col>}
+        {isError && error}
+        {isSuccess && (users.length === 0 ? (<Col className="no_users">
                 <i className="far fa-frown" />
                 <h5>{t('views.users.everybodys_gone')}</h5>
             </Col>
-        </Row>);
-    }
-
-    return (<Row>
-        present_user
+        ) : users.map(user => <Col>
+            {user.username}
+        </Col>))}
     </Row>);
-};
-
-PresentUsers.propTypes = {
-    users: PropTypes.array.isRequired,
 };
 
 export default PresentUsers;

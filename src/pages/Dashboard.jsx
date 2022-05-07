@@ -22,7 +22,7 @@ const Dashboard = () => {
                     </h2>
                 </Col>
             </Row>
-            <PresentUsers users={[]} />
+            <PresentUsers />
             <Row>
                 <Col>
                     <h3>{t('views.dashboard.sensor_readings')}</h3>
