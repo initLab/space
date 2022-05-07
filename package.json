@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && gzipper compress ./build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
