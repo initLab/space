@@ -1,6 +1,6 @@
 import {Card, Col, Container, Row} from "react-bootstrap";
 import PropTypes from "prop-types";
-import './SensorReading/SensorReading.css';
+import './SensorReading.css';
 
 const SensorReading = ({
     label,
