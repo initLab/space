@@ -1,0 +1,215 @@
+activerecord:
+  errors:
+    models:
+      user:
+        attributes:
+          username:
+            invalid: can contain only letters, digits, "_" and "-"
+          twitter:
+            invalid: must be a valid twitter account
+          url:
+            invalid: must be a valid http(s) address
+          jabber:
+            invalid: must contain "@" exactly once
+          github:
+            invalid: must contain less than 40 latin letters, numbers, or "-", and not begin with a "-"
+          gpg_fingerprint:
+            invalid: must to contain exactly 40 digits or the latin leters from "A" to "F"
+      network_device:
+        attributes:
+          mac_address:
+            invalid: must be a valid MAC address
+      phone_number:
+        improbable_phone: must be a valid phone number
+  models:
+    door/actions/unlock:
+      zero: unlocks
+      one: unlock
+      few: unlocks
+      many: unlocks
+      other: unlocks
+    door/actions/open:
+      zero: opens
+      one: open
+      few: opens
+      many: opens
+      other: opens
+    door/actions/lock:
+      zero: locks
+      one: lock
+      few: locks
+      many: locks
+      other: locks
+    user:
+      zero: Lab members
+      one: Lab member
+      few: Lab members
+      many: Lab members
+      other: Lab members
+    network_device: Network device
+    phone_number: Phone number
+    role: Role
+  attributes:
+    user:
+      name: Name
+      url: Site
+      username: Username
+      login: Username or email
+      password: Password
+      password_confirmation: Password confirmation
+      current_password: Current password
+      announce_my_presence: Show my name when I'm at the Lab and when I open the door
+      gpg_fingerprint: GPG key fingerprint
+      jabber: Jabber/XMPP account
+      picture: Photo
+      github: Github account
+      pin: PIN
+      pin_confirmation: PIN confirmation
+      roles: Roles
+      locale: Language
+    network_device:
+      owner: Owner
+      mac_address: MAC address
+      description: Description
+      use_for_presence: Use to determine when I'm in the Lab
+    phone_number:
+      phone_number: Phone number
+mailers:
+  unlocks:
+    hello: "Hello, %{name}!"
+    your_account_has_been_locked: Your account was locked out due to an excess number of unsuccessful login attempts.
+    click_the_link_below_to_unlock: Click on the link below to unlock.
+  registrations:
+    welcome: "Welcome, %{name}!"
+    confirm_by_clicking: You can confirm your account by clicking the link below
+  passwords:
+    hello: "Hello, %{name}!"
+    someone_has_requested_a_link: Somebody has requested a link to change the password of your account. Your password can be changed via the link below.
+    if_you_did_not_request: If you do not want to change your password, please delete this email.
+    your_password_will_not_change: Your password will not be changed until you click the link above and type in a new password.
+roles:
+  board_member: Council
+  trusted_member: Trusted member
+  member: Member
+  3d: 3D
+network_devices:
+  index:
+    new_network_device: New network device
+  new:
+    add_network_device: Add a new network device
+  form:
+    new_network_device: New network device
+  edit:
+    edit_network_device: Edit network device
+views:
+  dashboard:
+    sensor_readings: Temperature readings
+    loading: Loading data...
+  lights:
+    management: Lights control
+    always_on: Always on
+    switched_on: 'on'
+    switched_off: 'off'
+    auto: Automatic
+    status: State
+    change_policy_to: Choose mode
+    policy: Mode
+    an_error_occurred: An error occurred during the mode change request.
+    success: Mode was changed successfully.
+  door_status:
+    locked: Locked
+    unlocked: Unlocked
+    unknown: Unknown
+    action_executed_successfuly: "Action %{action} was completed successfully."
+    action_executed_unsuccessfuly: The action was not completed successfully.
+    invalid_action: The specified action is invalid.
+    forbidden: You do not have permission to perform this action.
+    management: Lab door control
+    lock: lock
+    unlock: unlock
+    open: open
+    log: log
+  navigation:
+    view_edit: View/edit
+    sign_in: Login
+    sign_out: Logout
+    account: Account
+    lab: Lab
+    labbers: Labbers
+    door_access: Open door
+    presence: Presence
+    access: Access
+    library: Library
+    inventory: Inventory
+    accounting: Accounting
+    management: Management
+    members_fee: Membership fee
+    network_devices: Network devices
+    lights: Lights
+    sensors: Sensors
+    oauth_application_management: OAuth integration
+    oauth_token_management: Authorized applications
+  registrations:
+    sign_up: Registration
+    sign_me_up: Sign me up
+    minimum_characters: "at least %{minimum} characters"
+    edit_account: Modify account
+    leave_blank_if_you_do_not_want_to_change: leave empty if you do not want to change it
+    we_need_your_current_password: we need your current password to confirm the changes
+    update: Update
+    account_cancelation: Cancel account
+    unhappy: Not happy?
+    cancel_my_account: Cancel my account
+    are_you_sure: Are you sure that you want to delete your registration?
+    add_phone_number: Add phone number
+    announce_my_presence_explanation: |
+      If you select this option, your name, username, avatar and public
+      profile information (website, Github, Twitter) will be visible on the
+      Fauna homepage. Your username will be sent to Twitter, IRC and Telegram
+      every time you unlock, lock or open the front door.
+      If you don't select this option, you will be shown as Mystery Labber and
+      your actions on the front door will still be published, but instead of
+      showing your username, the text will say Someone who does not wish to be
+      named, unlocked/locked/opened the door.
+  passwords:
+    forgotten_password: Forgotten password
+    send_instructions: Send instructions
+    change_your_password: Change your password
+    new_password: New password
+    confirm_your_new_password: Confirm your new password
+  sessions:
+    sign_in: Sign in
+    sign_in_heading: Sign in
+    remember_me: Remember me
+    sign_in_with: "Login with %{provider}"
+  confirmations:
+    resend_confirmation: Send cofirmation email
+    resend: Send
+    did_not_receive_confirmation_instructions: You haven't received confirmation instructions?
+  unlocks:
+    did_not_receive_unlock_instructions: You haven't received unlocking instructions?
+    resend_unlock_instructions: Send unlocking instructions
+    resend: Send
+  network_devices:
+    are_you_sure: Are you sure that you want to delete this network device?
+    network_devices: Network devices
+    network_device: Network device
+    new_network_device: New network device
+  users:
+    whos_in_the_lab: Who is in init Lab
+    people_at_about_html:
+      zero: "%{count} labbers at"
+      one: "%{count} labber at"
+      few: "%{count} labbers at"
+      many: "%{count} labbers at"
+      other: "%{count} labbers at"
+    everybodys_gone: Everyone's gone
+  roles:
+    are_you_sure: 'Are you shnur?'
+  sensors:
+    title: Sensor readings
+    temperature: Temperature
+    humidity: Humidity
+  footer:
+    license: 'init Lab Fauna is licensed under'
+    source_code: 'The source code is available in'
