@@ -10,6 +10,12 @@ function App() {
         <NavBar />
         <main>
             <Switch>
+                <Route path="/" exact>
+                    <Dashboard />
+                </Route>
+                <Route path="/door/status">
+                    door status
+                </Route>
                 <Route path="/users/present">
                     <UsersPresent />
                 </Route>
@@ -18,9 +24,6 @@ function App() {
                 </Route>
                 <Route path="/fauna/users">
                     manage
-                </Route>
-                <Route path="/">
-                    <Dashboard />
                 </Route>
             </Switch>
         </main>
