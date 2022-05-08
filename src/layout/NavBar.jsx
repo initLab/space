@@ -25,7 +25,7 @@ const NavBar = () => {
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
         <Container>
-            <Navbar.Brand as={NavLink} to="/" exact>
+            <Navbar.Brand as={NavLink} to="/">
                 <Image src={logo} className="logo" alt="Fauna" />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
