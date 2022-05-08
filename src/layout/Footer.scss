@@ -1,0 +1,15 @@
+@import "bootstrap/scss/bootstrap-grid";
+
+footer {
+  p {
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+    }
+  }
+
+  p.right {
+    @include media-breakpoint-up(sm) {
+      text-align: right;
+    }
+  }
+}
