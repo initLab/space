@@ -6,7 +6,7 @@ const SensorReading = ({
     label,
     topic,
 }) => {
-    return (<Col sm={4}>
+    return (<Col>
         <Card bg="primary" text="white">
             <Card.Body>
                 <Container>

@@ -15,7 +15,7 @@ const PresentUsers = () => {
         pollingInterval: 60000,
     });
 
-    return (<Row className={isSuccess && 'row-cols-1 row-cols-sm-2 row-cols-md-4 gy-3 mb-3'}>
+    return (<Row className={isSuccess && 'row-cols-1 row-cols-sm-2 row-cols-lg-4 gy-3 mb-3'}>
         {isLoading && <Col>
             <LoadingIcon large/>
         </Col>}

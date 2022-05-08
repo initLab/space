@@ -7,7 +7,7 @@ const PresentUsersWrapper = () => {
 
     return (<>
         <Row as="header">
-            <Col sm={12}>
+            <Col>
                 <h2 className="my-4">
                     {t('views.users.whos_in_the_lab')}
                     <div className="float-end">
