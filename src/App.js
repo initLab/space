@@ -1,9 +1,10 @@
 import './App.css';
 import Dashboard from "./pages/Dashboard";
+import NavBar from "./layout/NavBar";
 
 function App() {
     return (<>
-        <div>navigation</div>
+        <NavBar />
         <main>
             <Dashboard />
         </main>
