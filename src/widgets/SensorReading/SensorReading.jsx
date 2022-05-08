@@ -12,7 +12,7 @@ const SensorReading = ({
                 <Container>
                     <Row>
                         <Col xs={3}>
-                            <i className="fa fa-thermometer-half fa-5x" />
+                            <i className="fas fa-thermometer-half fa-5x" />
                         </Col>
                         <Col xs={9} className="text-end">
                             <div className="huge">21.9°C</div>

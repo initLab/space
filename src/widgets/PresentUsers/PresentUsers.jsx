@@ -44,7 +44,7 @@ const PresentUsers = () => {
                                 <i className="fab fa-github fa-2x"></i>
                             </Button>}
                         {user.url && <Button variant="info" href={user.url} target="_blank">
-                            <i className="fa fa-link fa-2x"></i>
+                            <i className="fas fa-link fa-2x"></i>
                         </Button>}
                     </ButtonGroup>
                 </Card.Body>

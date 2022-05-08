@@ -33,16 +33,17 @@ const NavBar = () => {
                 <Nav className="me-auto">
                     <Nav.Link as={NavLink} to="/door/status">
                         {isLoading && <LoadingIcon />}
-                        {isError && <i className="fa fa-lock" />}
-                        {isSuccess && <i className={'fa fa-' +
-                            (isUnlocked ? 'unlock' : 'lock')
+                        {isError && <i className="fas fa-lock" />}
+                        {isSuccess && <i className={isUnlocked ?
+                            'fa fas-unlock' :
+                            'fa fas-lock'
                         } />}
                         {' '}
                         {(isLoading || isError) && t('views.door_status.unknown')}
                         {isSuccess && t(isUnlocked ? 'views.door_status.unlocked' : 'views.door_status.locked')}
                     </Nav.Link>
                     <Nav.Link as={NavLink} to="/users/present">
-                        <i className="fa fa-street-view" />{' '}
+                        <i className="fas fa-street-view" />{' '}
                         {t('views.navigation.presence')}
                     </Nav.Link>
                     {/*<Nav.Link href="#">*/}
@@ -50,7 +51,7 @@ const NavBar = () => {
                     {/*    {t('views.navigation.lights')}*/}
                     {/*</Nav.Link>*/}
                     <Nav.Link as={NavLink} to="/sensors">
-                        <i className="fa fa-line-chart" />{' '}
+                        <i className="fas fa-chart-line" />{' '}
                         {t('views.navigation.sensors')}
                     </Nav.Link>
                     <NavDropdown title={<>
