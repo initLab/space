@@ -35,8 +35,8 @@ const NavBar = () => {
                         {isLoading && <LoadingIcon />}
                         {isError && <i className="fas fa-lock" />}
                         {isSuccess && <i className={isUnlocked ?
-                            'fa fas-unlock' :
-                            'fa fas-lock'
+                            'fas fa-unlock' :
+                            'fas fa-lock'
                         } />}
                         {' '}
                         {(isLoading || isError) && t('views.door_status.unknown')}
