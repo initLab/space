@@ -84,7 +84,7 @@ export const anonymousApiSlice = createApi({
     baseQuery: anonymousBaseQuery,
     endpoints: builder => ({
         getDoorStatus: query(builder)('door/status'),
-        getLightsStatus: query(builder)('lights/status'),
+        // getLightsStatus: query(builder)('lights/status'),
         getPresentUsers: query(builder)('users/present'),
         // TODO
         login: mutationPostWithBody(builder)('login'),
@@ -101,7 +101,7 @@ export const authenticatedApiSlice = createApi({
 
 export const {
     useGetDoorStatusQuery,
-    useGetLightsStatusQuery,
+    // useGetLightsStatusQuery,
     useGetPresentUsersQuery,
     useLoginMutation,
 } = anonymousApiSlice;
