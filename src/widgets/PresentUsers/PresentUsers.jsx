@@ -24,7 +24,7 @@ const PresentUsers = () => {
                 <i className="far fa-frown"/>
                 <h5>{t('views.users.everybodys_gone')}</h5>
             </Col>
-        ) : users.map(user => <Col key={user.id}>
+        ) : users.map(user => <Col key={user.picture}>
             <Card>
                 <Card.Body>
                     {user.picture &&
