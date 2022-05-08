@@ -8,7 +8,6 @@ const PresentUsers = () => {
     const {t} = useTranslation();
     const {
         data: users,
-        error,
         isLoading,
         isSuccess,
         isError,
@@ -20,7 +19,7 @@ const PresentUsers = () => {
         {isLoading && <Col>
             <LoadingIcon large/>
         </Col>}
-        {isError && error}
+        {isError && <Col>Error</Col>}
         {isSuccess && (users.length === 0 ? (<Col className="text-center no_users">
                 <i className="far fa-frown"/>
                 <h5>{t('views.users.everybodys_gone')}</h5>
