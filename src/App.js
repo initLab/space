@@ -1,6 +1,7 @@
 import './App.css';
 import Dashboard from "./pages/Dashboard";
 import NavBar from "./layout/NavBar";
+import Footer from "./layout/Footer";
 
 function App() {
     return (<>
@@ -8,7 +9,7 @@ function App() {
         <main>
             <Dashboard />
         </main>
-        <div>footer</div>
+        <Footer />
     </>);
 }
 
