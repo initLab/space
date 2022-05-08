@@ -5,6 +5,7 @@ import {useTranslation} from "react-i18next";
 import {useGetDoorStatusQuery} from "../features/apiSlice";
 import LoadingIcon from "../widgets/icons/LoadingIcon";
 import {useMemo} from "react";
+import {NavLink} from "react-router-dom";
 
 const NavBar = () => {
     const {t} = useTranslation();
@@ -30,7 +31,7 @@ const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link href="#">
+                    <Nav.Link as={NavLink} to="/door/status">
                         {isLoading && <LoadingIcon />}
                         {isError && <i className="fa fa-lock" />}
                         {isSuccess && <i className={'fa fa-' +
@@ -40,15 +41,15 @@ const NavBar = () => {
                         {(isLoading || isError) && t('views.door_status.unknown')}
                         {isSuccess && t(isUnlocked ? 'views.door_status.unlocked' : 'views.door_status.locked')}
                     </Nav.Link>
-                    <Nav.Link href="#">
+                    <Nav.Link as={NavLink} to="/users/present">
                         <i className="fa fa-street-view" />{' '}
                         {t('views.navigation.presence')}
                     </Nav.Link>
-                    <Nav.Link href="#">
-                        <i className="far fa-lightbulb" />{' '}
-                        {t('views.navigation.lights')}
-                    </Nav.Link>
-                    <Nav.Link href="#">
+                    {/*<Nav.Link href="#">*/}
+                    {/*    <i className="far fa-lightbulb" />{' '}*/}
+                    {/*    {t('views.navigation.lights')}*/}
+                    {/*</Nav.Link>*/}
+                    <Nav.Link as={NavLink} to="/sensors">
                         <i className="fa fa-line-chart" />{' '}
                         {t('views.navigation.sensors')}
                     </Nav.Link>
@@ -56,7 +57,7 @@ const NavBar = () => {
                         <i className="fas fa-users" />{' '}
                         {t('views.navigation.labbers')}
                     </>}>
-                        <NavDropdown.Item href="#">
+                        <NavDropdown.Item as={NavLink} to="/fauna/users">
                             {t('views.navigation.management')}
                         </NavDropdown.Item>
                     </NavDropdown>
