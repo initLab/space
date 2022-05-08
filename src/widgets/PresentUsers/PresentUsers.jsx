@@ -18,8 +18,8 @@ const PresentUsers = () => {
     const hasUsers = isSuccess && users.length > 0;
 
     return (<Row className={'mb-3' + (isSuccess && hasUsers ? ' row-cols-1 row-cols-sm-2 row-cols-lg-4 gy-3' : '')}>
-        {isLoading && <Col>
-            <LoadingIcon large/>
+        {isLoading && <Col className="text-center">
+            <LoadingIcon large />
         </Col>}
         {isError && <Col>Error</Col>}
         {isSuccess && <>
