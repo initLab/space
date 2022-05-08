@@ -4,6 +4,7 @@ import NavBar from "./layout/NavBar";
 import Footer from "./layout/Footer";
 import {Route, Switch} from "react-router-dom";
 import UsersPresent from "./pages/UsersPresent";
+import Sensors from "./pages/Sensors";
 
 function App() {
     return (<>
@@ -20,7 +21,7 @@ function App() {
                     <UsersPresent />
                 </Route>
                 <Route path="/sensors">
-                    sensors
+                    <Sensors />
                 </Route>
                 <Route path="/fauna/users">
                     manage

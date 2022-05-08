@@ -11,3 +11,20 @@ export const mqtt = {
         topic: 'sensors-xiaomi-ble/kitchen/temperature',
     }],
 };
+
+export const grafana = {
+    temperature: {
+        dashboard: {
+            id: 'C-7GPzXMk',
+            name: 'temperatures',
+        },
+        panels: [4, 5, 10],
+    },
+    humidity: {
+        dashboard: {
+            id: 'd19kszuGk',
+            name: 'humidity',
+        },
+        panels: [4, 5, 10],
+    },
+};
