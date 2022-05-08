@@ -16,7 +16,7 @@ const PresentUsers = () => {
         pollingInterval: 60000,
     });
 
-    return (<Row className={isSuccess && 'row-cols-4'}>
+    return (<Row className={isSuccess && 'row-cols-1 row-cols-sm-2 row-cols-md-4'}>
         {isLoading && <Col>
             <LoadingIcon large/>
         </Col>}
@@ -37,14 +37,14 @@ const PresentUsers = () => {
                         </h5>
                         <ButtonGroup>
                             {user.twitter && <Button href={'https://twitter.com/' + user.twitter} target="_blank">
-                                <i className="fa fa-twitter"></i>
+                                <i className="fab fa-twitter fa-2x"></i>
                             </Button>}
                             {user.github &&
                                 <Button variant="default" href={'https://github.com/' + user.github} target="_blank">
-                                    <i className="fa github"></i>
+                                    <i className="fab fa-github fa-2x"></i>
                                 </Button>}
                             {user.url && <Button variant="info" href={user.url} target="_blank">
-                                <i className="fa fa-link"></i>
+                                <i className="fa fa-link fa-2x"></i>
                             </Button>}
                         </ButtonGroup>
                     </div>
