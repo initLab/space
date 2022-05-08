@@ -30,7 +30,7 @@ const NavBar = () => {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+                <Nav className="flex-grow-1">
                     <Nav.Link as={NavLink} to="/door/status">
                         {isLoading && <LoadingIcon />}
                         {isError && <i className="fas fa-lock" />}
@@ -60,6 +60,27 @@ const NavBar = () => {
                     </>}>
                         <NavDropdown.Item as={NavLink} to="/fauna/users">
                             {t('views.navigation.management')}
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                    <NavDropdown title={<>
+                        <i className="fas fa-user" />{' '}
+                        {t('views.navigation.account')}
+                    </>} className="ms-0 ms-lg-auto">
+                        <NavDropdown.Item as={NavLink} to="/users/edit">
+                            {t('views.navigation.view_edit')}
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={NavLink} to="/user/network_devices">
+                            {t('views.navigation.network_devices')}
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={NavLink} to="/oauth/applications">
+                            {t('views.navigation.oauth_application_management')}
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={NavLink} to="/authorized_applications">
+                            {t('views.navigation.oauth_token_management')}
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item as={NavLink} to="/users/sign_out">
+                            {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
