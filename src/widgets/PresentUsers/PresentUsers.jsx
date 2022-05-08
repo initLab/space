@@ -25,7 +25,7 @@ const PresentUsers = () => {
                 <h5>{t('views.users.everybodys_gone')}</h5>
             </Col>
         ) : users.map(user => <Col key={user.picture}>
-            <Card>
+            <Card className="h-100">
                 <Card.Header>
                     {user.picture &&
                         <Image fluid src={user.picture.replace('s=128', 's=242')} alt="avatar" className="w-100"/>}
