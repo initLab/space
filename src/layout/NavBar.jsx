@@ -46,10 +46,6 @@ const NavBar = () => {
                         <i className="fas fa-street-view" />{' '}
                         {t('views.navigation.presence')}
                     </Nav.Link>
-                    {/*<Nav.Link href="#">*/}
-                    {/*    <i className="far fa-lightbulb" />{' '}*/}
-                    {/*    {t('views.navigation.lights')}*/}
-                    {/*</Nav.Link>*/}
                     <Nav.Link as={NavLink} to="/sensors">
                         <i className="fas fa-chart-line" />{' '}
                         {t('views.navigation.sensors')}
