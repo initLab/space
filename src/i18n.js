@@ -7,7 +7,7 @@ i18n
     .use(Backend)
     .use(initReactI18next)
     .init({
-        lng: 'en',
+        fallbackLng: 'bg',
         backend: {
             loadPath: '/locales/{{lng}}.yaml',
             parse: data => load(data),
