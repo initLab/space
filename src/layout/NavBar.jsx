@@ -2,26 +2,10 @@ import {Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import './NavBar.css';
 import logo from '../assets/logo.svg';
 import {useTranslation} from "react-i18next";
-import {useGetDoorStatusQuery} from "../features/apiSlice";
-import LoadingIcon from "../widgets/icons/LoadingIcon";
-import {useMemo} from "react";
 import {NavLink} from "react-router-dom";
 
 const NavBar = () => {
     const {t} = useTranslation();
-    const {
-        data: doorStatus,
-        isLoading,
-        isSuccess,
-        isError,
-    } = useGetDoorStatusQuery(undefined, {
-        pollingInterval: 60000,
-    });
-
-    const isUnlocked = useMemo(
-        () => isSuccess && doorStatus.latch === 'unlocked',
-        [isSuccess, doorStatus]
-    );
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
         <Container>
@@ -32,6 +16,8 @@ const NavBar = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="flex-grow-1">
                     <Nav.Link as={NavLink} to="/door/status">
+                        <i className="fas fa-lock" /> TODO
+{/*
                         {isLoading && <LoadingIcon />}
                         {isError && <i className="fas fa-lock" />}
                         {isSuccess && <i className={isUnlocked ?
@@ -41,6 +27,7 @@ const NavBar = () => {
                         {' '}
                         {(isLoading || isError) && t('views.door_status.unknown')}
                         {isSuccess && t(isUnlocked ? 'views.door_status.unlocked' : 'views.door_status.locked')}
+*/}
                     </Nav.Link>
                     <Nav.Link as={NavLink} to="/users/present">
                         <i className="fas fa-street-view" />{' '}
