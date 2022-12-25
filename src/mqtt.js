@@ -1,13 +1,7 @@
 import {mqtt} from "./config";
-import { Buffer } from "buffer";
-import * as process from "process";
 import {setSensor} from "./features/sensorSlice";
 import {store} from "./app/store";
-
-window.Buffer = Buffer;
-window.process = process;
-
-const connect = require('mqtt').connect;
+import {connect} from 'mqtt/dist/mqtt';
 
 const topics = mqtt.sensors.map(sensor => sensor.topic);
 const client = connect(mqtt.url);

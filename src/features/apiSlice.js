@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {authSlice, clearTokens, REFRESH_TOKEN_KEY, setTokens, TOKEN_KEY} from './authSlice';
 
 const anonymousBaseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_BASE_URL,
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
     prepareHeaders: (headers) => {
         headers.set('accept', 'application/json');
 
@@ -11,7 +11,7 @@ const anonymousBaseQuery = fetchBaseQuery({
 });
 
 const authenticatedBaseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_BASE_URL,
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
     prepareHeaders: (headers, { getState }) => {
         headers.set('accept', 'application/json');
 
