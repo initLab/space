@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import {Spinner} from "react-bootstrap";
 
 const LoadingIcon = ({
     large,
 }) => {
     return (
-        <i className={'fas fa-sync-alt fa-spin' + (large ? ' fa-2x' : '')} />
+        <Spinner size={large ? null : 'sm'} />
     );
 };
 
