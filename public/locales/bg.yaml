@@ -84,13 +84,13 @@ mailers:
   unlocks:
     hello: "Здравейте, %{name}!"
     your_account_has_been_locked: Акаунтът ви беше заключен заради прекалено голям брой неуспешни опити за вход.
-    click_the_link_below_to_unlock: Кликнете линкът отдолу, за да го отключите.
+    click_the_link_below_to_unlock: Кликнете линка отдолу, за да го отключите.
   registrations:
     welcome: "Добре дошли, %{name}!"
     confirm_by_clicking: Можете да потвърдите акаунта си като кликнете на линка отдолу
   passwords:
     hello: "Здравейте, %{name}!"
-    someone_has_requested_a_link: Някой поиска линк за промяна на парола на акаунта Ви. Паролата може да бъде променена от линкът отдолу.
+    someone_has_requested_a_link: Някой поиска линк за промяна на парола на акаунта Ви. Паролата може да бъде променена от линка отдолу.
     if_you_did_not_request: Ако не желаете да смените паролата си, моля изтрийте това писмо.
     your_password_will_not_change: Паролата Ви няма да бъде променена, докато не кликнете горния линк и не въведете нова парола.
 roles:
@@ -98,6 +98,8 @@ roles:
   trusted_member: Доверен член
   member: Член
   3d: 3D
+  tenant: Наемател
+  landlord: Хазяин
 network_devices:
   index:
     new_network_device: Ново мрежово устройство
@@ -111,23 +113,12 @@ views:
   dashboard:
     sensor_readings: Температура на въздуха
     loading: Зареждане на данните...
-  lights:
-    management: Управление на осветлението
-    always_on: Винаги включено
-    switched_on: включено
-    switched_off: изключено
-    auto: Автоуправление
-    status: Състояние
-    change_policy_to: Избери режим
-    policy: Режим
-    an_error_occurred: Възникна грешка при заявката за промяна на режима
-    success: Режимът беше успешно променен
-  door_status:
+  doors:
     locked: Заключено
     unlocked: Отключено
     unknown: Неясно
-    action_executed_successfuly: "Действието %{action} беше изпълнено успешно."
-    action_executed_unsuccessfuly: Действието не беше изпълнено успешно.
+    action_executed_successfully: "Действието беше изпълнено успешно."
+    action_executed_unsuccessfully: Действието не беше изпълнено успешно.
     invalid_action: Посоченото действие не е валидно.
     forbidden: Нямате право да извършите това действие.
     management: Управление на вратата на Лаба
@@ -135,6 +126,7 @@ views:
     unlock: отключи
     open: отвори
     log: журнал
+    no_actions_supported: Нямате права за управление на тази врата
   navigation:
     view_edit: Преглед/редакция
     sign_in: Вход
@@ -142,7 +134,7 @@ views:
     account: Акаунт
     lab: Лаб
     labbers: Лабъри
-    door_access: Отваряне на вратата
+    door_access: Отваряне на врати
     presence: Присъствие
     access: Достъп
     library: Библиотека
@@ -151,7 +143,6 @@ views:
     management: Управление
     members_fee: Членски внос
     network_devices: Мрежови устройства
-    lights: Осветление
     sensors: Графики
     oauth_application_management: OAuth интеграция
     oauth_token_management: Упълномощени приложения
