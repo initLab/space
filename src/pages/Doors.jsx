@@ -1,6 +1,6 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 
-const DoorStatus = () => {
+const Doors = () => {
     return (<Container as="section" className="text-center">
         <Row>
             <Col>
@@ -31,4 +31,4 @@ const DoorStatus = () => {
     </Container>);
 };
 
-export default DoorStatus;
+export default Doors;

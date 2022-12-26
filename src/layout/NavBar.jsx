@@ -23,7 +23,7 @@ const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="flex-grow-1">
-                    <Nav.Link as={NavLink} to="/door/status">
+                    <Nav.Link as={NavLink} to="/doors">
                         {doorStatus === 'uninitialized' && <>
                             <LoadingIcon /> ...
                         </>}
