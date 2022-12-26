@@ -28,16 +28,16 @@ const NavBar = () => {
                             <LoadingIcon /> ...
                         </>}
                         {doorStatus === 'locked' && <>
-                            <LockIcon /> {t('views.door_status.locked')}
+                            <LockIcon /> {t('views.doors.locked')}
                         </>}
                         {doorStatus === 'unlocked' && <>
-                            <UnlockIcon /> {t('views.door_status.unlocked')}
+                            <UnlockIcon /> {t('views.doors.unlocked')}
                         </>}
                         {doorStatus === 'busy' && <>
                             <BusyIcon /> ...
                         </>}
                         {doorStatus === 'invalid' && <>
-                            <WarningIcon /> {t('views.door_status.unknown')}
+                            <WarningIcon /> {t('views.doors.unknown')}
                         </>}
                     </Nav.Link>
                     <Nav.Link as={NavLink} to="/users/present">
