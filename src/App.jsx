@@ -1,13 +1,27 @@
 import './App.css';
-import Dashboard from "./pages/Dashboard";
-import NavBar from "./layout/NavBar";
-import Footer from "./layout/Footer";
-import {Route, Routes} from "react-router-dom";
-import UsersPresent from "./pages/UsersPresent";
-import Sensors from "./pages/Sensors";
-import Doors from "./pages/Doors.jsx";
+import Dashboard from './pages/Dashboard';
+import NavBar from './layout/NavBar';
+import Footer from './layout/Footer';
+import {Route, Routes, useLocation} from 'react-router-dom';
+import UsersPresent from './pages/UsersPresent';
+import Sensors from './pages/Sensors';
+import Doors from './pages/Doors.jsx';
+import {useEffect} from 'react';
+import {setTokens} from './authStorage.js';
 
 function App() {
+    const { hash } = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(hash);
+
+        if (params.get('token_type') === 'Bearer' && params.has('access_token')) {
+            setTokens({
+                token: params.get('access_token'),
+            });
+        }
+    }, [hash]);
+
     return (<>
         <NavBar />
         <main>

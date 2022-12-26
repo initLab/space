@@ -1,9 +1,12 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {authSlice, clearTokens, REFRESH_TOKEN_KEY, setTokens, TOKEN_KEY} from './authSlice';
+import {clearTokens, getRefreshToken, getToken, setTokens} from '../authStorage.js';
+import {E_ALREADY_LOCKED, Mutex, tryAcquire} from 'async-mutex';
+
+const refreshMutex = new Mutex();
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
         return headers;
@@ -12,14 +15,10 @@ const anonymousBaseQuery = fetchBaseQuery({
 
 const authenticatedBaseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
-        const {
-            [authSlice.name]: {
-                [TOKEN_KEY]: token,
-            },
-        } = getState();
+        const token = getToken();
 
         if (token) {
             headers.set('authorization', 'Bearer ' + token);
@@ -36,31 +35,36 @@ const authenticatedBaseQueryWithReauth = async (args, api, extraOptions) => {
         return result;
     }
 
-    const {
-        [authSlice.name]: {
-            [REFRESH_TOKEN_KEY]: refreshToken,
-        },
-    } = api.getState();
+    try {
+        await tryAcquire(refreshMutex).runExclusive(async () => {
+            const refreshToken = getRefreshToken();
 
-    if (refreshToken === null) {
-        api.dispatch(clearTokens());
-        return result;
+            if (refreshToken === null) {
+                clearTokens();
+                throw new Error('No refresh token found');
+            }
+
+            const refreshResult = await anonymousBaseQuery({
+                url: 'login/refresh-token',
+                method: 'POST',
+                body: {
+                    refresh_token: refreshToken,
+                },
+            }, api, extraOptions);
+
+            if (!refreshResult.data) {
+                clearTokens();
+                throw new Error('Refreshing token failed');
+            }
+
+            setTokens(refreshResult.data);
+        });
     }
-
-    const refreshResult = await anonymousBaseQuery({
-        url: 'login/refresh-token',
-        method: 'POST',
-        body: {
-            refresh_token: refreshToken,
-        },
-    }, api, extraOptions);
-
-    if (!refreshResult.data) {
-        api.dispatch(clearTokens());
-        return result;
+    catch (e) {
+        if (e === E_ALREADY_LOCKED) {
+            await refreshMutex.waitForUnlock();
+        }
     }
-
-    api.dispatch(setTokens(refreshResult.data));
 
     return authenticatedBaseQuery(args, api, extraOptions);
 };
