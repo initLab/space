@@ -5,7 +5,7 @@ import {E_ALREADY_LOCKED, Mutex, tryAcquire} from 'async-mutex';
 const refreshMutex = new Mutex();
 
 const anonymousBaseQuery = fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_BASE_URL,
+    baseUrl: import.meta.env.VITE_BACKEND_URL,
     prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
@@ -14,7 +14,7 @@ const anonymousBaseQuery = fetchBaseQuery({
 });
 
 const authenticatedBaseQuery = fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_BASE_URL,
+    baseUrl: import.meta.env.VITE_BACKEND_URL,
     prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
@@ -87,7 +87,7 @@ export const anonymousApiSlice = createApi({
     reducerPath: 'anonymousApi',
     baseQuery: anonymousBaseQuery,
     endpoints: builder => ({
-        getPresentUsers: query(builder)('users/present'),
+        getPresentUsers: query(builder)('api/users/present'),
         // TODO
         login: mutationPostWithBody(builder)('login'),
     }),
@@ -97,7 +97,7 @@ export const authenticatedApiSlice = createApi({
     reducerPath: 'authenticatedApi',
     baseQuery: authenticatedBaseQueryWithReauth,
     endpoints: builder => ({
-        getCurrentUser: query(builder)('current_user'),
+        getCurrentUser: query(builder)('api/current_user'),
     }),
 });
 
