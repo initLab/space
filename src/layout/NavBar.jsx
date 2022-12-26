@@ -3,9 +3,17 @@ import './NavBar.css';
 import logo from '../assets/logo.svg';
 import {useTranslation} from "react-i18next";
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {doorStatusSelector} from "../features/doorSlice.js";
+import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
+import WarningIcon from "../widgets/icons/WarningIcon.jsx";
+import LockIcon from "../widgets/icons/LockIcon.jsx";
+import UnlockIcon from "../widgets/icons/UnlockIcon.jsx";
+import BusyIcon from "../widgets/icons/BusyIcon.jsx";
 
 const NavBar = () => {
     const {t} = useTranslation();
+    const doorStatus = useSelector(doorStatusSelector());
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
         <Container>
@@ -16,18 +24,21 @@ const NavBar = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="flex-grow-1">
                     <Nav.Link as={NavLink} to="/door/status">
-                        <i className="fas fa-lock" /> TODO
-{/*
-                        {isLoading && <LoadingIcon />}
-                        {isError && <i className="fas fa-lock" />}
-                        {isSuccess && <i className={isUnlocked ?
-                            'fas fa-unlock' :
-                            'fas fa-lock'
-                        } />}
-                        {' '}
-                        {(isLoading || isError) && t('views.door_status.unknown')}
-                        {isSuccess && t(isUnlocked ? 'views.door_status.unlocked' : 'views.door_status.locked')}
-*/}
+                        {doorStatus === 'uninitialized' && <>
+                            <LoadingIcon /> ...
+                        </>}
+                        {doorStatus === 'locked' && <>
+                            <LockIcon /> {t('views.door_status.locked')}
+                        </>}
+                        {doorStatus === 'unlocked' && <>
+                            <UnlockIcon /> {t('views.door_status.unlocked')}
+                        </>}
+                        {doorStatus === 'busy' && <>
+                            <BusyIcon /> ...
+                        </>}
+                        {doorStatus === 'invalid' && <>
+                            <WarningIcon /> {t('views.door_status.unknown')}
+                        </>}
                     </Nav.Link>
                     <Nav.Link as={NavLink} to="/users/present">
                         <i className="fas fa-street-view" />{' '}

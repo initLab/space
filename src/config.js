@@ -10,6 +10,15 @@ export const mqtt = {
         label: 'Kitchen',
         topic: 'sensors-xiaomi-ble/kitchen/temperature',
     }],
+    doorStates: [{
+        type: 'locked',
+        topic: 'NetControl/initLab/out/ch28',
+        mapper: msg => JSON.parse(msg).value.raw === 1,
+    }, {
+        type: 'unlocked',
+        topic: 'NetControl/initLab/out/ch29',
+        mapper: msg => JSON.parse(msg).value.raw === 1,
+    }]
 };
 
 export const grafana = {

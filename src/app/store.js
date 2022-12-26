@@ -4,6 +4,7 @@ import {anonymousApiSlice, authenticatedApiSlice} from '../features/apiSlice'
 import {authSlice} from '../features/authSlice';
 import {formSlice} from '../features/formSlice';
 import {sensorSlice} from "../features/sensorSlice";
+import {doorSlice} from "../features/doorSlice.js";
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         [authSlice.name]: authSlice.reducer,
         [formSlice.name]: formSlice.reducer,
         [sensorSlice.name]: sensorSlice.reducer,
+        [doorSlice.name]: doorSlice.reducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(anonymousApiSlice.middleware).concat(authenticatedApiSlice.middleware),
