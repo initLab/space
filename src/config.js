@@ -1,5 +1,5 @@
 export const mqtt = {
-    url: 'wss://spitfire.initlab.org:8083/mqtt',
+    url: import.meta.env.VITE_MQTT_URL,
     sensors: [{
         label: 'Big room',
         topic: 'sensors-xiaomi-ble/big-room/temperature',
