@@ -30,6 +30,9 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build --base=/fauna-frontend/
+        env:
+          VITE_OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
+          VITE_OAUTH_CALLBACK_URL: https://initlab.github.io/fauna-frontend/
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
