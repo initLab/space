@@ -27,7 +27,7 @@ jobs:
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
-          cmd: build # will run `yarn build` command
+          cmd: build --base=/fauna-frontend/ # will run `yarn build` command
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
