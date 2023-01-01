@@ -10,10 +10,18 @@ import WarningIcon from "../widgets/icons/WarningIcon.jsx";
 import LockIcon from "../widgets/icons/LockIcon.jsx";
 import UnlockIcon from "../widgets/icons/UnlockIcon.jsx";
 import BusyIcon from "../widgets/icons/BusyIcon.jsx";
+import {getToken} from "../authStorage.js";
 
 const NavBar = () => {
     const {t} = useTranslation();
     const doorStatus = useSelector(doorStatusSelector());
+    const loginUrl = import.meta.env.VITE_BACKEND_URL + 'oauth/authorize?' + (new URLSearchParams({
+        client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
+        redirect_uri: import.meta.env.VITE_OAUTH_CALLBACK_URL,
+        response_type: 'token',
+        scope: ['public', 'account_data_read', 'door_control'].join(' '),
+    })).toString();
+    const isLoggedIn = getToken() !== null;
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
         <Container>
@@ -56,7 +64,7 @@ const NavBar = () => {
                             {t('views.navigation.management')}
                         </NavDropdown.Item>
                     </NavDropdown>
-                    <NavDropdown title={<>
+                    {isLoggedIn ? <NavDropdown title={<>
                         <i className="fas fa-user" />{' '}
                         {t('views.navigation.account')}
                     </>} className="ms-0 ms-lg-auto">
@@ -76,7 +84,10 @@ const NavBar = () => {
                         <NavDropdown.Item as={NavLink} to="/users/sign_out">
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
-                    </NavDropdown>
+                    </NavDropdown> : <Nav.Link href={loginUrl} className="ms-0 ms-lg-auto">
+                        <i className="fas fa-sign-in" />{' '}
+                        {t('views.navigation.sign_in')}
+                    </Nav.Link>}
                 </Nav>
             </Navbar.Collapse>
         </Container>
