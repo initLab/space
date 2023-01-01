@@ -1,8 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {clearTokens, getRefreshToken, getToken, setTokens} from '../authStorage.js';
-import {E_ALREADY_LOCKED, Mutex, tryAcquire} from 'async-mutex';
-
-const refreshMutex = new Mutex();
+import {getToken} from '../authStorage.js';
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,
@@ -27,47 +24,6 @@ const authenticatedBaseQuery = fetchBaseQuery({
         return headers;
     },
 });
-
-const authenticatedBaseQueryWithReauth = async (args, api, extraOptions) => {
-    let result = await authenticatedBaseQuery(args, api, extraOptions);
-
-    if (!result.error || result.error.status !== 401) {
-        return result;
-    }
-
-    try {
-        await tryAcquire(refreshMutex).runExclusive(async () => {
-            const refreshToken = getRefreshToken();
-
-            if (refreshToken === null) {
-                clearTokens();
-                throw new Error('No refresh token found');
-            }
-
-            const refreshResult = await anonymousBaseQuery({
-                url: 'login/refresh-token',
-                method: 'POST',
-                body: {
-                    refresh_token: refreshToken,
-                },
-            }, api, extraOptions);
-
-            if (!refreshResult.data) {
-                clearTokens();
-                throw new Error('Refreshing token failed');
-            }
-
-            setTokens(refreshResult.data);
-        });
-    }
-    catch (e) {
-        if (e === E_ALREADY_LOCKED) {
-            await refreshMutex.waitForUnlock();
-        }
-    }
-
-    return authenticatedBaseQuery(args, api, extraOptions);
-};
 
 const query = builder => url => builder.query({
     query: () => url,
@@ -95,7 +51,7 @@ export const anonymousApiSlice = createApi({
 
 export const authenticatedApiSlice = createApi({
     reducerPath: 'authenticatedApi',
-    baseQuery: authenticatedBaseQueryWithReauth,
+    baseQuery: authenticatedBaseQuery,
     endpoints: builder => ({
         getCurrentUser: query(builder)('api/current_user'),
     }),

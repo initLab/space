@@ -7,7 +7,7 @@ import UsersPresent from './pages/UsersPresent';
 import Sensors from './pages/Sensors';
 import Doors from './pages/Doors.jsx';
 import {useEffect} from 'react';
-import {setTokens} from './authStorage.js';
+import {setToken} from "./authStorage.js";
 
 function App() {
     const { hash } = useLocation();
@@ -16,9 +16,7 @@ function App() {
         const params = new URLSearchParams(hash);
 
         if (params.get('token_type') === 'Bearer' && params.has('access_token')) {
-            setTokens({
-                token: params.get('access_token'),
-            });
+            setToken(params.get('access_token'));
         }
     }, [hash]);
 
