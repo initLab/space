@@ -13,7 +13,7 @@ function App() {
     const { hash } = useLocation();
 
     useEffect(() => {
-        const params = new URLSearchParams(hash);
+        const params = new URLSearchParams(hash.substr(1));
 
         if (params.get('token_type') === 'Bearer' && params.has('access_token')) {
             setToken(params.get('access_token'));
