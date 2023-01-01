@@ -1,0 +1,8 @@
+{
+  "short_name": "Fauna",
+  "name": "Hackerspace management system",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2196f3",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,213 @@
+activerecord:
+  errors:
+    models:
+      user:
+        attributes:
+          username:
+            invalid: може да съдържа само букви, цифри, „_“ и „-“
+          twitter:
+            invalid: трябва да бъде валиден twitter акаунт
+          url:
+            invalid: трябва да бъде валиден http(s) адрес
+          jabber:
+            invalid: трябва да съдържа „@“ точно веднъж
+          github:
+            invalid: трябва да съдържа по-малко от 40 латински букви, цифри или „-“ и да не започва с „-“
+          gpg_fingerprint:
+            invalid: трябва да съдържа точно 40 цифри или латински букви от „A“ до „F“
+      network_device:
+        attributes:
+          mac_address:
+            invalid: трябва да бъде валиден MAC адрес
+      phone_number:
+        improbable_phone: трябва да е валиден телефонен номер
+  models:
+    doorkeeper/application:
+      zero: OAuth приложения
+      one: OAuth приложение
+      few: OAuth приложения
+      many: OAuth приложения
+      other: OAuth приложения
+    door/actions/unlock:
+      zero: отключвания
+      one: отключване
+      few: отключвания
+      many: отключвания
+      other: отключвания
+    door/actions/open:
+      zero: отваряния
+      one: отваряне
+      few: отваряния
+      many: отваряния
+      other: отваряния
+    door/actions/lock:
+      zero: заключвания
+      one: заключване
+      few: заключвания
+      many: заключвания
+      other: заключвания
+    user:
+      zero: Лабъри
+      one: Лабър
+      few: Лабъри
+      many: Лабъри
+      other: Лабъри
+    network_device: Мрежово устройство
+    phone_number: Телефонен номер
+    role: Роля
+  attributes:
+    user:
+      name: Име
+      url: Сайт
+      username: Потребителско име
+      login: Потребителско име или Email
+      password: Парола
+      password_confirmation: Потвърждение на паролата
+      current_password: Текуща парола
+      announce_my_presence: Показвай името ми, когато съм в Лаба и когато отварям вратата
+      gpg_fingerprint: Отпечатък на GPG ключ
+      jabber: Jabber акаунт
+      picture: Снимка
+      github: Github акаунт
+      pin: ПИН
+      pin_confirmation: Потвърждение на ПИН-а
+      roles: Роли
+      locale: Език
+    network_device:
+      owner: Собственик
+      mac_address: MAC адрес
+      description: Описание
+      use_for_presence: Използвай за определяне кога съм в Лаба
+    phone_number:
+      phone_number: Телефонен номер
+mailers:
+  unlocks:
+    hello: "Здравейте, %{name}!"
+    your_account_has_been_locked: Акаунтът ви беше заключен заради прекалено голям брой неуспешни опити за вход.
+    click_the_link_below_to_unlock: Кликнете линка отдолу, за да го отключите.
+  registrations:
+    welcome: "Добре дошли, %{name}!"
+    confirm_by_clicking: Можете да потвърдите акаунта си като кликнете на линка отдолу
+  passwords:
+    hello: "Здравейте, %{name}!"
+    someone_has_requested_a_link: Някой поиска линк за промяна на парола на акаунта Ви. Паролата може да бъде променена от линка отдолу.
+    if_you_did_not_request: Ако не желаете да смените паролата си, моля изтрийте това писмо.
+    your_password_will_not_change: Паролата Ви няма да бъде променена, докато не кликнете горния линк и не въведете нова парола.
+roles:
+  board_member: УС
+  trusted_member: Доверен член
+  member: Член
+  3d: 3D
+  tenant: Наемател
+  landlord: Хазяин
+network_devices:
+  index:
+    new_network_device: Ново мрежово устройство
+  new:
+    add_network_device: Добавяне на ново мрежово устройство
+  form:
+    new_network_device: Ново мрежово устройство
+  edit:
+    edit_network_device: Редакция на мрежово устройство
+views:
+  dashboard:
+    sensor_readings: Температура на въздуха
+    loading: Зареждане на данните...
+  doors:
+    locked: Заключено
+    unlocked: Отключено
+    unknown: Неясно
+    action_executed_successfully: "Действието беше изпълнено успешно."
+    action_executed_unsuccessfully: Действието не беше изпълнено успешно.
+    invalid_action: Посоченото действие не е валидно.
+    forbidden: Нямате право да извършите това действие.
+    management: Управление на вратата на Лаба
+    lock: заключи
+    unlock: отключи
+    open: отвори
+    log: журнал
+    no_actions_supported: Нямате права за управление на тази врата
+  navigation:
+    view_edit: Преглед/редакция
+    sign_in: Вход
+    sign_out: Изход
+    account: Акаунт
+    lab: Лаб
+    labbers: Лабъри
+    door_access: Отваряне на врати
+    presence: Присъствие
+    access: Достъп
+    library: Библиотека
+    inventory: Инвентар
+    accounting: Счетоводство
+    management: Управление
+    members_fee: Членски внос
+    network_devices: Мрежови устройства
+    sensors: Графики
+    oauth_application_management: OAuth интеграция
+    oauth_token_management: Упълномощени приложения
+  registrations:
+    sign_up: Регистрация
+    sign_me_up: Регистрирай ме
+    minimum_characters: "най-малко %{minimum} символа"
+    edit_account: Редакция на акаунт
+    leave_blank_if_you_do_not_want_to_change: оставете празно, ако не искате да я променяте
+    we_need_your_current_password: нуждаем се от сегашната Ви парола, за да потвърдим промените
+    update: Промени
+    account_cancelation: Изтриване на акаунт
+    unhappy: Не Сте щастливи?
+    cancel_my_account: Изтрий акаунта ми
+    are_you_sure: Сигурни ли Сте, че искате да изтриете регистрацията си?
+    add_phone_number: Добави телефонен номер
+    announce_my_presence_explanation: |
+      Ако изберете тази отметка, вашето име, потребителско име, аватар и
+      публични данни от профила (сайт, Github, Twitter) ще са видими на
+      началната страница на Fauna. Вашето потребителско име ще бъде изпращано
+      в Twitter, IRC и Telegram, когато отключвате, заключвате или отваряте
+      входната врата.
+      Ако не я изберете, ще бъдете показван като Mystery Labber, а действията
+      Ви свързани с входната врата пак ще се изпращат, но вместо с името ви,
+      ще пише Someone who does not wish to be named, unlocked/locked/opened
+      the door."
+  passwords:
+    forgotten_password: Забравена парола
+    send_instructions: Изпрати инструкции
+    change_your_password: Променете паролата си
+    new_password: Нова парола
+    confirm_your_new_password: Потвърждение на новата парола
+  sessions:
+    sign_in: Влез
+    sign_in_heading: Вход
+    remember_me: Запомни ме
+    sign_in_with: "Влез с %{provider}"
+  confirmations:
+    resend_confirmation: Изпращане на Email за потвърждение
+    resend: Изпрати
+    did_not_receive_confirmation_instructions: Не сте получили инструкции за потвърждение?
+  unlocks:
+    did_not_receive_unlock_instructions: Не сте получили инструкции за отключване?
+    resend_unlock_instructions: Изпращане на инструкции за отключване
+    resend: Изпрати
+  network_devices:
+    are_you_sure: Сигурни ли Сте, че искате да изтриете това мрежово устройство?
+    network_devices: Мрежови устройства
+    network_device: Мрежово устройство
+    new_network_device: Ново мрежово устройство
+  users:
+    whos_in_the_lab: Кой е в init Lab
+    people_at_about_html:
+      zero: "%{count} лабъри към"
+      one: "%{count} лабър към"
+      few: "%{count}<sup>-ма</sup> лабъри към"
+      many: "%{count} лабъри към"
+      other: "%{count} лабъри към"
+    everybodys_gone: Всички ги е хванала липсата
+  roles:
+    are_you_sure: 'Сигурни ли сте?'
+  sensors:
+    title: Показания на сензорите
+    temperature: Температура
+    humidity: Относителна влажност
+  footer:
+    license: 'init Lab Fauna е лицензирана под'
+    source_code: 'Изходният код е достъпен в'
