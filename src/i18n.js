@@ -1,7 +1,7 @@
- import i18n from "i18next";
+import i18n from "i18next";
 import Backend from 'i18next-http-backend';
-import { initReactI18next } from "react-i18next";
-import { load } from 'js-yaml';
+import {initReactI18next} from "react-i18next";
+import {load} from 'js-yaml';
 
 i18n
     .use(Backend)
@@ -9,7 +9,7 @@ i18n
     .init({
         fallbackLng: 'bg',
         backend: {
-            loadPath: '/locales/{{lng}}.yaml',
+            loadPath: import.meta.env.BASE_URL + 'locales/{{lng}}.yaml',
             parse: data => load(data),
         },
         interpolation: {
