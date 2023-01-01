@@ -1,32 +1,31 @@
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import '../doors.scss';
+import React from "react";
 
 const Doors = () => {
-    return (<Container as="section" className="text-center">
-        <Row>
+    return (<Container as="section" className="text-center mt-4">
+        <Row className="row-cols row-cols-1">
+            <Col></Col>
             <Col>
-                <div className="mt-3 mx-auto" style={{
-                        width: 200,
-                        height: 200,
-                    }}>
-                    <i className="fa fa-lock" />
-                    <br />
-                    Locked
-                </div>
+                <Card>
+                    <Card.Header className="bg-primary text-light text-start">Входна врата</Card.Header>
+                    <Card.Body className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
+                        <Button variant="success" className="door-button">
+                            <i className="fa fa-sign-in" />
+                            <div>отвори</div>
+                        </Button>
+                        <Button variant="danger" className="door-button">
+                            <i className="fa fa-unlock" />
+                            <div>отключи</div>
+                        </Button>
+                        <Button variant="info" className="door-button">
+                            <i className="fa fa-lock" />
+                            <div>заключи</div>
+                        </Button>
+                    </Card.Body>
+                </Card>
             </Col>
-        </Row>
-        <Row>
-            <Col>
-                <div className="mt-3 mx-auto">
-                    <Button variant="danger" className="door_button" style={{
-                        width: 200,
-                        height: 200,
-                    }}>
-                        <i className="fa fa-unlock" />
-                        <br />
-                        <span className="small">unlock</span>
-                    </Button>
-                </div>
-            </Col>
+            <Col></Col>
         </Row>
     </Container>);
 };

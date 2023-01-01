@@ -1,0 +1,32 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+
+.door-button {
+  width: 250px;
+
+  div {
+    font-size: 110%;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: 350px;
+
+    i.fa {
+      font-size: 36pt;
+    }
+
+    div {
+      margin-top: map-get($spacers, 2);
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 200px;
+    height: 200px;
+
+    i.fa {
+      font-size: 72pt;
+    }
+  }
+}
