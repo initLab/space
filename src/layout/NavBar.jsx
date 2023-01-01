@@ -10,12 +10,13 @@ import WarningIcon from "../widgets/icons/WarningIcon.jsx";
 import LockIcon from "../widgets/icons/LockIcon.jsx";
 import UnlockIcon from "../widgets/icons/UnlockIcon.jsx";
 import BusyIcon from "../widgets/icons/BusyIcon.jsx";
-import {getToken} from "../authStorage.js";
+import {clearToken, getToken} from "../authStorage.js";
 
 const NavBar = () => {
     const {t} = useTranslation();
     const doorStatus = useSelector(doorStatusSelector());
-    const loginUrl = import.meta.env.VITE_BACKEND_URL + 'oauth/authorize?' + (new URLSearchParams({
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const loginUrl = backendUrl + 'oauth/authorize?' + (new URLSearchParams({
         client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
         redirect_uri: import.meta.env.VITE_OAUTH_CALLBACK_URL,
         response_type: 'token',
@@ -68,20 +69,20 @@ const NavBar = () => {
                         <i className="fas fa-user" />{' '}
                         {t('views.navigation.account')}
                     </>} className="ms-0 ms-lg-auto">
-                        <NavDropdown.Item as={NavLink} to="/users/edit">
+                        <NavDropdown.Item href={backendUrl + 'users/edit'}>
                             {t('views.navigation.view_edit')}
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={NavLink} to="/user/network_devices">
+                        <NavDropdown.Item href={backendUrl + 'user/network_devices'}>
                             {t('views.navigation.network_devices')}
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={NavLink} to="/oauth/applications">
+                        <NavDropdown.Item href={backendUrl + 'oauth/applications'}>
                             {t('views.navigation.oauth_application_management')}
                         </NavDropdown.Item>
-                        <NavDropdown.Item as={NavLink} to="/authorized_applications">
+                        <NavDropdown.Item href={backendUrl + 'oauth/authorized_applications'}>
                             {t('views.navigation.oauth_token_management')}
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item as={NavLink} to="/users/sign_out">
+                        <NavDropdown.Item onClick={() => clearToken()}>
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
                     </NavDropdown> : <Nav.Link href={loginUrl} className="ms-0 ms-lg-auto">
