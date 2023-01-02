@@ -22,12 +22,12 @@ function App() {
         <NavBar />
         <main>
             <Routes>
+                <Route path="/" element={<Dashboard />} />
                 <Route path="/doors" element={<Doors />} />
                 <Route path="/users/present" element={<UsersPresent />} />
                 <Route path="/sensors" element={<Sensors />} />
                 <Route path="/oauth-callback" element={<OauthCallback />} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="*" element={<Dashboard />} />
             </Routes>
         </main>
         <Footer />
