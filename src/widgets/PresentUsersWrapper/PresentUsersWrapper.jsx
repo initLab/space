@@ -12,7 +12,7 @@ const PresentUsersWrapper = () => {
                     {t('views.users.whos_in_the_lab')}
                     <div className="float-end">
                         <span className="small">
-                            {t('views.users.people_at_about_html.few')}{' '}
+                            {t('views.users.people_at_about_html.other')}{' '}
                             <time dateTime="2022-05-07T19:02:46+03:00">19:02</time>
                         </span>
                     </div>
