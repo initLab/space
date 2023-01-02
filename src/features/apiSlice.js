@@ -44,8 +44,6 @@ export const anonymousApiSlice = createApi({
     baseQuery: anonymousBaseQuery,
     endpoints: builder => ({
         getPresentUsers: query(builder)('api/users/present'),
-        // TODO
-        login: mutationPostWithBody(builder)('login'),
     }),
 });
 
@@ -53,15 +51,16 @@ export const authenticatedApiSlice = createApi({
     reducerPath: 'authenticatedApi',
     baseQuery: authenticatedBaseQuery,
     endpoints: builder => ({
-        getCurrentUser: query(builder)('api/current_user'),
+        getDoors: query(builder)('api/doors.json'),
+        doorAction: mutationPostWithBody(builder)('doors'),
     }),
 });
 
 export const {
     useGetPresentUsersQuery,
-    useLoginMutation,
 } = anonymousApiSlice;
 
 export const {
-    useGetCurrentUserQuery,
+    useGetDoorsQuery,
+    useDoorActionMutation,
 } = authenticatedApiSlice;

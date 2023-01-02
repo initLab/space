@@ -1,8 +1,20 @@
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import '../doors.scss';
 import React from "react";
+import {useGetDoorsQuery} from "../features/apiSlice.js";
 
 const Doors = () => {
+    const {
+        data: doors,
+        error,
+        isLoading,
+        isSuccess,
+        isError,
+    } = useGetDoorsQuery();
+
+    // TODO
+    console.log(doors, error, isLoading, isSuccess, isError);
+
     return (<Container as="section" className="text-center mt-4">
         <Row className="row-cols row-cols-1">
             <Col></Col>
