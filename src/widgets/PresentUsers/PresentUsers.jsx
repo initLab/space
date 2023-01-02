@@ -1,29 +1,15 @@
 import {Button, ButtonGroup, Card, Col, Image, Row} from "react-bootstrap";
 import "./PresentUsers.scss";
 import {useTranslation} from "react-i18next";
-import {useGetPresentUsersQuery} from "../../features/apiSlice";
-import LoadingIcon from "../icons/LoadingIcon";
 
-const PresentUsers = () => {
+const PresentUsers = ({
+    users,
+}) => {
     const {t} = useTranslation();
-    const {
-        data: users,
-        isLoading,
-        isSuccess,
-        isError,
-    } = useGetPresentUsersQuery(undefined, {
-        pollingInterval: 60000,
-    });
 
-    const hasUsers = isSuccess && users.length > 0;
-
-    return (<Row className={'mb-3' + (isSuccess && hasUsers ? ' row-cols-1 row-cols-sm-2 row-cols-lg-4 gy-3' : '')}>
-        {isLoading && <Col className="text-center">
-            <LoadingIcon large />
-        </Col>}
-        {isError && <Col>Error</Col>}
-        {isSuccess && <>
-            {hasUsers && users.map(user => <Col key={user.picture}>
+    if (users.length > 0) {
+        return (<Row className="mb-3 row-cols-1 row-cols-sm-2 row-cols-lg-4 gy-3">
+            {users.map(user => <Col key={user.picture}>
                 <Card className="h-100">
                     <Card.Header>
                         {user.picture &&
@@ -49,11 +35,14 @@ const PresentUsers = () => {
                     </Card.Body>
                 </Card>
             </Col>)}
-            {hasUsers || <Col className="text-center no_users">
-                <i className="far fa-frown"/>
-                <h5 className="mt-2">{t('views.users.everybodys_gone')}</h5>
-            </Col>}
-        </>}
+        </Row>);
+    }
+
+    return (<Row className="mb-3">
+        <Col className="text-center no_users">
+            <i className="far fa-frown"/>
+            <h5 className="mt-2">{t('views.users.everybodys_gone')}</h5>
+        </Col>
     </Row>);
 };
 
