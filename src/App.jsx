@@ -10,6 +10,7 @@ import OauthCallback from "./pages/OauthCallback.jsx";
 import {useEffect} from "react";
 import {checkAuth} from "./authStorage.js";
 import Logout from "./pages/Logout.jsx";
+import {Container} from "react-bootstrap";
 
 function App() {
     const location = useLocation();
@@ -21,14 +22,16 @@ function App() {
     return (<>
         <NavBar />
         <main>
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/doors" element={<Doors />} />
-                <Route path="/users/present" element={<UsersPresent />} />
-                <Route path="/sensors" element={<Sensors />} />
-                <Route path="/oauth-callback" element={<OauthCallback />} />
-                <Route path="/logout" element={<Logout />} />
-            </Routes>
+            <Container as="section" className="mt-4">
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/doors" element={<Doors />} />
+                    <Route path="/users/present" element={<UsersPresent />} />
+                    <Route path="/sensors" element={<Sensors />} />
+                    <Route path="/oauth-callback" element={<OauthCallback />} />
+                    <Route path="/logout" element={<Logout />} />
+                </Routes>
+            </Container>
         </main>
         <Footer />
     </>);
