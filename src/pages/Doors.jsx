@@ -5,6 +5,7 @@ import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
 import DoorButton from "../widgets/DoorButton/DoorButton.jsx";
 import {useSelector} from "react-redux";
 import {doorStatusSelector} from "../features/doorSlice.js";
+import {Navigate} from "react-router-dom";
 
 const Doors = () => {
     const {
@@ -61,9 +62,7 @@ const Doors = () => {
                 </Card>
             </Col>);
         })}
-        {isError && <Col>
-            Error {error.status} {error.data}
-        </Col>}
+        {isError && error.status === 401 && <Navigate to="/login" />}
     </Row>);
 };
 

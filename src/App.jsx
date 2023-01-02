@@ -10,6 +10,7 @@ import {checkAuth} from "./authStorage.js";
 import Logout from "./pages/Logout.jsx";
 import {Container} from "react-bootstrap";
 import PresentUsersWrapper from "./widgets/PresentUsersWrapper/PresentUsersWrapper.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
     const location = useLocation();
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/users/present" element={<PresentUsersWrapper />} />
                     <Route path="/sensors" element={<Sensors />} />
                     <Route path="/oauth-callback" element={<OauthCallback />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
                 </Routes>
             </Container>

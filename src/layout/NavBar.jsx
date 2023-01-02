@@ -16,12 +16,6 @@ const NavBar = () => {
     const {t} = useTranslation();
     const doorStatus = useSelector(doorStatusSelector());
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const loginUrl = backendUrl + 'oauth/authorize?' + (new URLSearchParams({
-        client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
-        redirect_uri: import.meta.env.VITE_OAUTH_CALLBACK_URL,
-        response_type: 'token',
-        scope: ['public', 'account_data_read', 'door_control'].join(' '),
-    })).toString();
     const isLoggedIn = getToken() !== null;
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
@@ -85,7 +79,7 @@ const NavBar = () => {
                         <NavDropdown.Item as={NavLink} to="/logout">
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
-                    </NavDropdown> : <Nav.Link href={loginUrl} className="ms-0 ms-lg-auto">
+                    </NavDropdown> : <Nav.Link as={NavLink} to="/login" className="ms-0 ms-lg-auto">
                         <i className="fas fa-sign-in" />{' '}
                         {t('views.navigation.sign_in')}
                     </Nav.Link>}
