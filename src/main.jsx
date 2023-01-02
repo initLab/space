@@ -10,7 +10,6 @@ import App from './App';
 
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'bootswatch/dist/materia/bootstrap.css';
-import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
