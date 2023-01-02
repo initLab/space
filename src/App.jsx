@@ -9,6 +9,7 @@ import Doors from './pages/Doors.jsx';
 import OauthCallback from "./pages/OauthCallback.jsx";
 import {useEffect} from "react";
 import {checkAuth} from "./authStorage.js";
+import Logout from "./pages/Logout.jsx";
 
 function App() {
     const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/users/present" element={<UsersPresent />} />
                 <Route path="/sensors" element={<Sensors />} />
                 <Route path="/oauth-callback" element={<OauthCallback />} />
+                <Route path="/logout" element={<Logout />} />
                 <Route path="*" element={<Dashboard />} />
             </Routes>
         </main>

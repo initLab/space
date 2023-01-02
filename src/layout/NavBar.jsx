@@ -10,7 +10,7 @@ import WarningIcon from "../widgets/icons/WarningIcon.jsx";
 import LockIcon from "../widgets/icons/LockIcon.jsx";
 import UnlockIcon from "../widgets/icons/UnlockIcon.jsx";
 import BusyIcon from "../widgets/icons/BusyIcon.jsx";
-import {clearAuth, getToken} from "../authStorage.js";
+import {getToken} from "../authStorage.js";
 
 const NavBar = () => {
     const {t} = useTranslation();
@@ -82,7 +82,7 @@ const NavBar = () => {
                             {t('views.navigation.oauth_token_management')}
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={() => clearAuth()}>
+                        <NavDropdown.Item as={NavLink} to="/logout">
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
                     </NavDropdown> : <Nav.Link href={loginUrl} className="ms-0 ms-lg-auto">
