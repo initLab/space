@@ -1,7 +1,8 @@
-import {Button, Card, Col, Row} from "react-bootstrap";
-import '../doors.scss';
+import {Card, Col, Row} from "react-bootstrap";
 import React from "react";
 import {useGetDoorsQuery} from "../features/apiSlice.js";
+import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
+import DoorButton from "../widgets/DoorButton/DoorButton.jsx";
 
 const Doors = () => {
     const {
@@ -12,31 +13,21 @@ const Doors = () => {
         isError,
     } = useGetDoorsQuery();
 
-    // TODO
-    console.log(doors, error, isLoading, isSuccess, isError);
-
     return (<Row className="row-cols row-cols-1">
-        <Col></Col>
-        <Col>
+        {isLoading && <Col className="text-center">
+            <LoadingIcon large />
+        </Col>}
+        {isSuccess && doors.map(door => <Col key={door.id}>
             <Card>
-                <Card.Header className="bg-primary text-light text-start">Входна врата</Card.Header>
+                <Card.Header className="bg-primary text-light text-start">{door.name}</Card.Header>
                 <Card.Body className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
-                    <Button variant="success" className="door-button">
-                        <i className="fa fa-sign-in" />
-                        <div>отвори</div>
-                    </Button>
-                    <Button variant="danger" className="door-button">
-                        <i className="fa fa-unlock" />
-                        <div>отключи</div>
-                    </Button>
-                    <Button variant="info" className="door-button">
-                        <i className="fa fa-lock" />
-                        <div>заключи</div>
-                    </Button>
+                    {door.supported_actions.map(action => <DoorButton key={action} action={action} />)}
                 </Card.Body>
             </Card>
-        </Col>
-        <Col></Col>
+        </Col>)}
+        {isError && <Col>
+            Error {error.status} {error.data}
+        </Col>}
     </Row>);
 };
 
