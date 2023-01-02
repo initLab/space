@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 import {useGetPresentUsersQuery} from "../../features/apiSlice.js";
 import LoadingIcon from "../icons/LoadingIcon.jsx";
 import {useMemo} from "react";
+import {format, formatISO} from "date-fns";
 
 const PresentUsersWrapper = () => {
     const { t } = useTranslation();
@@ -33,7 +34,7 @@ const PresentUsersWrapper = () => {
                     <div className="small text-muted">
                         {t('views.users.people_at_about_html.' + (usersCount === 1 ? 'one' : 'other'))
                             .replace('%{count}', usersCount.toString(10))}{' '}
-                        <time dateTime="2022-05-07T19:02:46+03:00">19:02</time>
+                        <time dateTime={formatISO(fulfilledTime)}>{format(fulfilledTime, 'HH:mm')}</time>
                     </div>
                 </h2>}
             </Col>
