@@ -6,19 +6,16 @@ import {Route, Routes, useLocation} from 'react-router-dom';
 import UsersPresent from './pages/UsersPresent';
 import Sensors from './pages/Sensors';
 import Doors from './pages/Doors.jsx';
-import {useEffect} from 'react';
-import {setToken} from "./authStorage.js";
+import OauthCallback from "./pages/OauthCallback.jsx";
+import {useEffect} from "react";
+import {checkAuth} from "./authStorage.js";
 
 function App() {
-    const { hash } = useLocation();
+    const location = useLocation();
 
     useEffect(() => {
-        const params = new URLSearchParams(hash.substr(1));
-
-        if (params.get('token_type') === 'Bearer' && params.has('access_token')) {
-            setToken(params.get('access_token'));
-        }
-    }, [hash]);
+        checkAuth();
+    }, [location]);
 
     return (<>
         <NavBar />
@@ -27,6 +24,7 @@ function App() {
                 <Route path="/doors" element={<Doors />} />
                 <Route path="/users/present" element={<UsersPresent />} />
                 <Route path="/sensors" element={<Sensors />} />
+                <Route path="/oauth-callback" element={<OauthCallback />} />
                 <Route path="*" element={<Dashboard />} />
             </Routes>
         </main>
