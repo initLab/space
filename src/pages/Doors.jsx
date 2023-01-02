@@ -1,6 +1,6 @@
 import {Card, Col, Row} from "react-bootstrap";
 import React, {useCallback} from "react";
-import {useGetDoorsQuery} from "../features/apiSlice.js";
+import {useDoorActionMutation, useGetDoorsQuery} from "../features/apiSlice.js";
 import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
 import DoorButton from "../widgets/DoorButton/DoorButton.jsx";
 import {useSelector} from "react-redux";
@@ -14,6 +14,10 @@ const Doors = () => {
         isSuccess,
         isError,
     } = useGetDoorsQuery();
+
+    const [
+        execute,
+    ] = useDoorActionMutation();
 
     const monitoredDoor = 'building_door';
     const doorStatus = useSelector(doorStatusSelector());
@@ -43,15 +47,16 @@ const Doors = () => {
         {isSuccess && doors.map(door => {
             const doorActions = getDoorActions(door);
 
-            if (doorActions.length === 0) {
-                return;
-            }
-
             return (<Col key={door.id}>
                 <Card>
                     <Card.Header className="bg-primary text-light text-start">{door.name}</Card.Header>
                     <Card.Body className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
-                        {doorActions.map(action => <DoorButton key={action} action={action} />)}
+                        {doorActions.map(action => <DoorButton key={action} action={action} onClick={() => execute({
+                            doorId: door.id,
+                            action,
+                        })} />)}
+
+                        {door.id === monitoredDoor && doorStatus === 'busy' && <LoadingIcon large />}
                     </Card.Body>
                 </Card>
             </Col>);

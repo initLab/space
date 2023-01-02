@@ -29,16 +29,6 @@ const query = builder => url => builder.query({
     query: () => url,
 });
 
-const postWithBody = url => params => ({
-    url: url,
-    method: 'POST',
-    body: params,
-});
-
-const mutationPostWithBody = builder => url => builder.mutation({
-    query: postWithBody(url),
-});
-
 export const anonymousApiSlice = createApi({
     reducerPath: 'anonymousApi',
     baseQuery: anonymousBaseQuery,
@@ -52,7 +42,12 @@ export const authenticatedApiSlice = createApi({
     baseQuery: authenticatedBaseQuery,
     endpoints: builder => ({
         getDoors: query(builder)('api/doors.json'),
-        doorAction: mutationPostWithBody(builder)('doors'),
+        doorAction: builder.mutation({
+            query: params => ({
+                url: 'api/doors/' + params.doorId + '/' + params.action,
+                method: 'POST',
+            }),
+        }),
     }),
 });
 

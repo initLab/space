@@ -19,11 +19,12 @@ const types = {
 };
 const DoorButton = ({
     action,
+    onClick,
 }) => {
     const {t} = useTranslation();
     const type = types[action];
 
-    return (<Button variant={type.variant} className="door-button">
+    return (<Button variant={type.variant} className="door-button" onClick={onClick}>
         <i className={type.icon} />
         <div>{t('views.doors.' + action)}</div>
     </Button>);
