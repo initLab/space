@@ -12,7 +12,7 @@ const SensorReadingsWrapper = () => {
                 <h3>{t('views.dashboard.sensor_readings')}</h3>
             </Col>
         </Row>
-        <Row className="row-cols row-cols-sm-2 row-cols-lg-3 g-3">
+        <Row className="row-cols-1 row-cols-lg-3 g-3">
             {mqtt.sensors.map((sensor, idx) =>
                 <SensorReading key={idx} {...sensor} />
             )}
