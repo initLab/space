@@ -1,15 +1,19 @@
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {Col, Row} from "react-bootstrap";
 import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
+import {pkce} from "../oauth.js";
 
 const Login = () => {
+    const flag = useRef(false);
+
     useEffect(() => {
-        location.replace(import.meta.env.VITE_BACKEND_URL + 'oauth/authorize?' + (new URLSearchParams({
-            client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
-            redirect_uri: import.meta.env.VITE_OAUTH_CALLBACK_URL,
-            response_type: 'token',
-            scope: ['public', 'account_data_read', 'door_control'].join(' '),
-        })).toString());
+        if (flag.current) {
+            return;
+        }
+
+        flag.current = true;
+
+        location.replace(pkce.authorizeUrl());
     }, []);
 
     return (<Row>

@@ -1,24 +1,27 @@
-const TOKEN_KEY = 'token';
-const TOKEN_EXPIRE_KEY = 'tokenExpire';
+const ACCESS_TOKEN_KEY = 'accessToken';
+const ACCESS_TOKEN_EXPIRE_KEY = 'accessTokenExpire';
+const REFRESH_TOKEN_KEY = 'refreshToken';
 
 export const checkAuth = () => {
-    const expire = localStorage.getItem(TOKEN_EXPIRE_KEY);
+    const expire = localStorage.getItem(ACCESS_TOKEN_EXPIRE_KEY) * 1000;
 
     if (expire === null || expire > Date.now()) {
         return;
     }
-
+    // TODO: refresh token
     clearAuth();
 };
 
-export const getToken = () => localStorage.getItem(TOKEN_KEY);
+export const getToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
 
-export const setAuth = (token, expire) => {
-    localStorage.setItem(TOKEN_KEY, token);
-    localStorage.setItem(TOKEN_EXPIRE_KEY, (Date.now() + expire * 1000).toString(10));
+export const setAuth = (accessToken, accessTokenExpire, refreshToken) => {
+    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    localStorage.setItem(ACCESS_TOKEN_EXPIRE_KEY, accessTokenExpire);
+    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
 };
 
 export const clearAuth = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(TOKEN_EXPIRE_KEY);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(ACCESS_TOKEN_EXPIRE_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
