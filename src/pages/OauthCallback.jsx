@@ -18,7 +18,7 @@ const OauthCallback = () => {
         flag.current = true;
 
         (async () => {
-            const tokenResponse = await pkce.exchangeForAccessToken(location.href);
+            const tokenResponse = await pkce.exchangeForAccessToken(window.location.href);
 
             if (tokenResponse.hasOwnProperty('error') && tokenResponse.hasOwnProperty('error_description')) {
                 setErrorMessage(tokenResponse.error_description);
@@ -46,7 +46,7 @@ const OauthCallback = () => {
                 });
             }
         })();
-    }, []);
+    }, [navigate]);
 
     return (errorMessage || <Row>
         <Col className="text-center">

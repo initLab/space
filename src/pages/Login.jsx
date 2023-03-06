@@ -13,7 +13,7 @@ const Login = () => {
 
         flag.current = true;
 
-        location.replace(pkce.authorizeUrl());
+        window.location.replace(pkce.authorizeUrl());
     }, []);
 
     return (<Row>
