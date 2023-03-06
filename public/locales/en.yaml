@@ -121,6 +121,9 @@ views:
     open: open
     log: log
     no_actions_supported: You don't have the necessary rights to control this door
+    no_access: |
+      You don't have the necessary rights to control the doors. Please contact an init Lab board member to request
+      access.
   navigation:
     view_edit: View/edit
     sign_in: Login
