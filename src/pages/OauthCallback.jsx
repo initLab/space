@@ -33,13 +33,13 @@ const OauthCallback = () => {
                     tokenResponse.hasOwnProperty('token_type') &&
                     tokenResponse.token_type === 'Bearer' &&
                     tokenResponse.scope === scopes
-                )
-
+                ) {
                     setAuth(
                         tokenResponse.access_token,
                         tokenResponse.created_at + tokenResponse.expires_in,
                         tokenResponse.refresh_token,
                     );
+                }
 
                 navigate('/', {
                     replace: true,
