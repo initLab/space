@@ -1,10 +1,10 @@
-import {Col, Row} from "react-bootstrap";
-import PresentUsers from "../PresentUsers/PresentUsers";
-import {useTranslation} from "react-i18next";
-import {useGetPresentUsersQuery} from "../../features/apiSlice.js";
-import LoadingIcon from "../icons/LoadingIcon.jsx";
-import {useMemo} from "react";
-import {format, formatISO} from "date-fns";
+import { Col, Row } from 'react-bootstrap';
+import PresentUsers from '../PresentUsers/PresentUsers';
+import { useTranslation } from 'react-i18next';
+import { useGetPresentUsersQuery } from '../../features/apiSlice.js';
+import LoadingIcon from '../icons/LoadingIcon.jsx';
+import { useMemo } from 'react';
+import { format, formatISO } from 'date-fns';
 
 const PresentUsersWrapper = () => {
     const { t } = useTranslation();

@@ -1,16 +1,16 @@
-import {Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
 import logo from '../assets/logo.svg';
-import {useTranslation} from "react-i18next";
-import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {doorStatusSelector} from "../features/doorSlice.js";
-import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
-import WarningIcon from "../widgets/icons/WarningIcon.jsx";
-import LockIcon from "../widgets/icons/LockIcon.jsx";
-import UnlockIcon from "../widgets/icons/UnlockIcon.jsx";
-import BusyIcon from "../widgets/icons/BusyIcon.jsx";
-import {getToken} from "../authStorage.js";
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { doorStatusSelector } from '../features/doorSlice.js';
+import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
+import WarningIcon from '../widgets/icons/WarningIcon.jsx';
+import LockIcon from '../widgets/icons/LockIcon.jsx';
+import UnlockIcon from '../widgets/icons/UnlockIcon.jsx';
+import BusyIcon from '../widgets/icons/BusyIcon.jsx';
+import { getToken } from '../authStorage.js';
 
 const NavBar = () => {
     const {t} = useTranslation();

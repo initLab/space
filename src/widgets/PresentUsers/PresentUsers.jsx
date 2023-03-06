@@ -1,6 +1,6 @@
-import {Button, ButtonGroup, Card, Col, Image, Row} from "react-bootstrap";
-import "./PresentUsers.scss";
-import {useTranslation} from "react-i18next";
+import { Button, ButtonGroup, Card, Col, Image, Row } from 'react-bootstrap';
+import './PresentUsers.scss';
+import { useTranslation } from 'react-i18next';
 
 const PresentUsers = ({
     users,
@@ -13,7 +13,7 @@ const PresentUsers = ({
                 <Card className="h-100">
                     <Card.Header>
                         {user.picture &&
-                            <Image fluid src={user.picture.replace('s=128', 's=242')} alt="avatar" className="w-100"/>}
+                            <Image fluid src={user.picture.replace('s=128', 's=242')} alt="avatar" className="w-100" />}
                     </Card.Header>
                     <Card.Body className="text-center">
                         <h5>
@@ -40,7 +40,7 @@ const PresentUsers = ({
 
     return (<Row className="mb-3">
         <Col className="text-center no_users">
-            <i className="far fa-frown"/>
+            <i className="far fa-frown" />
             <h5 className="mt-2">{t('views.users.everybodys_gone')}</h5>
         </Col>
     </Row>);

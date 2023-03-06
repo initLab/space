@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export const doorSlice = createSlice({
     name: 'door',
@@ -44,4 +44,4 @@ export const doorStatusSelector = () => state => {
     }
 };
 
-export const { setState } = doorSlice.actions;
+export const {setState} = doorSlice.actions;

@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export const sensorSlice = createSlice({
     name: 'sensor',
@@ -20,4 +20,4 @@ export const sensorSlice = createSlice({
 });
 
 export const sensorSelector = topic => state => state[sensorSlice.name][topic];
-export const { setSensor } = sensorSlice.actions;
+export const {setSensor} = sensorSlice.actions;

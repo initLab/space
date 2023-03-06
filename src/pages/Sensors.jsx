@@ -1,7 +1,7 @@
-import {Fragment} from 'react';
-import {Col, Image, Row} from "react-bootstrap";
-import {useTranslation} from "react-i18next";
-import {grafana} from "../config";
+import { Fragment } from 'react';
+import { Col, Image, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { grafana } from '../config';
 
 const Sensors = () => {
     const { t } = useTranslation();
@@ -19,7 +19,7 @@ const Sensors = () => {
                     {/* eslint-disable-next-line react/jsx-no-target-blank */}
                     <a href={'https://stats.initlab.org/d/' + config.dashboard.id + '/' + config.dashboard.name}
                        target="_blank">
-                        <Image src={'https://stats.initlab.org/render/d-solo/' + config.dashboard.id + '/'+
+                        <Image src={'https://stats.initlab.org/render/d-solo/' + config.dashboard.id + '/' +
                             config.dashboard.name + '?orgId=1&panelId=' + panelId +
                             '&width=350&height=200&tz=Europe%2FSofia'} height={200} />
                     </a>

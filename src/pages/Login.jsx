@@ -1,7 +1,7 @@
-import {useEffect, useRef} from "react";
-import {Col, Row} from "react-bootstrap";
-import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
-import {pkce} from "../oauth.js";
+import { useEffect, useRef } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
+import { pkce } from '../oauth.js';
 
 const Login = () => {
     const flag = useRef(false);

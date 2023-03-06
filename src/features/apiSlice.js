@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {getToken} from '../authStorage.js';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getToken } from '../authStorage.js';
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,

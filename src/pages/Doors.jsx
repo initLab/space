@@ -1,11 +1,11 @@
-import {Card, Col, Row} from "react-bootstrap";
-import React, {useCallback} from "react";
-import {useDoorActionMutation, useGetDoorsQuery} from "../features/apiSlice.js";
-import LoadingIcon from "../widgets/icons/LoadingIcon.jsx";
-import DoorButton from "../widgets/DoorButton/DoorButton.jsx";
-import {useSelector} from "react-redux";
-import {doorStatusSelector} from "../features/doorSlice.js";
-import {Navigate} from "react-router-dom";
+import { Card, Col, Row } from 'react-bootstrap';
+import React, { useCallback } from 'react';
+import { useDoorActionMutation, useGetDoorsQuery } from '../features/apiSlice.js';
+import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
+import DoorButton from '../widgets/DoorButton/DoorButton.jsx';
+import { useSelector } from 'react-redux';
+import { doorStatusSelector } from '../features/doorSlice.js';
+import { Navigate } from 'react-router-dom';
 
 const Doors = () => {
     const {
@@ -51,7 +51,8 @@ const Doors = () => {
             return (<Col key={door.id}>
                 <Card>
                     <Card.Header className="bg-primary text-light text-start">{door.name}</Card.Header>
-                    <Card.Body className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
+                    <Card.Body
+                        className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
                         {doorActions.map(action => <DoorButton key={action} action={action} onClick={() => execute({
                             doorId: door.id,
                             action,

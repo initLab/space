@@ -1,9 +1,9 @@
-import {Card, Col, Container, Row} from "react-bootstrap";
-import PropTypes from "prop-types";
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import './SensorReading.css';
-import {useSelector} from "react-redux";
-import {sensorSelector} from "../../features/sensorSlice";
-import LoadingIcon from "../icons/LoadingIcon";
+import { useSelector } from 'react-redux';
+import { sensorSelector } from '../../features/sensorSlice';
+import LoadingIcon from '../icons/LoadingIcon';
 
 const units = {
     'Temperature': ['°C', 1],

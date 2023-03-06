@@ -1,7 +1,7 @@
-import {Col, Row} from "react-bootstrap";
-import {mqtt} from "../../config";
-import SensorReading from "../SensorReading/SensorReading";
-import {useTranslation} from "react-i18next";
+import { Col, Row } from 'react-bootstrap';
+import { mqtt } from '../../config';
+import SensorReading from '../SensorReading/SensorReading';
+import { useTranslation } from 'react-i18next';
 
 const SensorReadingsWrapper = () => {
     const { t } = useTranslation();

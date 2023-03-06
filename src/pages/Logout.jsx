@@ -1,6 +1,6 @@
-import {Navigate} from "react-router-dom";
-import {useEffect} from "react";
-import {clearAuth} from "../authStorage.js";
+import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { clearAuth } from '../authStorage.js';
 
 const Logout = () => {
     useEffect(() => {
