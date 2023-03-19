@@ -18,7 +18,11 @@ export const mqtt = {
         type: 'unlocked',
         topic: 'NetControl/initLab/out/ch29',
         mapper: msg => JSON.parse(msg).value.raw === 1,
-    }]
+    }, {
+        type: 'closed',
+        topic: 'NetControl/initLab/out/ch30',
+        mapper: msg => JSON.parse(msg).value.raw === 1,
+    }],
 };
 
 export const grafana = {

@@ -1,12 +1,12 @@
-import { Card, Col, Row } from 'react-bootstrap';
-import React, { useCallback, useMemo } from 'react';
-import { useDoorActionMutation, useGetDoorsQuery } from '../features/apiSlice.js';
+import {Card, Col, Row} from 'react-bootstrap';
+import React, {useCallback, useMemo} from 'react';
+import {useDoorActionMutation, useGetDoorsQuery} from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DoorButton from '../widgets/DoorButton/DoorButton.jsx';
-import { useSelector } from 'react-redux';
-import { doorStatusSelector } from '../features/doorSlice.js';
-import { Navigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import {useSelector} from 'react-redux';
+import {doorLockStatusSelector} from '../features/doorSlice.js';
+import {Navigate} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 const Doors = () => {
     const { t } = useTranslation();
@@ -29,7 +29,7 @@ const Doors = () => {
     ] = useDoorActionMutation();
 
     const monitoredDoor = 'building_door';
-    const doorStatus = useSelector(doorStatusSelector());
+    const doorStatus = useSelector(doorLockStatusSelector());
 
     const getDoorActions = useCallback(door => {
         const actions = door.supported_actions;

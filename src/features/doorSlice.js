@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 export const doorSlice = createSlice({
     name: 'door',
@@ -18,7 +18,9 @@ export const doorSlice = createSlice({
     },
 });
 
-export const doorStatusSelector = () => state => {
+export const doorStateSelector = property => state => state[doorSlice.name]?.[property];
+
+export const doorLockStatusSelector = () => state => {
     const doorState = state[doorSlice.name];
     const locked = doorState.locked;
     const unlocked = doorState.unlocked;
