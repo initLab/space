@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { clearAuth } from '../authStorage.js';
+import { clearTokens } from '../authStorage.js';
 
 const Logout = () => {
     useEffect(() => {
-        clearAuth();
+        clearTokens();
     }, []);
 
     return (<Navigate replace to="/" />);
