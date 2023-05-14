@@ -1,13 +1,34 @@
 import PKCE from 'js-pkce';
+import { getToken } from './authStorage.js';
 
-const scopes = ['public', 'account_data_read', 'door_control'].join(' ');
+const baseUrl = import.meta.env.VITE_BACKEND_URL + 'oauth/';
 
-const pkce = new PKCE({
-    client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
+export const urls = {
+    authorize: baseUrl + 'authorize',
+    token: baseUrl + 'token',
+    revoke: baseUrl + 'revoke',
+};
+
+const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID;
+
+export const scopes = ['public', 'account_data_read', 'door_control'].join(' ');
+
+export const pkce = new PKCE({
+    client_id: clientId,
     redirect_uri: window.location.protocol + '//' + window.location.host + import.meta.env.BASE_URL + 'oauth-callback',
-    authorization_endpoint: import.meta.env.VITE_BACKEND_URL + 'oauth/authorize',
-    token_endpoint: import.meta.env.VITE_BACKEND_URL + 'oauth/token',
+    authorization_endpoint: urls.authorize,
+    token_endpoint: urls.token,
     requested_scopes: scopes,
 });
 
-export { pkce, scopes };
+export const revokeToken = async token => fetch(urls.revoke, {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer ' + getToken(),
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        client_id: clientId,
+        token,
+    }),
+});

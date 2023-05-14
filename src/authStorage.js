@@ -38,3 +38,10 @@ export const clearTokens = () => {
     localStorage.removeItem(ACCESS_TOKEN_EXPIRE_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
+
+export const logout = async () => {
+    // TODO
+    // await revokeToken(getRefreshToken());
+    // await revokeToken(getToken());
+    clearTokens();
+};
