@@ -26,11 +26,13 @@ const NavBar = () => {
             <Navbar.Brand as={NavLink} to="/">
                 <Image src={logo} className="logo" alt="Fauna" />
             </Navbar.Brand>
+            <Navbar.Text className="flex-grow-1 flex-lg-grow-0 text-end pe-3 pe-lg-0">
+                {doorClosed ? <DoorClosedIcon /> : <DoorOpenIcon />}
+            </Navbar.Text>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="flex-grow-1">
                     <Nav.Link as={NavLink} to="/doors">
-                        {doorClosed ? <DoorClosedIcon /> : <DoorOpenIcon />}{' '}
                         {doorLockStatus === 'uninitialized' && <>
                             <LoadingIcon /> ...
                         </>}
