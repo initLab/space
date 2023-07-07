@@ -1,18 +1,18 @@
-import {Container, Image, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
 import logo from '../assets/logo.svg';
-import {useTranslation} from 'react-i18next';
-import {NavLink} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {doorLockStatusSelector, doorStateSelector} from '../features/doorSlice.js';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { doorLockStatusSelector, doorStateSelector } from '../features/doorSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import WarningIcon from '../widgets/icons/WarningIcon.jsx';
 import LockIcon from '../widgets/icons/LockIcon.jsx';
 import UnlockIcon from '../widgets/icons/UnlockIcon.jsx';
 import BusyIcon from '../widgets/icons/BusyIcon.jsx';
-import {getToken} from '../authStorage.js';
-import DoorClosedIcon from "../widgets/icons/DoorClosedIcon.jsx";
-import DoorOpenIcon from "../widgets/icons/DoorOpenIcon.jsx";
+import { getToken } from '../authStorage.js';
+import DoorClosedIcon from '../widgets/icons/DoorClosedIcon.jsx';
+import DoorOpenIcon from '../widgets/icons/DoorOpenIcon.jsx';
 
 const NavBar = () => {
     const {t} = useTranslation();
@@ -55,14 +55,10 @@ const NavBar = () => {
                         <i className="fas fa-chart-line" />{' '}
                         {t('views.navigation.sensors')}
                     </Nav.Link>
-                    <NavDropdown title={<>
+                    <Nav.Link href={backendUrl + 'fauna/users'}>
                         <i className="fas fa-users" />{' '}
                         {t('views.navigation.labbers')}
-                    </>}>
-                        <NavDropdown.Item as={NavLink} to="/fauna/users">
-                            {t('views.navigation.management')}
-                        </NavDropdown.Item>
-                    </NavDropdown>
+                    </Nav.Link>
                     {isLoggedIn ? <NavDropdown title={<>
                         <i className="fas fa-user" />{' '}
                         {t('views.navigation.account')}
