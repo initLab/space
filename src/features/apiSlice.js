@@ -102,6 +102,7 @@ export const authenticatedApiSlice = createApi({
     reducerPath: 'authenticatedApi',
     baseQuery: authenticatedBaseQueryWithReauth,
     endpoints: builder => ({
+        getCurrentUser: query(builder)('current_user.json'),
         getDoors: query(builder)('doors.json'),
         doorAction: builder.mutation({
             query: params => ({
@@ -117,6 +118,7 @@ export const {
 } = anonymousApiSlice;
 
 export const {
+    useGetCurrentUserQuery,
     useGetDoorsQuery,
     useDoorActionMutation,
 } = authenticatedApiSlice;
