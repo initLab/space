@@ -6,20 +6,25 @@ import { sensorSelector } from '../../features/sensorSlice';
 import LoadingIcon from '../icons/LoadingIcon';
 
 const units = {
-    'Temperature': ['°C', 1],
-    'Humidity': ['%', 1]
+    Temperature: ['°C', 1],
+    Humidity: ['%', 1],
 };
 
 const SensorReading = ({
+    type,
     label,
     topic,
 }) => {
-    const value = useSelector(sensorSelector(topic));
-    const unit = units.Temperature; // TODO
-    const formattedValue = value?.data && parseFloat(value.data).toFixed(unit[1]) + unit[0];
+    const {
+        timestamp,
+        value,
+    } = useSelector(sensorSelector(topic)) || {};
+    const unit = units[type];
+    const formattedValue = value && value.toFixed(unit[1]) + unit[0];
+    const isCurrent = timestamp && Date.now() - timestamp <= 3_600_000;
 
     return (<Col>
-        <Card bg="primary" text="white">
+        <Card bg="primary" text={isCurrent ? 'white' : 'secondary'}>
             <Card.Body>
                 <Container>
                     <Row>
@@ -38,6 +43,7 @@ const SensorReading = ({
 };
 
 SensorReading.propTypes = {
+    type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     topic: PropTypes.string.isRequired,
 };

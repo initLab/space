@@ -7,12 +7,14 @@ export const sensorSlice = createSlice({
         setSensor: (state, {
             payload: {
                 topic,
-                data,
+                timestamp,
+                value,
                 message,
             }
         }) => {
             state[topic] = {
-                data,
+                timestamp,
+                value,
                 message,
             };
         },

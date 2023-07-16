@@ -15,17 +15,18 @@ client.on('connect', function () {
 });
 
 client.on('message', function (topic, data, message) {
+    data = data.toString();
+
     if (sensorTopics.indexOf(topic) > -1) {
-        // Xiaomi BLE devices send data rarely (10 min), unlike the Espurna-based devices,
-        // which can send data every 6 secs. It would be a better idea to just show the retained
-        // measurements on page load, instead of waiting for a fresh one.
-        //
-        // if (message.retain) {
-        //     return;
-        // }
+        const {
+            timestamp,
+            value,
+        } = JSON.parse(data);
+
         store.dispatch(setSensor({
             topic,
-            data: data.toString(),
+            timestamp,
+            value,
             message: {
                 ...message,
                 payload: message.payload.toJSON(),
@@ -38,7 +39,7 @@ client.on('message', function (topic, data, message) {
     if (doorState) {
         store.dispatch(setState({
             property: doorState.type,
-            value: doorState.mapper(data.toString()),
+            value: doorState.mapper(data),
         }));
     }
 });
