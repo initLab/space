@@ -10,6 +10,8 @@ const units = {
     Humidity: ['%', 1],
 };
 
+const thresholds = [18, 24, 26, 32];
+
 const SensorReading = ({
     type,
     label,
@@ -22,6 +24,7 @@ const SensorReading = ({
     const unit = units[type];
     const formattedValue = value && value.toFixed(unit[1]) + unit[0];
     const isCurrent = timestamp && Date.now() - timestamp <= 3_600_000;
+    const thermometerState = thresholds.filter(threshold => threshold < value).length;
 
     return (<Col>
         <Card bg="primary" text={isCurrent ? 'white' : 'secondary'}>
@@ -29,7 +32,7 @@ const SensorReading = ({
                 <Container>
                     <Row>
                         <Col xs={3}>
-                            <i className="fas fa-thermometer-half fa-5x" />
+                            <i className={'fas fa-5x fa-thermometer-' + thermometerState} />
                         </Col>
                         <Col xs={9} className="text-end">
                             <div className="huge">{formattedValue || <LoadingIcon />}</div>
