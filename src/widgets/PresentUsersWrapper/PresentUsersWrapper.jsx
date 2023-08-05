@@ -5,6 +5,7 @@ import { useGetPresentUsersQuery } from '../../features/apiSlice.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
 import { useMemo } from 'react';
 import { format, formatISO } from 'date-fns';
+import ErrorMessage from '../ErrorMessage.jsx';
 
 const PresentUsersWrapper = () => {
     const { t } = useTranslation();
@@ -47,7 +48,7 @@ const PresentUsersWrapper = () => {
         {isSuccess && <PresentUsers users={users} />}
         {isError && <Row className="mb-3">
             <Col>
-                {error}
+                <ErrorMessage error={error} />
             </Col>
         </Row>}
     </>);

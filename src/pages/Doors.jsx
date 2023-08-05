@@ -1,12 +1,13 @@
-import {Card, Col, Row} from 'react-bootstrap';
-import React, {useCallback, useMemo} from 'react';
-import {useDoorActionMutation, useGetDoorsQuery} from '../features/apiSlice.js';
+import { Card, Col, Row } from 'react-bootstrap';
+import React, { useCallback, useMemo } from 'react';
+import { useDoorActionMutation, useGetDoorsQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DoorButton from '../widgets/DoorButton/DoorButton.jsx';
-import {useSelector} from 'react-redux';
-import {doorLockStatusSelector} from '../features/doorSlice.js';
-import {Navigate} from 'react-router-dom';
-import {useTranslation} from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { doorLockStatusSelector } from '../features/doorSlice.js';
+import { Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import ErrorMessage from '../widgets/ErrorMessage.jsx';
 
 const Doors = () => {
     const { t } = useTranslation();
@@ -77,7 +78,7 @@ const Doors = () => {
                 </Card>
             </Col>}
         </>}
-        {isError && error.status === 401 && <Navigate to="/login" />}
+        {isError && (error.status === 401 ? <Navigate to="/login" /> : <ErrorMessage error={error} />)}
     </Row>);
 };
 
