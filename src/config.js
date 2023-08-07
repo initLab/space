@@ -29,18 +29,9 @@ export const mqtt = {
 };
 
 export const grafana = {
-    temperature: {
-        dashboard: {
-            id: 'C-7GPzXMk',
-            name: 'temperatures',
-        },
-        panels: [4, 5, 10],
+    dashboard: {
+        id: 'SGAb0ZXMk',
+        name: 'temperature-and-humidity',
     },
-    humidity: {
-        dashboard: {
-            id: 'd19kszuGk',
-            name: 'humidity',
-        },
-        panels: [4, 5, 10],
-    },
+    panels: [4, 5, 10],
 };
