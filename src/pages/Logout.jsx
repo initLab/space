@@ -19,7 +19,7 @@ const Logout = () => {
             await logout();
             navigate('/');
         })();
-    }, []);
+    }, [navigate]);
 
     return (<Row>
         <Col className="text-center">
