@@ -33,9 +33,9 @@ const NavBar = () => {
 
     useEffect(function() {
         if (isSuccess) {
-            i18n.changeLanguage(data.locale);
+            i18n.changeLanguage(data.locale).then(() => {});
         }
-    }, [data.locale, isSuccess]);
+    }, [data?.locale, isSuccess]);
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
         <Container>
