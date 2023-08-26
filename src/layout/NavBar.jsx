@@ -14,6 +14,8 @@ import { getToken } from '../authStorage.js';
 import DoorClosedIcon from '../widgets/icons/DoorClosedIcon.jsx';
 import DoorOpenIcon from '../widgets/icons/DoorOpenIcon.jsx';
 import { useGetCurrentUserQuery } from '../features/apiSlice.js';
+import { useEffect } from 'react';
+import i18n from '../i18n.js';
 
 const NavBar = () => {
     const {t} = useTranslation();
@@ -28,6 +30,12 @@ const NavBar = () => {
         skip: !isLoggedIn,
     });
     const isBoardMember = isSuccess && data.roles.includes('board_member');
+
+    useEffect(function() {
+        if (isSuccess) {
+            i18n.changeLanguage(data.locale);
+        }
+    }, [data.locale, isSuccess]);
 
     return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
         <Container>
