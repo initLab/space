@@ -4,6 +4,7 @@ import { E_ALREADY_LOCKED, Mutex, tryAcquire } from 'async-mutex';
 
 const refreshMutex = new Mutex();
 const apiBaseUrl = import.meta.env.VITE_BACKEND_URL + 'api/';
+const doorApiBaseUrl = import.meta.env.VITE_DOOR_BACKEND_URL + 'api/';
 
 const refreshToken = async (api, extraOptions) => {
     try {
@@ -70,6 +71,21 @@ const authenticatedBaseQuery = fetchBaseQuery({
     },
 });
 
+const authenticatedDoorBaseQuery = fetchBaseQuery({
+    baseUrl: doorApiBaseUrl,
+    prepareHeaders: headers => {
+        headers.set('accept', 'application/json');
+
+        const token = getToken();
+
+        if (token) {
+            headers.set('authorization', 'Bearer ' + token);
+        }
+
+        return headers;
+    },
+});
+
 const authenticatedBaseQueryWithReauth = async (args, api, extraOptions) => {
     const expire = getTokenExpireTimestamp();
 
@@ -103,6 +119,13 @@ export const authenticatedApiSlice = createApi({
     baseQuery: authenticatedBaseQueryWithReauth,
     endpoints: builder => ({
         getCurrentUser: query(builder)('current_user'),
+    }),
+});
+
+export const authenticatedDoorApiSlice = createApi({
+    reducerPath: 'authenticatedDoorApi',
+    baseQuery: authenticatedDoorBaseQuery,
+    endpoints: builder => ({
         getDoors: query(builder)('doors'),
         doorAction: builder.mutation({
             query: params => ({
@@ -119,6 +142,9 @@ export const {
 
 export const {
     useGetCurrentUserQuery,
+} = authenticatedApiSlice;
+
+export const {
     useGetDoorsQuery,
     useDoorActionMutation,
-} = authenticatedApiSlice;
+} = authenticatedDoorApiSlice;
