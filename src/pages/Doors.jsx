@@ -78,7 +78,7 @@ const Doors = () => {
                 </Card>
             </Col>}
         </>}
-        {isError && (error.status === 401 ? <Navigate to="/login" /> : <ErrorMessage error={error} />)}
+        {isError && ([401, 403].includes(error.status) ? <Navigate to="/login" /> : <ErrorMessage error={error} />)}
     </Row>);
 };
 
