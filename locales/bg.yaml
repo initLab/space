@@ -125,6 +125,7 @@ views:
     lock: заключи
     unlock: отключи
     open: отвори
+    open_alternative: отвори
     log: журнал
     no_actions_supported: Нямате права за управление на тази врата
     no_access: |
