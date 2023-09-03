@@ -8,6 +8,10 @@ const types = {
         variant: 'success',
         icon: 'fa fa-sign-in',
     },
+    open_alternative: {
+        variant: '',
+        icon: 'fa fa-sign-in',
+    },
     lock: {
         variant: 'danger',
         icon: 'fa fa-lock',

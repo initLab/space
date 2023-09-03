@@ -119,6 +119,7 @@ views:
     lock: lock
     unlock: unlock
     open: open
+    open_alternative: open
     log: log
     no_actions_supported: You don't have the necessary rights to control this door
     no_access: |
