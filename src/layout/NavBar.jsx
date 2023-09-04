@@ -43,7 +43,9 @@ const NavBar = () => {
                 <Image src={logo} className="logo" alt="Fauna" />
             </Navbar.Brand>
             <Navbar.Text className="flex-grow-1 flex-lg-grow-0 text-end pe-3 pe-lg-0">
-                {doorClosed ? <DoorClosedIcon /> : <DoorOpenIcon />}
+                {doorClosed === undefined ? <LoadingIcon /> : (
+                    doorClosed ? <DoorClosedIcon /> : <DoorOpenIcon />
+                )}
             </Navbar.Text>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
