@@ -1,6 +1,7 @@
 import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
-import logo from '../assets/initlab/logo.svg';
+import initLabLogo from '../assets/initlab/logo.svg';
+import colibriLogo from '../assets/colibri/logo.png';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -32,6 +33,7 @@ const NavBar = () => {
     });
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
+    const isColibri = variant === 'colibri';
     const isBoardMember = isSuccess && data.roles.includes('board_member');
 
     useEffect(function() {
@@ -40,11 +42,22 @@ const NavBar = () => {
         }
     }, [data?.locale, isSuccess]);
 
-    return (<Navbar bg="primary" variant="dark" expand="lg" className="py-0">
+    return (<Navbar {...({
+        ...isInitLab && {
+            bg: 'primary',
+            variant: 'dark',
+        },
+        ...isColibri && {
+            bg: 'light',
+        }
+    })} expand="lg" className="py-0">
         <Container>
-            <Navbar.Brand as={NavLink} to="/">
-                <Image src={logo} className="logo" alt="Fauna" />
-            </Navbar.Brand>
+            {isInitLab && <Navbar.Brand as={NavLink} to="/">
+                <Image src={initLabLogo} className="logo" alt="init Lab logo" />
+            </Navbar.Brand>}
+            {isColibri && <Navbar.Brand as={NavLink} to="/doors">
+                <Image src={colibriLogo} className="logo" alt="Colibri logo" />
+            </Navbar.Brand>}
             <Navbar.Text className="flex-grow-1 flex-lg-grow-0 text-end pe-3 pe-lg-0">
                 {doorClosed === undefined ? <LoadingIcon /> : (
                     doorClosed ? <DoorClosedIcon /> : <DoorOpenIcon />
