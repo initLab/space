@@ -30,7 +30,8 @@ const Doors = () => {
         execute,
     ] = useDoorActionMutation();
 
-    const monitoredDoor = 'building_door';
+    // TODO: get this from the backend
+    const monitoredDoor = 'back_door';
     const doorStatus = useSelector(doorLockStatusSelector());
 
     const getDoorActions = useCallback(door => {
