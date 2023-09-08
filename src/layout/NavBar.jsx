@@ -21,7 +21,7 @@ const NavBar = () => {
     const {t} = useTranslation();
     const doorClosed = useSelector(doorStateSelector('closed'));
     const doorLockStatus = useSelector(doorLockStatusSelector());
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.BACKEND_URL;
     const isLoggedIn = getToken() !== null;
     const {
         data,

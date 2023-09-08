@@ -3,8 +3,8 @@ import { clearTokens, getRefreshToken, getToken, getTokenExpireTimestamp, setTok
 import { E_ALREADY_LOCKED, Mutex, tryAcquire } from 'async-mutex';
 
 const refreshMutex = new Mutex();
-const apiBaseUrl = import.meta.env.VITE_BACKEND_URL + 'api/';
-const doorApiBaseUrl = import.meta.env.VITE_DOOR_BACKEND_URL + 'api/';
+const apiBaseUrl = import.meta.env.BACKEND_URL + 'api/';
+const doorApiBaseUrl = import.meta.env.DOOR_BACKEND_URL + 'api/';
 
 const refreshToken = async (api, extraOptions) => {
     try {
@@ -21,7 +21,7 @@ const refreshToken = async (api, extraOptions) => {
                 url: '../oauth/token',
                 method: 'POST',
                 body: {
-                    client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
+                    client_id: import.meta.env.OAUTH_CLIENT_ID,
                     grant_type: 'refresh_token',
                     refresh_token: refreshToken,
                 },

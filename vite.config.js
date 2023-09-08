@@ -8,6 +8,12 @@ export default defineConfig({
     build: {
         sourcemap: true,
     },
+    envPrefix: [
+        'BACKEND_URL',
+        'DOOR_BACKEND_URL',
+        'MQTT_URL',
+        'OAUTH_CLIENT_ID',
+    ],
     plugins: [
         react(),
         viteCompression(),

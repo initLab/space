@@ -1,7 +1,7 @@
 import PKCE from 'js-pkce';
 import { getToken } from './authStorage.js';
 
-const baseUrl = import.meta.env.VITE_BACKEND_URL + 'oauth/';
+const baseUrl = import.meta.env.BACKEND_URL + 'oauth/';
 
 export const urls = {
     authorize: baseUrl + 'authorize',
@@ -9,7 +9,7 @@ export const urls = {
     revoke: baseUrl + 'revoke',
 };
 
-const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID;
+const clientId = import.meta.env.OAUTH_CLIENT_ID;
 
 export const scopes = ['public', 'account_data_read', 'door_control'].join(' ');
 

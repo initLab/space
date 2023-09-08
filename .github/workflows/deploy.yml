@@ -36,7 +36,7 @@ jobs:
         with:
           cmd: build --base=/fauna-frontend/
         env:
-          VITE_OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
+          OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3

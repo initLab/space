@@ -1,5 +1,5 @@
 export const mqtt = {
-    url: import.meta.env.VITE_MQTT_URL,
+    url: import.meta.env.MQTT_URL,
     sensors: [{
         type: 'Temperature',
         label: 'Big room',
