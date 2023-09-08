@@ -11,7 +11,7 @@ export const urls = {
 
 const clientId = import.meta.env.OAUTH_CLIENT_ID;
 
-export const scopes = ['public', 'account_data_read', 'door_control'].join(' ');
+export const scopes = ['account_data_read', 'door_control'].join(' ');
 
 export const pkce = new PKCE({
     client_id: clientId,
