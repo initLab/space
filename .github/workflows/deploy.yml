@@ -38,6 +38,7 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
           VARIANT: initlab
+          TITLE: Fauna
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
