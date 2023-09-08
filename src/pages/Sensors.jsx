@@ -2,9 +2,17 @@ import { Fragment } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { grafana } from '../config';
+import { useVariant } from '../hooks/useVariant.js';
+import { Navigate } from 'react-router-dom';
 
 const Sensors = () => {
     const { t } = useTranslation();
+
+    const variant = useVariant();
+
+    if (variant === 'colibri') {
+        return (<Navigate to="/doors" />);
+    }
 
     return (<>
         <Row>

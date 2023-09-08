@@ -13,6 +13,7 @@ export default defineConfig({
         'DOOR_BACKEND_URL',
         'MQTT_URL',
         'OAUTH_CLIENT_ID',
+        'VARIANT',
     ],
     plugins: [
         react(),

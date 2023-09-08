@@ -37,6 +37,7 @@ jobs:
           cmd: build --base=/fauna-frontend/
         env:
           OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
+          VARIANT: initlab
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3

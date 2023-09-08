@@ -1,6 +1,6 @@
 import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
-import logo from '../assets/logo.svg';
+import logo from '../assets/initlab/logo.svg';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import DoorOpenIcon from '../widgets/icons/DoorOpenIcon.jsx';
 import { useGetCurrentUserQuery } from '../features/apiSlice.js';
 import { useEffect } from 'react';
 import i18n from '../i18n.js';
+import { useVariant } from '../hooks/useVariant.js';
 
 const NavBar = () => {
     const {t} = useTranslation();
@@ -29,6 +30,8 @@ const NavBar = () => {
     } = useGetCurrentUserQuery(undefined, {
         skip: !isLoggedIn,
     });
+    const variant = useVariant();
+    const isInitLab = variant === 'initlab';
     const isBoardMember = isSuccess && data.roles.includes('board_member');
 
     useEffect(function() {
@@ -67,18 +70,20 @@ const NavBar = () => {
                             <WarningIcon /> {t('views.doors.unknown')}
                         </>}
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to="/users/present">
-                        <i className="fas fa-street-view" />{' '}
-                        {t('views.navigation.presence')}
-                    </Nav.Link>
-                    <Nav.Link as={NavLink} to="/sensors">
-                        <i className="fas fa-chart-line" />{' '}
-                        {t('views.navigation.sensors')}
-                    </Nav.Link>
-                    {isBoardMember && <Nav.Link href={backendUrl + 'fauna/users'}>
-                        <i className="fas fa-users" />{' '}
-                        {t('views.navigation.labbers')}
-                    </Nav.Link>}
+                    {isInitLab && <>
+                        <Nav.Link as={NavLink} to="/users/present">
+                            <i className="fas fa-street-view" />{' '}
+                            {t('views.navigation.presence')}
+                        </Nav.Link>
+                        <Nav.Link as={NavLink} to="/sensors">
+                            <i className="fas fa-chart-line" />{' '}
+                            {t('views.navigation.sensors')}
+                        </Nav.Link>
+                        {isBoardMember && <Nav.Link href={backendUrl + 'fauna/users'}>
+                            <i className="fas fa-users" />{' '}
+                            {t('views.navigation.labbers')}
+                        </Nav.Link>}
+                    </>}
                     {isLoggedIn ? <NavDropdown title={<>
                             <i className="fas fa-user" />{' '}
                             {t('views.navigation.account')}
@@ -86,16 +91,18 @@ const NavBar = () => {
                         <NavDropdown.Item href={backendUrl + 'users/edit'}>
                             {t('views.navigation.view_edit')}
                         </NavDropdown.Item>
-                        <NavDropdown.Item href={backendUrl + 'user/network_devices'}>
-                            {t('views.navigation.network_devices')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={backendUrl + 'oauth/applications'}>
-                            {t('views.navigation.oauth_application_management')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href={backendUrl + 'oauth/authorized_applications'}>
-                            {t('views.navigation.oauth_token_management')}
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
+                        {isInitLab && <>
+                            <NavDropdown.Item href={backendUrl + 'user/network_devices'}>
+                                {t('views.navigation.network_devices')}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href={backendUrl + 'oauth/applications'}>
+                                {t('views.navigation.oauth_application_management')}
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href={backendUrl + 'oauth/authorized_applications'}>
+                                {t('views.navigation.oauth_token_management')}
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                        </>}
                         <NavDropdown.Item as={NavLink} to="/logout">
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
