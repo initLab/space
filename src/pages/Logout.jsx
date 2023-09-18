@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
-import { useAuthStorage } from '../hooks/useAuthStorage.js';
+import { getAccessToken, getRefreshToken, useAuthStorage } from '../hooks/useAuthStorage.js';
 import { useRememberPage } from '../hooks/useRememberPage.js';
 import { useNavigate } from 'react-router-dom';
+import { revokeToken } from '../oauth.js';
 
 const Logout = () => {
     const flag = useRef(false);
@@ -19,9 +20,8 @@ const Logout = () => {
         flag.current = true;
 
         (async () => {
-            // TODO
-            // await revokeToken(getRefreshToken());
-            // await revokeToken(getToken());
+            await revokeToken(getRefreshToken());
+            await revokeToken(getAccessToken());
             clearTokens();
             navigate(getPreviousPath() || '/', {
                 replace: true,
