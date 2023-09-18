@@ -3,7 +3,7 @@ import './NavBar.css';
 import initLabLogo from '../assets/initlab/logo.svg';
 import colibriLogo from '../assets/colibri/logo.png';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { doorLockStatusSelector, doorStateSelector } from '../features/doorSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
@@ -11,7 +11,7 @@ import WarningIcon from '../widgets/icons/WarningIcon.jsx';
 import LockIcon from '../widgets/icons/LockIcon.jsx';
 import UnlockIcon from '../widgets/icons/UnlockIcon.jsx';
 import BusyIcon from '../widgets/icons/BusyIcon.jsx';
-import { getToken } from '../authStorage.js';
+import { useAuthStorage } from '../hooks/useAuthStorage.js';
 import DoorClosedIcon from '../widgets/icons/DoorClosedIcon.jsx';
 import DoorOpenIcon from '../widgets/icons/DoorOpenIcon.jsx';
 import { useGetCurrentUserQuery } from '../features/apiSlice.js';
@@ -24,7 +24,8 @@ const NavBar = () => {
     const doorClosed = useSelector(doorStateSelector('closed'));
     const doorLockStatus = useSelector(doorLockStatusSelector());
     const backendUrl = import.meta.env.BACKEND_URL;
-    const isLoggedIn = getToken() !== null;
+    const { accessToken } = useAuthStorage();
+    const isLoggedIn = !!accessToken;
     const {
         data,
         isSuccess,
@@ -41,6 +42,8 @@ const NavBar = () => {
             i18n.changeLanguage(data.locale).then(() => {});
         }
     }, [data?.locale, isSuccess]);
+
+    const location = useLocation();
 
     return (<Navbar {...({
         ...isInitLab && {
@@ -68,7 +71,7 @@ const NavBar = () => {
                 <Nav className="flex-grow-1">
                     <Nav.Link as={NavLink} to="/doors">
                         {doorLockStatus === 'uninitialized' && <>
-                            <LoadingIcon /> ...
+                            <LoadingIcon />
                         </>}
                         {doorLockStatus === 'locked' && <>
                             <LockIcon /> {t('views.doors.locked')}
@@ -77,7 +80,7 @@ const NavBar = () => {
                             <UnlockIcon /> {t('views.doors.unlocked')}
                         </>}
                         {doorLockStatus === 'busy' && <>
-                            <BusyIcon /> ...
+                            <BusyIcon />
                         </>}
                         {doorLockStatus === 'invalid' && <>
                             <WarningIcon /> {t('views.doors.unknown')}
@@ -119,7 +122,9 @@ const NavBar = () => {
                         <NavDropdown.Item as={NavLink} to="/logout">
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
-                    </NavDropdown> : <Nav.Link as={NavLink} to="/login" className="ms-0 ms-lg-auto">
+                    </NavDropdown> : <Nav.Link as={NavLink} to="/login" state={{
+                        from: location,
+                    }} className="ms-0 ms-lg-auto">
                         <i className="fas fa-sign-in" />{' '}
                         {t('views.navigation.sign_in')}
                     </Nav.Link>}

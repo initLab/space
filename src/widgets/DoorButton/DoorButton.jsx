@@ -2,6 +2,8 @@ import { Button } from 'react-bootstrap';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './DoorButton.scss';
+import { useDoorActionMutation } from '../../features/apiSlice.js';
+import RedirectToLogin from '../RedirectToLogin.jsx';
 
 const types = {
     open: {
@@ -22,19 +24,34 @@ const types = {
     },
 };
 const DoorButton = ({
+    doorId,
     action,
-    onClick,
 }) => {
+    const [ execute, {
+        isError,
+        error,
+    } ] = useDoorActionMutation();
+
     const {t} = useTranslation();
     const type = types?.[action] || {
         variant: '',
         icon: '',
     };
 
-    return (<Button variant={type.variant} className="door-button" onClick={onClick}>
-        <i className={type.icon} />
-        <div>{t('views.doors.' + action)}</div>
-    </Button>);
+    async function handleClick() {
+        await execute({
+            doorId,
+            action,
+        });
+    }
+
+    return (<>
+        <Button variant={type.variant} className="door-button" onClick={handleClick}>
+            <i className={type.icon} />
+            <div>{t('views.doors.' + action)}</div>
+        </Button>
+        {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
+    </>);
 };
 
 export default DoorButton;

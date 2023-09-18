@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { pkce } from '../oauth.js';
-import { setTokens } from '../authStorage.js';
+import { exchangeForAccessToken } from '../oauth.js';
+import { useAuthStorage } from '../hooks/useAuthStorage.js';
 import { Col, Row } from 'react-bootstrap';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 
@@ -9,6 +9,7 @@ const OauthCallback = () => {
     const flag = useRef(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
+    const { updateTokens } = useAuthStorage();
 
     useEffect(() => {
         if (flag.current) {
@@ -18,12 +19,28 @@ const OauthCallback = () => {
         flag.current = true;
 
         (async () => {
-            const tokenResponse = await pkce.exchangeForAccessToken(window.location.href);
+            const tokenResponse = await exchangeForAccessToken();
 
             try {
-                setTokens(tokenResponse);
+                updateTokens(tokenResponse);
 
-                navigate('/', {
+                let returnPath = '/';
+                const redirectInfo = localStorage.getItem('redirectAfterLogin');
+
+                if (redirectInfo) {
+                    const {
+                        path,
+                        expiresAt,
+                    } = JSON.parse(redirectInfo);
+
+                    if (expiresAt > Date.now()) {
+                        returnPath = path;
+                    }
+
+                    localStorage.removeItem('redirectAfterLogin');
+                }
+
+                navigate(returnPath, {
                     replace: true,
                 });
             }
@@ -31,7 +48,7 @@ const OauthCallback = () => {
                 setErrorMessage(e.message);
             }
         })();
-    }, [navigate]);
+    }, [navigate, updateTokens]);
 
     return (errorMessage || <Row>
         <Col className="text-center">

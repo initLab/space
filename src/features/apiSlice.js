@@ -1,51 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { clearTokens, getRefreshToken, getToken, getTokenExpireTimestamp, setTokens } from '../authStorage.js';
-import { E_ALREADY_LOCKED, Mutex, tryAcquire } from 'async-mutex';
+import { getAccessToken, isAccessTokenExpired } from '../hooks/useAuthStorage.js';
+import { refreshTokenIfNeeded } from '../oauth.js';
 
-const refreshMutex = new Mutex();
 const apiBaseUrl = import.meta.env.BACKEND_URL + 'api/';
 const doorApiBaseUrl = import.meta.env.DOOR_BACKEND_URL + 'api/';
-
-const refreshToken = async (api, extraOptions) => {
-    try {
-        return await tryAcquire(refreshMutex).runExclusive(async () => {
-            const refreshToken = getRefreshToken();
-
-            if (refreshToken === null) {
-                clearTokens();
-                console.error('No refresh token found');
-                return false;
-            }
-
-            const refreshResponse = (await anonymousBaseQuery({
-                url: '../oauth/token',
-                method: 'POST',
-                body: {
-                    client_id: import.meta.env.OAUTH_CLIENT_ID,
-                    grant_type: 'refresh_token',
-                    refresh_token: refreshToken,
-                },
-            }, api, extraOptions))?.data;
-
-            if (!refreshResponse) {
-                clearTokens();
-                console.error('Refreshing token failed');
-                return false;
-            }
-
-            setTokens(refreshResponse);
-            return true;
-        });
-    }
-    catch (e) {
-        if (e === E_ALREADY_LOCKED) {
-            await refreshMutex.waitForUnlock();
-            return true;
-        }
-
-        throw e;
-    }
-};
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: apiBaseUrl,
@@ -61,7 +19,7 @@ const authenticatedBaseQuery = fetchBaseQuery({
     prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
-        const token = getToken();
+        const token = getAccessToken();
 
         if (token) {
             headers.set('authorization', 'Bearer ' + token);
@@ -76,7 +34,7 @@ const authenticatedDoorBaseQuery = fetchBaseQuery({
     prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
-        const token = getToken();
+        const token = getAccessToken();
 
         if (token) {
             headers.set('authorization', 'Bearer ' + token);
@@ -87,16 +45,28 @@ const authenticatedDoorBaseQuery = fetchBaseQuery({
 });
 
 const authenticatedBaseQueryWithReauth = async (args, api, extraOptions) => {
-    const expire = getTokenExpireTimestamp();
-
-    if (expire !== null && expire * 1000 < Date.now()) {
-        await refreshToken(api, extraOptions);
+    if (isAccessTokenExpired()) {
+        await refreshTokenIfNeeded();
     }
 
     let result = await authenticatedBaseQuery(args, api, extraOptions);
 
-    if (result?.error?.status === 401 && await refreshToken(api, extraOptions)) {
+    if (result?.error?.status === 401 && await refreshTokenIfNeeded()) {
         return authenticatedBaseQuery(args, api, extraOptions);
+    }
+
+    return result;
+};
+
+const authenticatedDoorBaseQueryWithReauth = async (args, api, extraOptions) => {
+    if (isAccessTokenExpired()) {
+        await refreshTokenIfNeeded();
+    }
+
+    let result = await authenticatedDoorBaseQuery(args, api, extraOptions);
+
+    if (result?.error?.status === 401 && await refreshTokenIfNeeded()) {
+        return authenticatedDoorBaseQuery(args, api, extraOptions);
     }
 
     return result;
@@ -124,7 +94,7 @@ export const authenticatedApiSlice = createApi({
 
 export const authenticatedDoorApiSlice = createApi({
     reducerPath: 'authenticatedDoorApi',
-    baseQuery: authenticatedDoorBaseQuery,
+    baseQuery: authenticatedDoorBaseQueryWithReauth,
     endpoints: builder => ({
         getDoors: query(builder)('doors'),
         doorAction: builder.mutation({

@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
-import { logout } from '../authStorage.js';
+import { useAuthStorage } from '../hooks/useAuthStorage.js';
 import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
     const flag = useRef(false);
     const navigate = useNavigate();
+    const { clearTokens } = useAuthStorage();
 
     useEffect(() => {
         if (flag.current) {
@@ -16,10 +17,13 @@ const Logout = () => {
         flag.current = true;
 
         (async () => {
-            await logout();
+            // TODO
+            // await revokeToken(getRefreshToken());
+            // await revokeToken(getToken());
+            await clearTokens();
             navigate('/');
         })();
-    }, [navigate]);
+    }, [clearTokens, navigate]);
 
     return (<Row>
         <Col className="text-center">
