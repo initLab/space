@@ -39,7 +39,7 @@ const DoorButton = ({
     };
 
     async function handleClick() {
-        await execute({
+        return execute({
             doorId,
             action,
         });

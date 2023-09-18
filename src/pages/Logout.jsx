@@ -22,8 +22,8 @@ const Logout = () => {
             // TODO
             // await revokeToken(getRefreshToken());
             // await revokeToken(getToken());
-            await clearTokens();
-            navigate(getPreviousPath, {
+            clearTokens();
+            navigate(getPreviousPath() || '/', {
                 replace: true,
             });
         })();
