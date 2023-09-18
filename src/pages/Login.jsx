@@ -2,12 +2,11 @@ import { useEffect, useRef } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import { authorizeUrl } from '../oauth.js';
-import { useLocation } from 'react-router-dom';
+import { useRememberPage } from '../hooks/useRememberPage.js';
 
 const Login = () => {
     const flag = useRef(false);
-    const location = useLocation();
-    const previousPath = location.state?.from?.pathname;
+    const { storePreviousPath } = useRememberPage();
 
     useEffect(() => {
         if (flag.current) {
@@ -16,18 +15,9 @@ const Login = () => {
 
         flag.current = true;
 
-        if (previousPath) {
-            localStorage.setItem('redirectAfterLogin', JSON.stringify({
-                path: previousPath,
-                expiresAt: Date.now() + 30 * 60 * 1000,
-            }));
-        }
-        else {
-            localStorage.removeItem('redirectAfterLogin');
-        }
-
+        storePreviousPath();
         window.location.replace(authorizeUrl());
-    }, [previousPath]);
+    }, [storePreviousPath]);
 
     return (<Row>
         <Col className="text-center">

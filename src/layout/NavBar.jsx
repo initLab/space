@@ -119,7 +119,9 @@ const NavBar = () => {
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                         </>}
-                        <NavDropdown.Item as={NavLink} to="/logout">
+                        <NavDropdown.Item as={NavLink} to="/logout" state={{
+                            from: location,
+                        }}>
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
                     </NavDropdown> : <Nav.Link as={NavLink} to="/login" state={{
