@@ -120,7 +120,7 @@ const NavBar = () => {
                             <NavDropdown.Divider />
                         </>}
                         <NavDropdown.Item as={NavLink} to="/logout" state={{
-                            from: location,
+                            from: location.pathname === '/doors' ? null : location,
                         }}>
                             {t('views.navigation.sign_out')}
                         </NavDropdown.Item>
