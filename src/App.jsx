@@ -9,6 +9,7 @@ import Logout from './pages/Logout.jsx';
 import { Container } from 'react-bootstrap';
 import PresentUsersWrapper from './widgets/PresentUsersWrapper/PresentUsersWrapper.jsx';
 import Login from './pages/Login.jsx';
+import { RequireLoggedIn } from './widgets/Route/RequireLoggedIn.jsx';
 
 function App() {
     return (<>
@@ -17,7 +18,9 @@ function App() {
             <Container as="section" className="mt-4">
                 <Routes>
                     <Route path="/" element={<Dashboard />} />
-                    <Route path="/doors" element={<Doors />} />
+                    <Route path="/doors" element={<RequireLoggedIn>
+                        <Doors />
+                    </RequireLoggedIn>} />
                     <Route path="/users/present" element={<PresentUsersWrapper />} />
                     <Route path="/sensors" element={<Sensors />} />
                     <Route path="/oauth-callback" element={<OauthCallback />} />
