@@ -8,23 +8,16 @@ import { doorLockStatusSelector } from '../features/doorSlice.js';
 import { useTranslation } from 'react-i18next';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import { useVariant } from '../hooks/useVariant.js';
-import { useAuthStorage } from '../hooks/useAuthStorage.js';
-import RedirectToLogin from '../widgets/RedirectToLogin.jsx';
 
 const Doors = () => {
     const { t } = useTranslation();
-    const { accessToken } = useAuthStorage();
-    const isLoggedIn = !!accessToken;
-
     const {
         data: doors,
         error,
         isLoading,
         isSuccess,
         isError,
-    } = useGetDoorsQuery({
-        skip: !isLoggedIn,
-    });
+    } = useGetDoorsQuery();
 
     const availableDoors = useMemo(
         () => isSuccess ? doors.filter(door => door.supported_actions.length > 0) : [],
@@ -56,10 +49,6 @@ const Doors = () => {
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
 
-    if (!isLoggedIn) {
-        return (<RedirectToLogin />);
-    }
-
     return (<Row className="row-cols row-cols-1 gap-4">
         {isLoading && <Col className="text-center">
             <LoadingIcon large />
@@ -84,7 +73,7 @@ const Doors = () => {
                 </Card>
             </Col>}
         </>}
-        {isError && ([401, 403].includes(error.status) ? <RedirectToLogin /> : <ErrorMessage error={error} />)}
+        {isError && <ErrorMessage error={error} />}
     </Row>);
 };
 
