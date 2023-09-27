@@ -11,37 +11,33 @@ import WarningIcon from '../widgets/icons/WarningIcon.jsx';
 import LockIcon from '../widgets/icons/LockIcon.jsx';
 import UnlockIcon from '../widgets/icons/UnlockIcon.jsx';
 import BusyIcon from '../widgets/icons/BusyIcon.jsx';
-import { useAuthStorage } from '../hooks/useAuthStorage.js';
 import DoorClosedIcon from '../widgets/icons/DoorClosedIcon.jsx';
 import DoorOpenIcon from '../widgets/icons/DoorOpenIcon.jsx';
-import { useGetCurrentUserQuery } from '../features/apiSlice.js';
 import { useEffect } from 'react';
 import i18n from '../i18n.js';
 import { useVariant } from '../hooks/useVariant.js';
+import { useCurrentUser } from '../hooks/useCurrentUser.js';
 
 const NavBar = () => {
     const {t} = useTranslation();
     const doorClosed = useSelector(doorStateSelector('closed'));
     const doorLockStatus = useSelector(doorLockStatusSelector());
     const backendUrl = import.meta.env.BACKEND_URL;
-    const { accessToken } = useAuthStorage();
-    const isLoggedIn = !!accessToken;
     const {
-        data,
+        hasAccessToken,
+        user,
         isSuccess,
-    } = useGetCurrentUserQuery(undefined, {
-        skip: !isLoggedIn,
-    });
+    } = useCurrentUser();
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
     const isColibri = variant === 'colibri';
-    const isBoardMember = isSuccess && data.roles.includes('board_member');
+    const isBoardMember = user.roles?.includes('board_member');
 
     useEffect(function() {
         if (isSuccess) {
-            i18n.changeLanguage(data.locale).then(() => {});
+            i18n.changeLanguage(user.locale).then(() => {});
         }
-    }, [data?.locale, isSuccess]);
+    }, [user.locale, isSuccess]);
 
     const location = useLocation();
 
@@ -100,7 +96,7 @@ const NavBar = () => {
                             {t('views.navigation.labbers')}
                         </Nav.Link>}
                     </>}
-                    {isLoggedIn ? <NavDropdown title={<>
+                    {hasAccessToken ? <NavDropdown title={<>
                             <i className="fas fa-user" />{' '}
                             {t('views.navigation.account')}
                         </>} className="ms-0 ms-lg-auto">
