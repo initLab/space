@@ -1,6 +1,5 @@
 import PKCE from 'js-pkce';
 import { clearTokens, getAccessToken, getRefreshToken, updateTokens } from './hooks/useAuthStorage.js';
-import { E_ALREADY_LOCKED, Mutex, tryAcquire } from 'async-mutex';
 
 const clientId = import.meta.env.OAUTH_CLIENT_ID;
 const baseUrl = import.meta.env.BACKEND_URL + 'oauth/';
@@ -12,8 +11,6 @@ const urls = {
 };
 
 export const scopes = ['account_data_read', 'door_control'].join(' ');
-
-const refreshMutex = new Mutex();
 
 const pkce = new PKCE({
     client_id: clientId,
@@ -41,34 +38,22 @@ export async function revokeToken(token) {
 }
 
 export async function refreshTokenIfNeeded() {
+    const refreshToken = getRefreshToken();
+
+    if (!refreshToken) {
+        clearTokens();
+        console.error('No refresh token found');
+        return false;
+    }
+
     try {
-        return tryAcquire(refreshMutex).runExclusive(async () => {
-            const refreshToken = getRefreshToken();
-
-            if (!refreshToken) {
-                clearTokens();
-                console.error('No refresh token found');
-                return false;
-            }
-
-            try {
-                updateTokens(await pkce.refreshAccessToken(refreshToken));
-            }
-            catch (e) {
-                clearTokens();
-                console.error(e);
-                return false;
-            }
-
-            return true;
-        });
+        updateTokens(await pkce.refreshAccessToken(refreshToken));
     }
     catch (e) {
-        if (e === E_ALREADY_LOCKED) {
-            await refreshMutex.waitForUnlock();
-            return true;
-        }
-
-        throw e;
+        clearTokens();
+        console.error(e);
+        return false;
     }
+
+    return true;
 }
