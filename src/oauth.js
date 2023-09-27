@@ -21,7 +21,7 @@ const pkce = new PKCE({
 });
 
 export const authorizeUrl = () => pkce.authorizeUrl();
-export const exchangeForAccessToken = async url => pkce.exchangeForAccessToken(url || window.location.href);
+export const exchangeForAccessToken = async () => pkce.exchangeForAccessToken(window.location.href);
 
 export async function revokeToken(token) {
     return fetch(urls.revoke, {
