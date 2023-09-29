@@ -1,6 +1,8 @@
 import { useCurrentUser } from '../../hooks/useCurrentUser.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
 import RedirectToLogin from '../RedirectToLogin.jsx';
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 export function RequireLoggedIn({
     children,
@@ -12,7 +14,11 @@ export function RequireLoggedIn({
     } = useCurrentUser();
 
     if (isLoading) {
-        return (<LoadingIcon large />);
+        return (<Row className="row-cols row-cols-1">
+            <Col className="text-center">
+                <LoadingIcon large />
+            </Col>
+        </Row>);
     }
 
     if (isError) {
