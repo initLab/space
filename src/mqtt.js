@@ -1,7 +1,7 @@
 import { mqtt } from './config';
 import { setSensor } from './features/sensorSlice';
 import { store } from './app/store';
-import { connect } from 'mqtt/dist/mqtt';
+import { connect } from 'precompiled-mqtt';
 import { setState } from './features/doorSlice.js';
 
 const sensorTopics = mqtt.sensors.map(sensor => sensor.topic);
