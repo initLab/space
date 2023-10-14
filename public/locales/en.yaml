@@ -132,6 +132,7 @@ views:
     account: Account
     lab: Lab
     labbers: Labbers
+    action_log: Logs
     door_access: Open doors
     presence: Presence
     access: Access
@@ -205,6 +206,14 @@ views:
     title: Sensor readings
     temperature: Temperature
     humidity: Humidity
+  action_log:
+    title: Action logs
+    columns:
+      date_time: Date/time
+      door: Door
+      action: Action
+      user: User
+      application: Application
   footer:
     license: 'init Lab Fauna is licensed under'
     source_code: 'The source code is available in'

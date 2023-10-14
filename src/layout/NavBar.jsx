@@ -91,10 +91,16 @@ const NavBar = () => {
                             <i className="fas fa-chart-line" />{' '}
                             {t('views.navigation.sensors')}
                         </Nav.Link>
-                        {isBoardMember && <Nav.Link href={backendUrl + 'fauna/users'}>
-                            <i className="fas fa-users" />{' '}
-                            {t('views.navigation.labbers')}
-                        </Nav.Link>}
+                        {isBoardMember && <>
+                            <Nav.Link as={NavLink} to="/action-log">
+                                <i className="fas fa-book" />{' '}
+                                {t('views.navigation.action_log')}
+                            </Nav.Link>
+                            <Nav.Link href={backendUrl + 'fauna/users'}>
+                                <i className="fas fa-users" />{' '}
+                                {t('views.navigation.labbers')}
+                            </Nav.Link>
+                        </>}
                     </>}
                     {hasAccessToken ? <NavDropdown title={<>
                             <i className="fas fa-user" />{' '}

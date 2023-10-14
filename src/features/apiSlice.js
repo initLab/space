@@ -103,6 +103,9 @@ export const authenticatedDoorApiSlice = createApi({
                 method: 'POST',
             }),
         }),
+        getActionLog: builder.query({
+            query: params => 'actionLog/' + params.offset + '/' + params.limit,
+        }),
     }),
 });
 
@@ -117,4 +120,5 @@ export const {
 export const {
     useGetDoorsQuery,
     useDoorActionMutation,
+    useGetActionLogQuery,
 } = authenticatedDoorApiSlice;
