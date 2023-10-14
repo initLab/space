@@ -138,6 +138,7 @@ views:
     account: Акаунт
     lab: Лаб
     labbers: Лабъри
+    action_log: Логове
     door_access: Отваряне на врати
     presence: Присъствие
     access: Достъп
@@ -212,6 +213,14 @@ views:
     title: Показания на сензорите
     temperature: Температура
     humidity: Относителна влажност
+  action_log:
+    title: Лог на действията
+    columns:
+      date_time: Дата/час
+      door: Врата
+      action: Действие
+      user: Потребител
+      application: Приложение
   footer:
     license: 'init Lab Fauna е лицензирана под'
     source_code: 'Изходният код е достъпен в'
