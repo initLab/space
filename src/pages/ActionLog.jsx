@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 import { useGetActionLogQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
+import ActionLogEntry from '../widgets/ActionLog/ActionLogEntry.jsx';
 
 const ActionLog = () => {
     const { t } = useTranslation();
@@ -49,13 +50,7 @@ const ActionLog = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(log => <tr key={log.id}>
-                            <td>{log.createdAt}</td>
-                            <td>{log.doorId}</td>
-                            <td>{log.action}</td>
-                            <td>{log.User.name} ({log.User.username})</td>
-                            <td>{log.Application.name}</td>
-                        </tr>)}
+                        {data.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
                     </tbody>
                 </Table>}
             </Col>
