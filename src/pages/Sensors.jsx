@@ -16,7 +16,9 @@ const Sensors = () => {
 
     return (<>
         <Row>
-            <h2>{t('views.sensors.title')}</h2>
+            <Col>
+                <h2>{t('views.sensors.title')}</h2>
+            </Col>
         </Row>
         <Row className="row-cols row-cols-1 row-cols-xxl-3">
             {grafana.panels.map(panelId => <Col key={panelId}>

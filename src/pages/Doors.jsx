@@ -73,7 +73,9 @@ const Doors = () => {
                 </Card>
             </Col>}
         </>}
-        {isError && <ErrorMessage error={error} />}
+        {isError && <Col>
+            <ErrorMessage error={error} />
+        </Col>}
     </Row>);
 };
 
