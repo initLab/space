@@ -44,7 +44,7 @@ const ActionLog = () => {
                     <thead>
                         <tr>
                             <th>{t('views.action_log.columns.date_time')}</th>
-                            <th>{t('views.action_log.columns.door')}</th>
+                            <th>{t('views.action_log.columns.device')}</th>
                             <th>{t('views.action_log.columns.action')}</th>
                             <th>{t('views.action_log.columns.user')}</th>
                             <th>{t('views.action_log.columns.application')}</th>

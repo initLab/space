@@ -15,7 +15,7 @@ export default function ActionLogEntry({
             addSuffix: true,
             locale: locales[locale],
         })})</td>
-        <td>{entry.doorId}</td>
+        <td>{entry.deviceId}</td>
         <td>{entry.action}</td>
         <td>{entry.User.name} ({entry.User.username})</td>
         <td>{entry.Application.name}</td>

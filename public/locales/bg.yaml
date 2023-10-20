@@ -217,7 +217,7 @@ views:
     title: Лог на действията
     columns:
       date_time: Дата/час
-      door: Врата
+      device: Обект
       action: Действие
       user: Потребител
       application: Приложение
