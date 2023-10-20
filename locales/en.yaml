@@ -210,7 +210,7 @@ views:
     title: Action logs
     columns:
       date_time: Date/time
-      door: Door
+      device: Device
       action: Action
       user: User
       application: Application
