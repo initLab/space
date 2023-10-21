@@ -107,23 +107,23 @@ views:
   dashboard:
     sensor_readings: Temperature readings
     loading: Loading data...
-  doors:
-    locked: Locked
-    unlocked: Unlocked
-    unknown: Unknown
-    action_executed_successfully: "Action was completed successfully."
-    action_executed_unsuccessfully: The action was not completed successfully.
-    invalid_action: The specified action is invalid.
-    forbidden: You do not have permission to perform this action.
-    management: Lab door control
+  devices:
     lock: lock
     unlock: unlock
     open: open
     open_alternative: open
-    log: log
-    no_actions_supported: You don't have the necessary rights to control this door
+    turn_on: turn on
+    turn_off: turn off
+  doors:
+    locked: Locked
+    unlocked: Unlocked
+    unknown: Unknown
     no_access: |
       You don't have the necessary rights to control the doors. Please contact an init Lab board member to request
+      access.
+  lights:
+    no_access: |
+      You don't have the necessary rights to control the lights. Please contact an init Lab board member to request
       access.
   navigation:
     view_edit: View/edit
@@ -141,6 +141,7 @@ views:
     management: Management
     members_fee: Membership fee
     network_devices: Network devices
+    lights: Lights
     sensors: Sensors
     oauth_application_management: OAuth integration
     oauth_token_management: Authorized applications
