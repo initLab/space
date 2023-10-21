@@ -19,11 +19,6 @@ const Doors = () => {
         isError,
     } = useGetDoorsQuery();
 
-    const availableDoors = useMemo(
-        () => isSuccess ? doors.filter(door => door.supported_actions.length > 0) : [],
-        [doors, isSuccess],
-    );
-
     // TODO: get this from the backend
     const monitoredDoor = 'back_door';
     const doorStatus = useSelector(doorLockStatusSelector());
@@ -54,7 +49,7 @@ const Doors = () => {
             <LoadingIcon large />
         </Col>}
         {isSuccess && <>
-            {availableDoors.length > 0 ? availableDoors.map(door => {
+            {doors.length > 0 ? doors.map(door => {
                 const doorActions = getDoorActions(door);
 
                 return (<Col key={door.id}>
