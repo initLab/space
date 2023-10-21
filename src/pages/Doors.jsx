@@ -1,8 +1,8 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useGetDoorsQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
-import DoorButton from '../widgets/DoorButton/DoorButton.jsx';
+import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
 import { useSelector } from 'react-redux';
 import { doorLockStatusSelector } from '../features/doorSlice.js';
 import { useTranslation } from 'react-i18next';
@@ -62,7 +62,7 @@ const Doors = () => {
                         <Card.Header className={'text-start' + (isInitLab ? ' bg-primary text-light' : '')}>{door.name}</Card.Header>
                         <Card.Body
                             className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
-                            {doorActions.map(action => <DoorButton key={action} doorId={door.id} action={action} />)}
+                            {doorActions.map(action => <DeviceActionButton key={action} deviceId={door.id} action={action} />)}
                             {door.id === monitoredDoor && doorStatus === 'busy' && <LoadingIcon large />}
                         </Card.Body>
                     </Card>

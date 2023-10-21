@@ -3,7 +3,7 @@ import { getAccessToken, isAccessTokenExpired } from '../hooks/useAuthStorage.js
 import { refreshTokenIfNeeded } from '../oauth.js';
 
 const apiBaseUrl = import.meta.env.BACKEND_URL + 'api/';
-const doorApiBaseUrl = import.meta.env.DOOR_BACKEND_URL + 'api/';
+const deviceApiBaseUrl = import.meta.env.DEVICE_BACKEND_URL + 'api/';
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: apiBaseUrl,
@@ -29,8 +29,8 @@ const authenticatedBaseQuery = fetchBaseQuery({
     },
 });
 
-const authenticatedDoorBaseQuery = fetchBaseQuery({
-    baseUrl: doorApiBaseUrl,
+const authenticatedDeviceBaseQuery = fetchBaseQuery({
+    baseUrl: deviceApiBaseUrl,
     prepareHeaders: headers => {
         headers.set('accept', 'application/json');
 
@@ -58,15 +58,15 @@ const authenticatedBaseQueryWithReauth = async (args, api, extraOptions) => {
     return result;
 };
 
-const authenticatedDoorBaseQueryWithReauth = async (args, api, extraOptions) => {
+const authenticatedDeviceBaseQueryWithReauth = async (args, api, extraOptions) => {
     if (isAccessTokenExpired()) {
         await refreshTokenIfNeeded();
     }
 
-    let result = await authenticatedDoorBaseQuery(args, api, extraOptions);
+    let result = await authenticatedDeviceBaseQuery(args, api, extraOptions);
 
     if (result?.error?.status === 401 && await refreshTokenIfNeeded()) {
-        return authenticatedDoorBaseQuery(args, api, extraOptions);
+        return authenticatedDeviceBaseQuery(args, api, extraOptions);
     }
 
     return result;
@@ -92,14 +92,14 @@ export const authenticatedApiSlice = createApi({
     }),
 });
 
-export const authenticatedDoorApiSlice = createApi({
-    reducerPath: 'authenticatedDoorApi',
-    baseQuery: authenticatedDoorBaseQueryWithReauth,
+export const authenticatedDeviceApiSlice = createApi({
+    reducerPath: 'authenticatedDeviceApi',
+    baseQuery: authenticatedDeviceBaseQueryWithReauth,
     endpoints: builder => ({
         getDoors: query(builder)('doors'),
-        doorAction: builder.mutation({
+        deviceAction: builder.mutation({
             query: params => ({
-                url: 'doors/' + params.doorId + '/' + params.action,
+                url: 'devices/' + params.deviceId + '/' + params.action,
                 method: 'POST',
             }),
         }),
@@ -119,6 +119,6 @@ export const {
 
 export const {
     useGetDoorsQuery,
-    useDoorActionMutation,
+    useDeviceActionMutation,
     useGetActionLogQuery,
-} = authenticatedDoorApiSlice;
+} = authenticatedDeviceApiSlice;

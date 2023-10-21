@@ -1,8 +1,8 @@
 import { Button } from 'react-bootstrap';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './DoorButton.scss';
-import { useDoorActionMutation } from '../../features/apiSlice.js';
+import './DeviceActionButton.scss';
+import { useDeviceActionMutation } from '../../features/apiSlice.js';
 import RedirectToLogin from '../RedirectToLogin.jsx';
 
 const types = {
@@ -23,14 +23,14 @@ const types = {
         icon: 'fa fa-unlock',
     },
 };
-const DoorButton = ({
-    doorId,
+const DeviceActionButton = ({
+    deviceId,
     action,
 }) => {
     const [ execute, {
         isError,
         error,
-    } ] = useDoorActionMutation();
+    } ] = useDeviceActionMutation();
 
     const {t} = useTranslation();
     const type = types?.[action] || {
@@ -40,18 +40,18 @@ const DoorButton = ({
 
     async function handleClick() {
         return execute({
-            doorId,
+            deviceId,
             action,
         });
     }
 
     return (<>
-        <Button variant={type.variant} className="door-button" onClick={handleClick}>
+        <Button variant={type.variant} className="device-action-button" onClick={handleClick}>
             <i className={type.icon} />
-            <div>{t('views.doors.' + action)}</div>
+            <div>{t('views.devices.' + action)}</div>
         </Button>
         {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
     </>);
 };
 
-export default DoorButton;
+export default DeviceActionButton;

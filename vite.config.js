@@ -13,7 +13,7 @@ export default defineConfig({
     envPrefix: [
         'TITLE',
         'BACKEND_URL',
-        'DOOR_BACKEND_URL',
+        'DEVICE_BACKEND_URL',
         'MQTT_URL',
         'OAUTH_CLIENT_ID',
         'VARIANT',
