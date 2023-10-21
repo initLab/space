@@ -100,7 +100,7 @@ export const authenticatedDeviceApiSlice = createApi({
         getLights: query(builder)('lights'),
         deviceAction: builder.mutation({
             query: params => ({
-                url: 'devices/' + params.deviceId + '/' + params.action,
+                url: 'device/' + params.deviceId + '/' + params.action,
                 method: 'POST',
             }),
         }),
