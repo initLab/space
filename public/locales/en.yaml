@@ -112,12 +112,18 @@ views:
     unlock: unlock
     open: open
     open_alternative: open
+    turn_on: turn on
+    turn_off: turn off
   doors:
     locked: Locked
     unlocked: Unlocked
     unknown: Unknown
     no_access: |
       You don't have the necessary rights to control the doors. Please contact an init Lab board member to request
+      access.
+  lights:
+    no_access: |
+      You don't have the necessary rights to control the lights. Please contact an init Lab board member to request
       access.
   navigation:
     view_edit: View/edit

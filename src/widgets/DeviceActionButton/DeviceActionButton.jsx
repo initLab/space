@@ -22,6 +22,14 @@ const types = {
         variant: 'info',
         icon: 'fa-solid fa-lock-open',
     },
+    turn_on: {
+        variant: 'success',
+        icon: 'fa-solid fa-lightbulb',
+    },
+    turn_off: {
+        variant: 'danger',
+        icon: 'fa-regular fa-lightbulb',
+    },
 };
 const DeviceActionButton = ({
     deviceId,

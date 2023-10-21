@@ -10,6 +10,7 @@ import { Container } from 'react-bootstrap';
 import Login from './pages/Login.jsx';
 import { RequireLoggedIn } from './widgets/Route/RequireLoggedIn.jsx';
 import ActionLog from './pages/ActionLog.jsx';
+import Lights from './pages/Lights.jsx';
 
 function App() {
     return (<>
@@ -20,6 +21,9 @@ function App() {
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/doors" element={<RequireLoggedIn>
                         <Doors />
+                    </RequireLoggedIn>} />
+                    <Route path="/lights" element={<RequireLoggedIn>
+                        <Lights />
                     </RequireLoggedIn>} />
                     <Route path="/sensors" element={<Sensors />} />
                     <Route path="/action-log" element={<ActionLog />} />

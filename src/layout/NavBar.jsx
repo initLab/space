@@ -82,6 +82,10 @@ const NavBar = () => {
                             <WarningIcon /> {t('views.doors.unknown')}
                         </>}
                     </Nav.Link>
+                    <Nav.Link as={NavLink} to="/lights">
+                        <i className="fa-solid fa-lightbulb" />{' '}
+                        {t('views.navigation.lights')}
+                    </Nav.Link>
                     {isInitLab && <>
                         <Nav.Link as={NavLink} to="/sensors">
                             <i className="fa-solid fa-chart-line" />{' '}
