@@ -8,19 +8,19 @@ import RedirectToLogin from '../RedirectToLogin.jsx';
 const types = {
     open: {
         variant: 'success',
-        icon: 'fa fa-sign-in',
+        icon: 'fa-solid fa-right-to-bracket',
     },
     open_alternative: {
         variant: '',
-        icon: 'fa fa-sign-in',
+        icon: 'fa-solid fa-right-to-bracket',
     },
     lock: {
         variant: 'danger',
-        icon: 'fa fa-lock',
+        icon: 'fa-solid fa-lock',
     },
     unlock: {
         variant: 'info',
-        icon: 'fa fa-unlock',
+        icon: 'fa-solid fa-lock-open',
     },
 };
 const DeviceActionButton = ({

@@ -1,6 +1,6 @@
 const UnlockIcon = () => {
     return (
-        <i className="fas fa-unlock" />
+        <i className="fa-solid fa-lock-open" />
     );
 };
 

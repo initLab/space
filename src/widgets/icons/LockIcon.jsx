@@ -1,6 +1,6 @@
 const LockIcon = () => {
     return (
-        <i className="fas fa-lock" />
+        <i className="fa-solid fa-lock" />
     );
 };
 

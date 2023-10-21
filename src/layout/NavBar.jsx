@@ -84,22 +84,22 @@ const NavBar = () => {
                     </Nav.Link>
                     {isInitLab && <>
                         <Nav.Link as={NavLink} to="/sensors">
-                            <i className="fas fa-chart-line" />{' '}
+                            <i className="fa-solid fa-chart-line" />{' '}
                             {t('views.navigation.sensors')}
                         </Nav.Link>
                         {isBoardMember && <>
                             <Nav.Link as={NavLink} to="/action-log">
-                                <i className="fas fa-book" />{' '}
+                                <i className="fa-solid fa-book" />{' '}
                                 {t('views.navigation.action_log')}
                             </Nav.Link>
                             <Nav.Link href={backendUrl + 'fauna/users'}>
-                                <i className="fas fa-users" />{' '}
+                                <i className="fa-solid fa-users" />{' '}
                                 {t('views.navigation.labbers')}
                             </Nav.Link>
                         </>}
                     </>}
                     {hasAccessToken ? <NavDropdown title={<>
-                            <i className="fas fa-user" />{' '}
+                            <i className="fa-solid fa-user" />{' '}
                             {t('views.navigation.account')}
                         </>} className="ms-0 ms-lg-auto">
                         <NavDropdown.Item href={backendUrl + 'users/edit'}>
@@ -125,7 +125,7 @@ const NavBar = () => {
                     </NavDropdown> : <Nav.Link as={NavLink} to="/login" state={{
                         from: location,
                     }} className="ms-0 ms-lg-auto">
-                        <i className="fas fa-sign-in" />{' '}
+                        <i className="fa-solid fa-right-to-bracket" />{' '}
                         {t('views.navigation.sign_in')}
                     </Nav.Link>}
                 </Nav>

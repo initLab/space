@@ -29,7 +29,7 @@ const PresentUsers = ({
                                     <i className="fab fa-github fa-2x"></i>
                                 </Button>}
                             {user.url && <Button variant="info" href={user.url} target="_blank">
-                                <i className="fas fa-link fa-2x"></i>
+                                <i className="fa-solid fa-link fa-2x"></i>
                             </Button>}
                         </ButtonGroup>
                     </Card.Body>
@@ -40,7 +40,7 @@ const PresentUsers = ({
 
     return (<Row className="mb-3">
         <Col className="text-center no_users">
-            <i className="far fa-frown" />
+            <i className="fa-regular fa-frown" />
             <h5 className="mt-2">{t('views.users.everybodys_gone')}</h5>
         </Col>
     </Row>);

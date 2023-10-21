@@ -12,7 +12,7 @@
   @include media-breakpoint-up(md) {
     width: 350px;
 
-    i.fa {
+    i {
       font-size: 36pt;
     }
 
@@ -25,7 +25,7 @@
     width: 200px;
     height: 200px;
 
-    i.fa {
+    i {
       font-size: 72pt;
     }
   }

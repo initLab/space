@@ -1,6 +1,6 @@
 const DoorOpenIcon = () => {
     return (
-        <i className="fas fa-door-open" />
+        <i className="fa-solid fa-door-open" />
     );
 };
 

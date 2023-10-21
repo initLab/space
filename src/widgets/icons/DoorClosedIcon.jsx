@@ -1,6 +1,6 @@
 const DoorClosedIcon = () => {
     return (
-        <i className="fas fa-door-closed" />
+        <i className="fa-solid fa-door-closed" />
     );
 };
 

@@ -32,7 +32,7 @@ const SensorReading = ({
                 <Container>
                     <Row>
                         <Col xs={3}>
-                            <i className={'fas fa-5x fa-thermometer-' + thermometerState} />
+                            <i className={'fa-solid fa-5x fa-thermometer-' + thermometerState} />
                         </Col>
                         <Col xs={9} className="text-end">
                             <div className="huge">{formattedValue || <LoadingIcon />}</div>
