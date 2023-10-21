@@ -134,7 +134,6 @@ views:
     labbers: Labbers
     action_log: Logs
     door_access: Open doors
-    presence: Presence
     access: Access
     library: Library
     inventory: Inventory

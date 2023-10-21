@@ -83,10 +83,6 @@ const NavBar = () => {
                         </>}
                     </Nav.Link>
                     {isInitLab && <>
-                        <Nav.Link as={NavLink} to="/users/present">
-                            <i className="fas fa-street-view" />{' '}
-                            {t('views.navigation.presence')}
-                        </Nav.Link>
                         <Nav.Link as={NavLink} to="/sensors">
                             <i className="fas fa-chart-line" />{' '}
                             {t('views.navigation.sensors')}
