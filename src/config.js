@@ -1,18 +1,5 @@
 export const mqtt = {
     url: import.meta.env.MQTT_URL,
-    sensors: [{
-        type: 'Temperature',
-        label: 'Big room',
-        topic: 'sensors-xiaomi-ble/big-room/temperature',
-    }, {
-        type: 'Temperature',
-        label: 'Small room',
-        topic: 'sensors-xiaomi-ble/small-room/temperature',
-    }, {
-        type: 'Temperature',
-        label: 'Kitchen',
-        topic: 'sensors-xiaomi-ble/kitchen/temperature',
-    }],
     doorStates: [{
         type: 'locked',
         topic: 'NetControl/initLab/out/ch28',
@@ -26,6 +13,21 @@ export const mqtt = {
         topic: 'NetControl/initLab/out/ch30',
         mapper: msg => JSON.parse(msg).value.raw === 1,
     }],
+};
+
+export const sensors = {
+    'sensors-xiaomi-ble/big-room/temperature': {
+        type: 'Temperature',
+        label: 'Big room',
+    },
+    'sensors-xiaomi-ble/small-room/temperature': {
+        type: 'Temperature',
+        label: 'Small room',
+    },
+    'sensors-xiaomi-ble/kitchen/temperature': {
+        type: 'Temperature',
+        label: 'Kitchen',
+    },
 };
 
 export const grafana = {

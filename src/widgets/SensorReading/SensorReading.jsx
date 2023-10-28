@@ -1,9 +1,7 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './SensorReading.css';
-import { useSelector } from 'react-redux';
-import { sensorSelector } from '../../features/sensorSlice';
-import LoadingIcon from '../icons/LoadingIcon';
+import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
 
 const units = {
     Temperature: ['°C', 1],
@@ -15,15 +13,19 @@ const thresholds = [18, 24, 26, 32];
 const SensorReading = ({
     type,
     label,
-    topic,
+    timestamp,
+    value,
 }) => {
     const {
-        timestamp,
-        value,
-    } = useSelector(sensorSelector(topic)) || {};
+        formatDefault,
+        formatDistanceToNow,
+    } = useDateTimeFormatter();
+    const lastUpdate = new Date(timestamp);
+    const formattedTimestamp = formatDefault(lastUpdate) + ' (' + formatDistanceToNow(lastUpdate) + ')';
     const unit = units[type];
-    const formattedValue = value && value.toFixed(unit[1]) + unit[0];
+    const formattedValue = value.toFixed(unit[1]) + unit[0];
     const isCurrent = timestamp && Date.now() - timestamp <= 3_600_000;
+    // TODO: only for type === Temperature
     const thermometerState = thresholds.filter(threshold => threshold < value).length;
 
     return (<Col>
@@ -35,8 +37,8 @@ const SensorReading = ({
                             <i className={'fa-solid fa-5x fa-thermometer-' + thermometerState} />
                         </Col>
                         <Col xs={9} className="text-end">
-                            <div className="huge">{formattedValue || <LoadingIcon />}</div>
-                            <div>{label}</div>
+                            <div className="huge">{formattedValue}</div>
+                            <div title={formattedTimestamp}>{label}</div>
                         </Col>
                     </Row>
                 </Container>
@@ -48,7 +50,8 @@ const SensorReading = ({
 SensorReading.propTypes = {
     type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    topic: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
 };
 
 export default SensorReading;
