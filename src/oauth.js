@@ -10,7 +10,7 @@ const urls = {
     revoke: baseUrl + 'revoke',
 };
 
-export const scopes = ['account_data_read', 'door_control'].join(' ');
+export const scopes = ['account_data_read'].join(' ');
 
 const pkce = new PKCE({
     client_id: clientId,
