@@ -17,7 +17,7 @@ export function useRememberPage() {
         if (previousPath) {
             localStorage.setItem(STORAGE_KEY, JSON.stringify({
                 path: previousPath,
-                expiresAt: Date.now() + 30 * 60 * 1000,
+                expiresAt: Date.now() + 30 * 60 * 1_000,
             }));
         }
         else {

@@ -23,7 +23,7 @@ const ActionLog = () => {
     } = useGetActionLogQuery({
     }, {
         skip: !hasAccess,
-        pollingInterval: 60000,
+        pollingInterval: 60_000,
     });
 
     if (!hasAccess) {

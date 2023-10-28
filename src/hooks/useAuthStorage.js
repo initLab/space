@@ -29,7 +29,7 @@ function parseTokenResponse(tokenResponse) {
 
     return {
         [ACCESS_TOKEN_KEY]: tokenResponse.access_token,
-        [ACCESS_TOKEN_EXPIRE_KEY]: (tokenResponse.created_at + tokenResponse.expires_in) * 1000,
+        [ACCESS_TOKEN_EXPIRE_KEY]: (tokenResponse.created_at + tokenResponse.expires_in) * 1_000,
         [REFRESH_TOKEN_KEY]: tokenResponse.refresh_token,
     };
 }

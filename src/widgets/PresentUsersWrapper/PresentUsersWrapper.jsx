@@ -18,7 +18,7 @@ const PresentUsersWrapper = () => {
         isError,
         fulfilledTimeStamp,
     } = useGetPresentUsersQuery(undefined, {
-        pollingInterval: 60000,
+        pollingInterval: 60_000,
     });
 
     const fulfilledTime = useMemo(() => new Date(fulfilledTimeStamp), [fulfilledTimeStamp]);
