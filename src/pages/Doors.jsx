@@ -1,10 +1,9 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import React, { useCallback } from 'react';
-import { useGetDoorsQuery } from '../features/apiSlice.js';
+import React, { useMemo } from 'react';
+import { useGetDevicesQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
-import { useSelector } from 'react-redux';
-import { doorLockStatusSelector } from '../features/doorSlice.js';
+import { getDoorActions } from '../utils/door.js';
 import { useTranslation } from 'react-i18next';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import { useVariant } from '../hooks/useVariant.js';
@@ -12,34 +11,15 @@ import { useVariant } from '../hooks/useVariant.js';
 const Doors = () => {
     const { t } = useTranslation();
     const {
-        data: doors,
+        data: devices,
         error,
         isLoading,
         isSuccess,
         isError,
-    } = useGetDoorsQuery();
+    } = useGetDevicesQuery();
 
-    // TODO: get this from the backend
-    const monitoredDoor = 'back_door';
-    const doorStatus = useSelector(doorLockStatusSelector());
-
-    const getDoorActions = useCallback(door => {
-        const actions = door.supported_actions;
-
-        if (door.id !== monitoredDoor) {
-            return actions;
-        }
-
-        if (doorStatus === 'unlocked') {
-            return actions.filter(action => action !== 'unlock');
-        }
-
-        if (doorStatus === 'locked') {
-            return actions.filter(action => ['open', 'lock'].indexOf(action) === -1);
-        }
-
-        return [];
-    }, [monitoredDoor, doorStatus]);
+    const doors = useMemo(() =>
+        isSuccess ? devices.filter(device => device.type === 'door') : [], [devices, isSuccess]);
 
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
@@ -58,7 +38,7 @@ const Doors = () => {
                         <Card.Body
                             className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
                             {doorActions.map(action => <DeviceActionButton key={action} deviceId={door.id} action={action} />)}
-                            {door.id === monitoredDoor && doorStatus === 'busy' && <LoadingIcon large />}
+                            {doorActions.length === 0 && <LoadingIcon large />}
                         </Card.Body>
                     </Card>
                 </Col>);

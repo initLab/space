@@ -1,6 +1,6 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import React from 'react';
-import { useGetLightsQuery } from '../features/apiSlice.js';
+import React, { useMemo } from 'react';
+import { useGetDevicesQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
 import { useTranslation } from 'react-i18next';
@@ -10,12 +10,16 @@ import { useVariant } from '../hooks/useVariant.js';
 const Lights = () => {
     const { t } = useTranslation();
     const {
-        data: lights,
+        data: devices,
         error,
         isLoading,
         isSuccess,
         isError,
-    } = useGetLightsQuery();
+    } = useGetDevicesQuery();
+
+    const lights = useMemo(() => isSuccess ? devices.filter(device =>
+        device.type === 'light'
+    ) : [], [devices, isSuccess]);
 
     const variant = useVariant();
     const isInitLab = variant === 'initlab';

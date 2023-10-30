@@ -109,8 +109,7 @@ export const authenticatedDeviceApiSlice = createApi({
     reducerPath: 'authenticatedDeviceApi',
     baseQuery: authenticatedDeviceBaseQueryWithReauth,
     endpoints: builder => ({
-        getDoors: query(builder)('doors'),
-        getLights: query(builder)('lights'),
+        getDevices: query(builder)('devices'),
         deviceAction: builder.mutation({
             query: params => ({
                 url: 'device/' + params.deviceId + '/' + params.action,
@@ -136,8 +135,7 @@ export const {
 } = authenticatedApiSlice;
 
 export const {
-    useGetDoorsQuery,
-    useGetLightsQuery,
+    useGetDevicesQuery,
     useDeviceActionMutation,
     useGetActionLogQuery,
 } = authenticatedDeviceApiSlice;
