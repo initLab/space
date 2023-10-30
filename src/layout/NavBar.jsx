@@ -4,15 +4,7 @@ import initLabLogo from '../assets/initlab/logo.svg';
 import colibriLogo from '../assets/colibri/logo.png';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { doorLockStatusSelector, doorStateSelector } from '../features/doorSlice.js';
-import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
-import WarningIcon from '../widgets/icons/WarningIcon.jsx';
-import LockIcon from '../widgets/icons/LockIcon.jsx';
-import UnlockIcon from '../widgets/icons/UnlockIcon.jsx';
-import BusyIcon from '../widgets/icons/BusyIcon.jsx';
 import DoorClosedIcon from '../widgets/icons/DoorClosedIcon.jsx';
-import DoorOpenIcon from '../widgets/icons/DoorOpenIcon.jsx';
 import { useEffect } from 'react';
 import i18n from '../i18n.js';
 import { useVariant } from '../hooks/useVariant.js';
@@ -20,8 +12,6 @@ import { useCurrentUser } from '../hooks/useCurrentUser.js';
 
 const NavBar = () => {
     const {t} = useTranslation();
-    const doorClosed = useSelector(doorStateSelector('closed'));
-    const doorLockStatus = useSelector(doorLockStatusSelector());
     const backendUrl = import.meta.env.BACKEND_URL;
     const {
         hasAccessToken,
@@ -57,15 +47,19 @@ const NavBar = () => {
             {isColibri && <Navbar.Brand as={NavLink} to="/doors">
                 <Image src={colibriLogo} className="logo" alt="Colibri logo" />
             </Navbar.Brand>}
+            {/*
             <Navbar.Text className="flex-grow-1 flex-lg-grow-0 text-end pe-3 pe-lg-0">
-                {doorClosed === undefined ? <LoadingIcon /> : (
+                {doorClosed === null ? <LoadingIcon /> : (
                     doorClosed ? <DoorClosedIcon /> : <DoorOpenIcon />
                 )}
             </Navbar.Text>
+            */}
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="flex-grow-1">
                     <Nav.Link as={NavLink} to="/doors">
+                        <DoorClosedIcon /> {t('views.navigation.door_access')}
+                        {/*
                         {doorLockStatus === 'uninitialized' && <>
                             <LoadingIcon />
                         </>}
@@ -81,6 +75,7 @@ const NavBar = () => {
                         {doorLockStatus === 'invalid' && <>
                             <WarningIcon /> {t('views.doors.unknown')}
                         </>}
+                        */}
                     </Nav.Link>
                     <Nav.Link as={NavLink} to="/lights">
                         <i className="fa-solid fa-lightbulb" />{' '}
