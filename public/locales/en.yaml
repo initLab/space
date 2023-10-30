@@ -119,12 +119,12 @@ views:
     unlocked: Unlocked
     unknown: Unknown
     no_access: |
-      You don't have the necessary rights to control the doors. Please contact an init Lab board member to request
-      access.
+      You don't have the necessary rights to control the doors. Please contact an init Lab board member at
+      us@initlab.org to request access.
   lights:
     no_access: |
-      You don't have the necessary rights to control the lights. Please contact an init Lab board member to request
-      access.
+      You don't have the necessary rights to control the lights. Please contact an init Lab board member at
+      us@initlab.org to request access.
   navigation:
     view_edit: View/edit
     sign_in: Login
