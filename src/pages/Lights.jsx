@@ -6,6 +6,7 @@ import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton
 import { useTranslation } from 'react-i18next';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import { useVariant } from '../hooks/useVariant.js';
+import { getLightActions } from '../utils/device.js';
 
 const Lights = () => {
     const { t } = useTranslation();
@@ -30,12 +31,14 @@ const Lights = () => {
         </Col>}
         {isSuccess && <>
             {lights.length > 0 ? lights.map(light => {
+                const lightActions = getLightActions(light);
+
                 return (<Col key={light.id}>
                     <Card>
                         <Card.Header className={'text-start' + (isInitLab ? ' bg-primary text-light' : '')}>{light.name}</Card.Header>
                         <Card.Body
                             className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
-                            {light.supported_actions.map(action => <DeviceActionButton key={action} deviceId={light.id} action={action} />)}
+                            {lightActions.map(action => <DeviceActionButton key={action} deviceId={light.id} action={action} />)}
                         </Card.Body>
                     </Card>
                 </Col>);

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useGetDevicesQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
-import { getDoorActions } from '../utils/door.js';
+import { getDoorActions } from '../utils/device.js';
 import { useTranslation } from 'react-i18next';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import { useVariant } from '../hooks/useVariant.js';

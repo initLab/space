@@ -1,10 +1,10 @@
 export function getDoorActions(door) {
     const lockStatus = door?.statuses?.lock;
-    const isMonitored = typeof lockStatus === 'string';
+    const validLockStatus = typeof lockStatus === 'string';
 
     const actions = door.supported_actions;
 
-    if (!isMonitored) {
+    if (!validLockStatus) {
         return actions;
     }
 
@@ -23,4 +23,18 @@ export function getDoorActions(door) {
 
     // fallback - return all actions
     return actions;
+}
+
+export function getLightActions(light) {
+    const activityStatus = light?.statuses?.active;
+    const validActiveStatus = typeof activityStatus === 'boolean';
+
+    const actions = light.supported_actions;
+
+    if (!validActiveStatus) {
+        // fallback - return all actions
+        return actions;
+    }
+
+    return actions.filter(action => action !== (activityStatus ? 'turn_on' : 'turn_off'));
 }
