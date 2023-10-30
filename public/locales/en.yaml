@@ -133,7 +133,7 @@ views:
     lab: Lab
     labbers: Labbers
     action_log: Logs
-    door_access: Open doors
+    door_access: Doors
     access: Access
     library: Library
     inventory: Inventory
