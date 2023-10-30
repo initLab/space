@@ -119,14 +119,15 @@ views:
     open_alternative: open
     turn_on: turn on
     turn_off: turn off
-  doors:
+    offline: Device is currently offline
+  door:
     locked: Locked
     unlocked: Unlocked
     unknown: Unknown
     no_access: |
       You don't have the necessary rights to control the doors. Please contact an init Lab board member at
       us@initlab.org to request access.
-  lights:
+  light:
     no_access: |
       You don't have the necessary rights to control the lights. Please contact an init Lab board member at
       us@initlab.org to request access.
