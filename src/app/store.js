@@ -6,7 +6,6 @@ import {
     authenticatedApiSlice,
     authenticatedDeviceApiSlice
 } from '../features/apiSlice';
-import { doorSlice } from '../features/doorSlice.js';
 
 export const store = configureStore({
     reducer: {
@@ -14,7 +13,6 @@ export const store = configureStore({
         [anonymousMqttApiSlice.reducerPath]: anonymousMqttApiSlice.reducer,
         [authenticatedApiSlice.reducerPath]: authenticatedApiSlice.reducer,
         [authenticatedDeviceApiSlice.reducerPath]: authenticatedDeviceApiSlice.reducer,
-        [doorSlice.name]: doorSlice.reducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(anonymousApiSlice.middleware).concat(anonymousMqttApiSlice.middleware)

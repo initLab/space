@@ -15,7 +15,6 @@ export default defineConfig({
         'BACKEND_URL',
         'DEVICE_BACKEND_URL',
         'MQTT_BACKEND_URL',
-        'MQTT_URL',
         'OAUTH_CLIENT_ID',
         'VARIANT',
     ],

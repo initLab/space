@@ -5,7 +5,6 @@ import { store } from './app/store';
 import { BrowserRouter } from 'react-router-dom';
 
 import './i18n';
-import './mqtt';
 import App from './App';
 
 import '@fortawesome/fontawesome-free/css/all.css';
