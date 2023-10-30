@@ -1,18 +1,13 @@
-import PresentUsersWrapper from '../widgets/PresentUsersWrapper/PresentUsersWrapper';
-import SensorReadingsWrapper from '../widgets/SensorReadingsWrapper/SensorReadingsWrapper';
 import { useVariant } from '../hooks/useVariant.js';
-import { Navigate } from 'react-router-dom';
+import InitLabDashboard from './Dashboard/InitLabDashboard.jsx';
+import ColibriDashboard from './Dashboard/ColibriDashboard.jsx';
 
 const Dashboard = () => {
     const variant = useVariant();
 
-    if (variant === 'colibri') {
-        return (<Navigate to="/doors" />);
-    }
-
     return (<>
-        <PresentUsersWrapper />
-        <SensorReadingsWrapper />
+        {variant === 'initlab' && <InitLabDashboard />}
+        {variant === 'colibri' && <ColibriDashboard />}
     </>);
 };
 

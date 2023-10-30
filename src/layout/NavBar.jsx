@@ -41,12 +41,10 @@ const NavBar = () => {
         }
     })} expand="lg" className="py-0">
         <Container>
-            {isInitLab && <Navbar.Brand as={NavLink} to="/">
-                <Image src={initLabLogo} className="logo" alt="init Lab logo" />
-            </Navbar.Brand>}
-            {isColibri && <Navbar.Brand as={NavLink} to="/doors">
-                <Image src={colibriLogo} className="logo" alt="Colibri logo" />
-            </Navbar.Brand>}
+            <Navbar.Brand as={NavLink} to="/">
+                {isInitLab && <Image src={initLabLogo} className="logo" alt="init Lab logo" />}
+                {isColibri && <Image src={colibriLogo} className="logo" alt="Colibri logo" />}
+            </Navbar.Brand>
             {/*
             <Navbar.Text className="flex-grow-1 flex-lg-grow-0 text-end pe-3 pe-lg-0">
                 {doorClosed === null ? <LoadingIcon /> : (

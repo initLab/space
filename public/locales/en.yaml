@@ -107,6 +107,11 @@ views:
   dashboard:
     sensor_readings: Temperature readings
     loading: Loading data...
+    colibri_message_info: Please choose Doors or Lights from the application menu.
+    colibri_message_contact: |
+      In case of technical difficulties, or you need to request access for new employees, please contact init Lab
+      at us@initlab.org.
+    colibri_message_emergency: In case of major malfunction, please call +359 883 433 990 (Vencislav).
   devices:
     lock: lock
     unlock: unlock
