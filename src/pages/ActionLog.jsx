@@ -7,9 +7,14 @@ import { useGetActionLogQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import ActionLogEntry from '../widgets/ActionLog/ActionLogEntry.jsx';
+import { useNetworkState } from '@uidotdev/usehooks';
 
 const ActionLog = () => {
     const { t } = useTranslation();
+
+    const {
+        online,
+    } = useNetworkState();
 
     const variant = useVariant();
     const hasAccess = variant === 'initlab';
@@ -23,7 +28,7 @@ const ActionLog = () => {
     } = useGetActionLogQuery({
     }, {
         skip: !hasAccess,
-        pollingInterval: 60_000,
+        pollingInterval: online === false ? 0 : 60_000,
     });
 
     if (!hasAccess) {

@@ -5,9 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { useGetStatusQuery } from '../../features/apiSlice.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
 import ErrorMessage from '../ErrorMessage.jsx';
+import { useNetworkState } from '@uidotdev/usehooks';
 
 const SensorReadingsWrapper = () => {
     const { t } = useTranslation();
+
+    const {
+        online,
+    } = useNetworkState();
+
     const {
         data,
         isLoading,
@@ -15,7 +21,7 @@ const SensorReadingsWrapper = () => {
         isError,
         error,
     } = useGetStatusQuery(undefined, {
-        pollingInterval: 60_000,
+        pollingInterval: online === false ? 0 : 60_000,
     });
 
     return (<>

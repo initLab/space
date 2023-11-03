@@ -6,9 +6,14 @@ import LoadingIcon from '../icons/LoadingIcon.jsx';
 import { useMemo } from 'react';
 import { format, formatISO } from 'date-fns';
 import ErrorMessage from '../ErrorMessage.jsx';
+import { useNetworkState } from '@uidotdev/usehooks';
 
 const PresentUsersWrapper = () => {
     const { t } = useTranslation();
+
+    const {
+        online,
+    } = useNetworkState();
 
     const {
         data: users,
@@ -18,7 +23,7 @@ const PresentUsersWrapper = () => {
         isError,
         fulfilledTimeStamp,
     } = useGetPresentUsersQuery(undefined, {
-        pollingInterval: 60_000,
+        pollingInterval: online === false ? 0 : 60_000,
     });
 
     const fulfilledTime = useMemo(() => new Date(fulfilledTimeStamp), [fulfilledTimeStamp]);
