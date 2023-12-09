@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './DeviceActionButton.scss';
 import { useDeviceActionMutation } from '../../features/apiSlice.js';
 import RedirectToLogin from '../RedirectToLogin.jsx';
+import { sleep } from '../../utils/time.js';
 
 const types = {
     open: {
@@ -34,7 +35,13 @@ const types = {
 const DeviceActionButton = ({
     deviceId,
     action,
+    busyActionId,
+    setBusyActionId,
 }) => {
+    const actionId = deviceId + '/' + action;
+    const loading = actionId === busyActionId;
+    const disabled = typeof busyActionId === 'string';
+
     const [ execute, {
         isError,
         error,
@@ -47,15 +54,22 @@ const DeviceActionButton = ({
     };
 
     async function handleClick() {
-        return execute({
+        setBusyActionId && setBusyActionId(actionId);
+
+        await execute({
             deviceId,
             action,
         });
+
+        if (setBusyActionId) {
+            await sleep(3000);
+            setBusyActionId(null);
+        }
     }
 
     return (<>
-        <Button variant={type.variant} className="device-action-button" onClick={handleClick}>
-            <i className={type.icon} />
+        <Button variant={type.variant} className="device-action-button" onClick={handleClick} disabled={disabled}>
+            <i className={loading ? 'fa-solid fa-arrows-rotate fa-spin' : type.icon} />
             <div>{t('views.devices.' + action)}</div>
         </Button>
         {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
