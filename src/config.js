@@ -1,13 +1,13 @@
 export const sensors = {
-    'sensors-xiaomi-ble/big-room/temperature': {
+    'sensors/big-room/temperature': {
         type: 'Temperature',
         label: 'Big room',
     },
-    'sensors-xiaomi-ble/small-room/temperature': {
+    'sensors/small-room/temperature': {
         type: 'Temperature',
         label: 'Small room',
     },
-    'sensors-xiaomi-ble/kitchen/temperature': {
+    'sensors/kitchen/temperature': {
         type: 'Temperature',
         label: 'Kitchen',
     },
