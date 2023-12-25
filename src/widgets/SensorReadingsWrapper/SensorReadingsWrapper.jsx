@@ -41,7 +41,7 @@ const SensorReadingsWrapper = () => {
             </Col>
         </Row>}
         {isSuccess && <Row className="row-cols-1 row-cols-lg-3 g-3">
-            {Object.entries(sensors).map(([topic, sensor]) =>
+            {Object.entries(sensors).filter(([topic]) => data.hasOwnProperty(topic)).map(([topic, sensor]) =>
                 <SensorReading key={topic} {...sensor} {...data[topic]} />
             )}
         </Row>}
