@@ -107,7 +107,8 @@ views:
   dashboard:
     sensor_readings: Temperature readings
     loading: Loading data...
-    colibri_message_info: Please choose Doors or Lights from the application menu.
+    colibri_message_info: |
+      Please choose Doors or Lights from the application menu. In case they are not visualised, you need to login first.
     colibri_message_contact: |
       In case of technical difficulties, or you need to request access for new employees, please contact init Lab
       at us@initlab.org.
