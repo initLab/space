@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import i18n from '../i18n.js';
 import { useVariant } from '../hooks/useVariant.js';
 import { useCurrentUser } from '../hooks/useCurrentUser.js';
+import RequireRole from '../widgets/RequireRole.jsx';
 
 const NavBar = () => {
     const {t} = useTranslation();
@@ -21,7 +22,6 @@ const NavBar = () => {
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
     const isColibri = variant === 'colibri';
-    const isBoardMember = user.roles?.includes('board_member');
 
     useEffect(function() {
         if (isSuccess) {
@@ -55,46 +55,52 @@ const NavBar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="flex-grow-1">
-                    <Nav.Link as={NavLink} to="/doors">
-                        <DoorClosedIcon /> {t('views.navigation.door_access')}
-                        {/*
-                        {doorLockStatus === 'uninitialized' && <>
-                            <LoadingIcon />
-                        </>}
-                        {doorLockStatus === 'locked' && <>
-                            <LockIcon /> {t('views.doors.locked')}
-                        </>}
-                        {doorLockStatus === 'unlocked' && <>
-                            <UnlockIcon /> {t('views.doors.unlocked')}
-                        </>}
-                        {doorLockStatus === 'busy' && <>
-                            <BusyIcon />
-                        </>}
-                        {doorLockStatus === 'invalid' && <>
-                            <WarningIcon /> {t('views.doors.unknown')}
-                        </>}
-                        */}
-                    </Nav.Link>
-                    <Nav.Link as={NavLink} to="/lights">
-                        <i className="fa-solid fa-lightbulb" />{' '}
-                        {t('views.navigation.lights')}
-                    </Nav.Link>
+                    <RequireRole roles={['board_member', 'infra', 'trusted_member', 'landlord', 'tenant']}>
+                        <Nav.Link as={NavLink} to="/doors">
+                            <DoorClosedIcon /> {t('views.navigation.door_access')}
+                            {/*
+                            {doorLockStatus === 'uninitialized' && <>
+                                <LoadingIcon />
+                            </>}
+                            {doorLockStatus === 'locked' && <>
+                                <LockIcon /> {t('views.doors.locked')}
+                            </>}
+                            {doorLockStatus === 'unlocked' && <>
+                                <UnlockIcon /> {t('views.doors.unlocked')}
+                            </>}
+                            {doorLockStatus === 'busy' && <>
+                                <BusyIcon />
+                            </>}
+                            {doorLockStatus === 'invalid' && <>
+                                <WarningIcon /> {t('views.doors.unknown')}
+                            </>}
+                            */}
+                        </Nav.Link>
+                    </RequireRole>
+                    <RequireRole roles={['board_member', 'infra', 'landlord', 'tenant']}>
+                        <Nav.Link as={NavLink} to="/lights">
+                            <i className="fa-solid fa-lightbulb" />{' '}
+                            {t('views.navigation.lights')}
+                        </Nav.Link>
+                    </RequireRole>
                     {isInitLab && <>
                         <Nav.Link as={NavLink} to="/sensors">
                             <i className="fa-solid fa-chart-line" />{' '}
                             {t('views.navigation.sensors')}
                         </Nav.Link>
-                        {isBoardMember && <>
-                            <Nav.Link as={NavLink} to="/action-log">
-                                <i className="fa-solid fa-book" />{' '}
-                                {t('views.navigation.action_log')}
-                            </Nav.Link>
-                            <Nav.Link href={backendUrl + 'fauna/users'}>
-                                <i className="fa-solid fa-users" />{' '}
-                                {t('views.navigation.labbers')}
-                            </Nav.Link>
-                        </>}
                     </>}
+                    <RequireRole roles={['board_member', 'infra']}>
+                        <Nav.Link as={NavLink} to="/action-log">
+                            <i className="fa-solid fa-book" />{' '}
+                            {t('views.navigation.action_log')}
+                        </Nav.Link>
+                    </RequireRole>
+                    <RequireRole roles={['board_member']}>
+                        <Nav.Link href={backendUrl + 'fauna/users'}>
+                            <i className="fa-solid fa-users" />{' '}
+                            {t('views.navigation.labbers')}
+                        </Nav.Link>
+                    </RequireRole>
                     {hasAccessToken ? <NavDropdown title={<>
                             <i className="fa-solid fa-user" />{' '}
                             {t('views.navigation.account')}
