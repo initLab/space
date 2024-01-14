@@ -43,7 +43,9 @@ const SensorReading = ({
                             <i className={'fa-solid fa-5x fa-thermometer-' + thermometerState} />
                         </Col>
                         <Col xs={9} className="text-end">
-                            <div className="huge">{formattedValue}</div>
+                            <div className={'huge' + (isCurrent ? '' : ' text-decoration-line-through')}>
+                                {formattedValue}
+                            </div>
                             <div title={formattedTimestamp}>{label}</div>
                         </Col>
                     </Row>
