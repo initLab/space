@@ -2,6 +2,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './SensorReading.css';
 import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
+import { isValid } from 'date-fns';
 
 const units = {
     Temperature: ['°C', 1],
@@ -20,6 +21,11 @@ const SensorReading = ({
         formatDefault,
         formatDistanceToNow,
     } = useDateTimeFormatter();
+
+    if (!isValid(timestamp) || typeof value !== 'number') {
+        return null;
+    }
+
     const lastUpdate = new Date(timestamp);
     const formattedTimestamp = formatDefault(lastUpdate) + ' (' + formatDistanceToNow(lastUpdate) + ')';
     const unit = units[type];
