@@ -16,7 +16,7 @@ const PresentUsers = ({
                             <Image fluid src={user.picture.replace('s=128', 's=242')} alt="avatar" className="w-100" />}
                     </Card.Header>
                     <Card.Body className="text-center">
-                        <h5>
+                        <h5 className="mb-4">
                             {user.username}
                         </h5>
                         <ButtonGroup>
