@@ -17,8 +17,7 @@ const PresentUsers = ({
                     </Card.Header>
                     <Card.Body className="text-center">
                         <h5>
-                            {user.name}
-                            {user.username && <div className="small">{user.username}</div>}
+                            {user.username}
                         </h5>
                         <ButtonGroup>
                             {user.twitter && <Button href={'https://twitter.com/' + user.twitter} target="_blank">
