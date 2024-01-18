@@ -12,7 +12,7 @@ const types = {
         icon: 'fa-solid fa-right-to-bracket',
     },
     open_alternative: {
-        variant: '',
+        variant: 'success',
         icon: 'fa-solid fa-right-to-bracket',
     },
     lock: {
