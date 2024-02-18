@@ -1,5 +1,5 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useGetDevicesQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
@@ -35,8 +35,6 @@ const Devices = ({
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
 
-    const [ busyActionId, setBusyActionId ] = useState(null);
-
     return (<Row className="row-cols row-cols-1 gap-4">
         {isLoading && <Col className="text-center">
             <LoadingIcon large />
@@ -57,7 +55,6 @@ const Devices = ({
                             {isUnavailable ? t('views.devices.offline') : <>
                                 {deviceActions.map(action =>
                                     <DeviceActionButton key={action} deviceId={device.id} action={action}
-                                        busyActionId={busyActionId} setBusyActionId={setBusyActionId}
                                         isDoorOpen={action === 'open' && isOpen} />)}
                                 {deviceActions.length === 0 && <LoadingIcon large />}
                             </>}

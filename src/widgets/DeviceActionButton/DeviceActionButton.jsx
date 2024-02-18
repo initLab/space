@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './DeviceActionButton.scss';
 import { useDeviceActionMutation } from '../../features/apiSlice.js';
@@ -35,13 +35,9 @@ const types = {
 const DeviceActionButton = ({
     deviceId,
     action,
-    busyActionId,
-    setBusyActionId,
     isDoorOpen,
 }) => {
-    const actionId = deviceId + '/' + action;
-    const loading = actionId === busyActionId;
-    const disabled = typeof busyActionId === 'string';
+    const [ disabled, setDisabled ] = useState(false);
 
     const [ execute, {
         isError,
@@ -55,21 +51,19 @@ const DeviceActionButton = ({
     };
 
     async function handleClick() {
-        setBusyActionId && setBusyActionId(actionId);
+        setDisabled(true);
 
         await execute({
             deviceId,
             action,
         });
 
-        if (setBusyActionId) {
-            await sleep(3000);
-            setBusyActionId(null);
-        }
+        await sleep(3000);
+        setDisabled(false);
     }
 
     const variant = isDoorOpen ? 'warning' : type.variant;
-    const icon = (isDoorOpen ? 'fa-solid fa-door-open' : type.icon) + (loading ? ' fa-fade' : '');
+    const icon = (isDoorOpen ? 'fa-solid fa-door-open' : type.icon) + (disabled ? ' fa-fade' : '');
     const label = t(isDoorOpen ? 'views.door.open' : 'views.devices.' + action);
 
     return (<>
