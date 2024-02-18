@@ -69,12 +69,12 @@ const DeviceActionButton = ({
     }
 
     const variant = isDoorOpen ? 'warning' : type.variant;
-    const icon = isDoorOpen ? 'fa-solid fa-door-open' : type.icon;
+    const icon = (isDoorOpen ? 'fa-solid fa-door-open' : type.icon) + (loading ? ' fa-fade' : '');
     const label = t(isDoorOpen ? 'views.door.open' : 'views.devices.' + action);
 
     return (<>
         <Button variant={variant} className="device-action-button" onClick={handleClick} disabled={disabled}>
-            <i className={loading ? 'fa-solid fa-arrows-rotate fa-spin' : icon} />
+            <i className={icon} />
             <div>{label}</div>
         </Button>
         {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
