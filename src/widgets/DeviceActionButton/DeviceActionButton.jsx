@@ -37,6 +37,7 @@ const DeviceActionButton = ({
     action,
     busyActionId,
     setBusyActionId,
+    isDoorOpen,
 }) => {
     const actionId = deviceId + '/' + action;
     const loading = actionId === busyActionId;
@@ -67,13 +68,21 @@ const DeviceActionButton = ({
         }
     }
 
+    const variant = isDoorOpen ? 'warning' : type.variant;
+    const icon = isDoorOpen ? 'fa-solid fa-door-open' : type.icon;
+    const label = t(isDoorOpen ? 'views.door.open' : 'views.devices.' + action);
+
     return (<>
-        <Button variant={type.variant} className="device-action-button" onClick={handleClick} disabled={disabled}>
-            <i className={loading ? 'fa-solid fa-arrows-rotate fa-spin' : type.icon} />
-            <div>{t('views.devices.' + action)}</div>
+        <Button variant={variant} className="device-action-button" onClick={handleClick} disabled={disabled}>
+            <i className={loading ? 'fa-solid fa-arrows-rotate fa-spin' : icon} />
+            <div>{label}</div>
         </Button>
         {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
     </>);
+};
+
+DeviceActionButton.defaultProps = {
+    isDoorOpen: false,
 };
 
 export default DeviceActionButton;

@@ -124,6 +124,7 @@ views:
   door:
     locked: Locked
     unlocked: Unlocked
+    open: Wide open
     unknown: Unknown
     no_access: |
       You don't have the necessary rights to control the doors. Please contact an init Lab board member at

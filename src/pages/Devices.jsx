@@ -45,6 +45,7 @@ const Devices = ({
             {filteredDevices.length > 0 ? filteredDevices.map(device => {
                 const deviceActions = deviceActionMapper(device);
                 const isUnavailable = device?.statuses?.available === false;
+                const isOpen = device?.statuses?.open === true;
 
                 return (<Col key={device.id}>
                     <Card>
@@ -56,7 +57,8 @@ const Devices = ({
                             {isUnavailable ? t('views.devices.offline') : <>
                                 {deviceActions.map(action =>
                                     <DeviceActionButton key={action} deviceId={device.id} action={action}
-                                        busyActionId={busyActionId} setBusyActionId={setBusyActionId} />)}
+                                        busyActionId={busyActionId} setBusyActionId={setBusyActionId}
+                                        isDoorOpen={isOpen} />)}
                                 {deviceActions.length === 0 && <LoadingIcon large />}
                             </>}
                         </Card.Body>
