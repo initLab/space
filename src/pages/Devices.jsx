@@ -58,7 +58,7 @@ const Devices = ({
                                 {deviceActions.map(action =>
                                     <DeviceActionButton key={action} deviceId={device.id} action={action}
                                         busyActionId={busyActionId} setBusyActionId={setBusyActionId}
-                                        isDoorOpen={isOpen} />)}
+                                        isDoorOpen={action === 'open' && isOpen} />)}
                                 {deviceActions.length === 0 && <LoadingIcon large />}
                             </>}
                         </Card.Body>
