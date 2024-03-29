@@ -31,7 +31,7 @@ const SensorReading = ({
     const unit = units[type];
     const formattedValue = value.toFixed(unit[1]) + unit[0];
     const readingAge = Date.now() - timestamp;
-    const isCurrent = readingAge <= 3_600_000;
+    const isCurrent = readingAge <= 7_200_000;
     const isVisible = readingAge <= 86_400_000;
     // TODO: only for type === Temperature
     const thermometerState = thresholds.filter(threshold => threshold < value).length;
