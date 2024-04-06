@@ -11,14 +11,14 @@ const Footer = () => {
                 <Col xs={12} sm={6}>
                     <p className="my-4">
                         {t('views.footer.license')
-                            .replace('init Lab Fauna', 'init Lab Fauna Frontend')}{' '}
-                        <a href="https://github.com/initLab/fauna-frontend/blob/master/LICENSE">MIT License</a>
+                            .replace('init Lab Fauna', 'Space')}{' '}
+                        <a href="https://github.com/initLab/space/blob/master/LICENSE">MIT License</a>
                     </p>
                 </Col>
                 <Col xs={12} sm={6}>
                     <p className="my-4 right">
                         {t('views.footer.source_code')}{' '}
-                        <a href="https://github.com/initLab/fauna-frontend/">GitHub</a>
+                        <a href="https://github.com/initLab/space/">GitHub</a>
                     </p>
                 </Col>
             </Row>

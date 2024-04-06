@@ -34,7 +34,7 @@ jobs:
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
-          cmd: build --base=/fauna-frontend/
+          cmd: build --base=/space/
         env:
           OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
           VARIANT: initlab
