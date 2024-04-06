@@ -169,7 +169,7 @@ views:
     announce_my_presence_explanation: |
       If you select this option, your name, username, avatar and public
       profile information (website, Github, Twitter) will be visible on the
-      Fauna homepage. Your username will be sent to Twitter, IRC and Telegram
+      Space homepage. Your username will be sent to Twitter, IRC and Telegram
       every time you unlock, lock or open the front door.
       If you don't select this option, you will be shown as Mystery Labber and
       your actions on the front door will still be published, but instead of
@@ -223,5 +223,5 @@ views:
       user: User
       application: Application
   footer:
-    license: 'init Lab Fauna is licensed under'
+    license: 'init Lab Space is licensed under'
     source_code: 'The source code is available in'

@@ -10,8 +10,7 @@ const Footer = () => {
             <Row>
                 <Col xs={12} sm={6}>
                     <p className="my-4">
-                        {t('views.footer.license')
-                            .replace('init Lab Fauna', 'Space')}{' '}
+                        {t('views.footer.license')}{' '}
                         <a href="https://github.com/initLab/space/blob/master/LICENSE">MIT License</a>
                     </p>
                 </Col>
