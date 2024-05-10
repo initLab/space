@@ -5,6 +5,7 @@ import './DeviceActionButton.scss';
 import { useDeviceActionMutation } from '../../features/apiSlice.js';
 import RedirectToLogin from '../RedirectToLogin.jsx';
 import { sleep } from '../../utils/time.js';
+import debounce from 'debounce';
 
 const types = {
     open: {
@@ -50,15 +51,19 @@ const DeviceActionButton = ({
         icon: '',
     };
 
+    const openDoor = debounce(execute, 2000);
+
     async function handleClick() {
         setDisabled(true);
 
-        await execute({
-            deviceId,
-            action,
-        });
+        // await execute({
+        //     deviceId,
+        //     action,
+        // });
 
-        await sleep(3000);
+        openDoor({deviceId, action});
+
+        // await sleep(3000);
         setDisabled(false);
     }
 
