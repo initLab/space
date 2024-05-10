@@ -1,0 +1,31 @@
+version: '3'
+networks:
+  lan:
+    external: true
+  internal:
+    external: false
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - '../src:/etc/app/src'
+      - '../public:/etc/app/public'
+      - '../index.html:/etc/app/index.html'
+      - '../vite.config.js:/etc/app/vite.config'
+      - '../.env.development:/etc/app/.env.development'
+    networks:
+      - internal
+      - lan
+    # ports:
+    #   - '1234:1234'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.space-initlab.rule=Host(`space.initlab.lan`)
+      - traefik.http.routers.space-initlab.service=dashboard
+      - traefik.http.services.space-initlab.loadbalancer.server.port=5173
+      - traefik.http.routers.space-initlab-secure.rule=Host(`space.initlab.lan`)
+      - traefik.http.routers.space-initlab-secure.service=space-initlab
+      - traefik.http.routers.space-initlab-secure.entrypoints=websecure
+      - traefik.http.routers.space-initlab-secure.tls
