@@ -1,3 +1,9 @@
+export const oidc = {
+    authority: import.meta.env.OIDC_AUTHORITY_URL,
+    client_id: import.meta.env.OIDC_CLIENT_ID,
+    redirect_uri: window.location.protocol + '//' + window.location.host + import.meta.env.BASE_URL + 'oauth-callback',
+};
+
 export const sensors = {
     'sensors/big-room/temperature': {
         type: 'Temperature',
