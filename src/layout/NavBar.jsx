@@ -14,7 +14,7 @@ import RequireRole from '../widgets/RequireRole.jsx';
 
 const NavBar = () => {
     const {t} = useTranslation();
-    const backendUrl = import.meta.env.BACKEND_URL;
+    const backendUrl = import.meta.env.OIDC_AUTHORITY_URL;
     const {
         hasAccessToken,
         user,

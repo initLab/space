@@ -15,10 +15,10 @@ export default defineConfig({
         },
     },
     envPrefix: [
-        'BACKEND_URL',
-        'DEVICE_BACKEND_URL',
-        'MQTT_BACKEND_URL',
-        'OAUTH_CLIENT_ID',
+        'OIDC_AUTHORITY_URL',
+        'OIDC_CLIENT_ID',
+        'PORTIER_URL',
+        'MQTT_PROXY_URL',
     ],
     plugins: [
         react(),

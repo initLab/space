@@ -2,9 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getAccessToken, isAccessTokenExpired } from '../hooks/useAuthStorage.js';
 import { refreshTokenIfNeeded } from '../oauth.js';
 
-const apiBaseUrl = import.meta.env.BACKEND_URL + 'api/';
-const deviceApiBaseUrl = import.meta.env.DEVICE_BACKEND_URL + 'api/';
-const mqttApiBaseUrl = import.meta.env.MQTT_BACKEND_URL;
+const apiBaseUrl = import.meta.env.OIDC_AUTHORITY_URL + 'api/';
+const deviceApiBaseUrl = import.meta.env.PORTIER_URL + 'api/';
+const mqttApiBaseUrl = import.meta.env.MQTT_PROXY_URL;
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: apiBaseUrl,
