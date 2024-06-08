@@ -35,7 +35,7 @@ const types = {
 const DeviceActionButton = ({
     deviceId,
     action,
-    isDoorOpen,
+    isDoorOpen = false,
 }) => {
     const [ disabled, setDisabled ] = useState(false);
 
@@ -73,10 +73,6 @@ const DeviceActionButton = ({
         </Button>
         {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
     </>);
-};
-
-DeviceActionButton.defaultProps = {
-    isDoorOpen: false,
 };
 
 export default DeviceActionButton;

@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import { Spinner } from 'react-bootstrap';
 
 const LoadingIcon = ({
-    large,
+    large = false,
 }) => {
     return (
         <Spinner size={large ? null : 'sm'} />
     );
-};
-
-LoadingIcon.defaultProps = {
-    large: false,
 };
 
 LoadingIcon.propTypes = {
