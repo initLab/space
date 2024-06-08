@@ -1,6 +1,5 @@
 export function useVariant() {
-    // eslint-disable-next-line no-restricted-globals
-    switch (location.hostname) {
+    switch (window.location.hostname) {
         case 'space.initlab.org':
         case 'initlab.github.io':
             return 'initlab';
@@ -10,8 +9,7 @@ export function useVariant() {
             // fallthrough to query param and local storage
     }
 
-    // eslint-disable-next-line no-restricted-globals
-    const queryParam = (new URLSearchParams(location.search)).get('variant');
+    const queryParam = (new URLSearchParams(window.location.search)).get('variant');
 
     if (queryParam) {
         return queryParam;
