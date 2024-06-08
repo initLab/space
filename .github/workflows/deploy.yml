@@ -37,7 +37,6 @@ jobs:
           cmd: build
         env:
           OAUTH_CLIENT_ID: ERBrlPWjf98L_nI8Moxr7Aqjy4no1eRU-zSOROc2RbU
-          VARIANT: initlab
           TITLE: init Lab Space
 
       - name: Upload production-ready build files
