@@ -8,7 +8,6 @@ export default defineConfig({
         sourcemap: true,
     },
     envPrefix: [
-        'TITLE',
         'BACKEND_URL',
         'DEVICE_BACKEND_URL',
         'MQTT_BACKEND_URL',

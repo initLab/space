@@ -11,8 +11,18 @@ import Login from './pages/Login.jsx';
 import { RequireLoggedIn } from './widgets/Route/RequireLoggedIn.jsx';
 import ActionLog from './pages/ActionLog.jsx';
 import Lights from './pages/Lights.jsx';
+import { useVariant } from './hooks/useVariant.js';
+import { useEffect } from 'react';
 
 function App() {
+    const variant = useVariant();
+
+    useEffect(() => {
+        if (variant === 'colibri') {
+            document.title = 'Casa Libri';
+        }
+    }, [variant]);
+
     return (<>
         <NavBar />
         <main>
