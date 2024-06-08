@@ -1,8 +1,8 @@
 import PKCE from 'js-pkce';
 import { clearTokens, getAccessToken, getRefreshToken, updateTokens } from './hooks/useAuthStorage.js';
 
-const clientId = import.meta.env.OAUTH_CLIENT_ID;
-const baseUrl = import.meta.env.BACKEND_URL + 'oauth/';
+const clientId = import.meta.env.OIDC_CLIENT_ID;
+const baseUrl = import.meta.env.OIDC_AUTHORITY_URL + 'oauth/';
 
 const urls = {
     authorize: baseUrl + 'authorize',
