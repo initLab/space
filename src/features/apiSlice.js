@@ -4,7 +4,6 @@ import { refreshTokenIfNeeded } from '../oauth.js';
 
 const apiBaseUrl = import.meta.env.OIDC_AUTHORITY_URL + 'api/';
 const deviceApiBaseUrl = import.meta.env.PORTIER_URL + 'api/';
-const mqttApiBaseUrl = import.meta.env.MQTT_PROXY_URL;
 
 const anonymousBaseQuery = fetchBaseQuery({
     baseUrl: apiBaseUrl,
@@ -13,10 +12,6 @@ const anonymousBaseQuery = fetchBaseQuery({
 
         return headers;
     },
-});
-
-const anonymousMqttBaseQuery = fetchBaseQuery({
-    baseUrl: mqttApiBaseUrl,
 });
 
 const authenticatedBaseQuery = fetchBaseQuery({
@@ -89,14 +84,6 @@ export const anonymousApiSlice = createApi({
     }),
 });
 
-export const anonymousMqttApiSlice = createApi({
-    reducerPath: 'anonymousMqttApi',
-    baseQuery: anonymousMqttBaseQuery,
-    endpoints: builder => ({
-        getStatus: query(builder)('status'),
-    }),
-});
-
 export const authenticatedApiSlice = createApi({
     reducerPath: 'authenticatedApi',
     baseQuery: authenticatedBaseQueryWithReauth,
@@ -125,10 +112,6 @@ export const authenticatedDeviceApiSlice = createApi({
 export const {
     useGetPresentUsersQuery,
 } = anonymousApiSlice;
-
-export const {
-    useGetStatusQuery,
-} = anonymousMqttApiSlice;
 
 export const {
     useGetCurrentUserQuery,
