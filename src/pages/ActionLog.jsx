@@ -1,13 +1,13 @@
-import { Fragment } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useVariant } from '../hooks/useVariant.js';
 import { Navigate } from 'react-router-dom';
+import { useNetworkState } from '@uidotdev/usehooks';
+
+import { useVariant } from '../hooks/useVariant.js';
 import { useGetActionLogQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import ActionLogEntry from '../widgets/ActionLog/ActionLogEntry.jsx';
-import { useNetworkState } from '@uidotdev/usehooks';
 
 const ActionLog = () => {
     const { t } = useTranslation();

@@ -1,18 +1,19 @@
-import Dashboard from './pages/Dashboard';
-import NavBar from './layout/NavBar';
-import Footer from './layout/Footer';
+import { useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
-import Sensors from './pages/Sensors';
+
+import Dashboard from './pages/Dashboard.jsx';
+import NavBar from './layout/NavBar.jsx';
+import Footer from './layout/Footer.jsx';
+import Sensors from './pages/Sensors.jsx';
 import Doors from './pages/Doors.jsx';
 import OauthCallback from './pages/OauthCallback.jsx';
 import Logout from './pages/Logout.jsx';
-import { Container } from 'react-bootstrap';
 import Login from './pages/Login.jsx';
-import { RequireLoggedIn } from './widgets/Route/RequireLoggedIn.jsx';
+import RequireLoggedIn from './widgets/Route/RequireLoggedIn.jsx';
 import ActionLog from './pages/ActionLog.jsx';
 import Lights from './pages/Lights.jsx';
 import { useVariant } from './hooks/useVariant.js';
-import { useEffect } from 'react';
 
 function App() {
     const variant = useVariant();

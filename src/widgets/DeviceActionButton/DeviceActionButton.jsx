@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import './DeviceActionButton.scss';
+import PropTypes from 'prop-types';
+
 import { useDeviceActionMutation } from '../../features/apiSlice.js';
 import RedirectToLogin from '../RedirectToLogin.jsx';
 import { sleep } from '../../utils/time.js';
+
+import './DeviceActionButton.scss';
 
 const types = {
     open: {
@@ -73,6 +76,12 @@ const DeviceActionButton = ({
         </Button>
         {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
     </>);
+};
+
+DeviceActionButton.propTypes = {
+    deviceId: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
+    isDoorOpen: PropTypes.bool,
 };
 
 export default DeviceActionButton;

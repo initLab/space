@@ -1,5 +1,5 @@
-import { scopes } from '../oauth.js';
 import { useLocalStorage } from '@uidotdev/usehooks';
+import { scopes } from '../oauth.js';
 
 const STORAGE_KEY = 'tokens';
 
@@ -10,17 +10,17 @@ const REFRESH_TOKEN_KEY = 'refreshToken';
 const defaultTokensValue = {};
 
 function parseTokenResponse(tokenResponse) {
-    if (tokenResponse.hasOwnProperty('error') && tokenResponse.hasOwnProperty('error_description')) {
+    if (Object.prototype.hasOwnProperty.call(tokenResponse, 'error') && Object.prototype.hasOwnProperty.call(tokenResponse, 'error_description')) {
         throw new Error(tokenResponse.error_description);
     }
 
     if (
-        !tokenResponse.hasOwnProperty('access_token') ||
-        !tokenResponse.hasOwnProperty('created_at') ||
-        !tokenResponse.hasOwnProperty('expires_in') ||
-        !tokenResponse.hasOwnProperty('refresh_token') ||
-        !tokenResponse.hasOwnProperty('scope') ||
-        !tokenResponse.hasOwnProperty('token_type') ||
+        !Object.prototype.hasOwnProperty.call(tokenResponse, 'access_token') ||
+        !Object.prototype.hasOwnProperty.call(tokenResponse, 'created_at') ||
+        !Object.prototype.hasOwnProperty.call(tokenResponse, 'expires_in') ||
+        !Object.prototype.hasOwnProperty.call(tokenResponse, 'refresh_token') ||
+        !Object.prototype.hasOwnProperty.call(tokenResponse, 'scope') ||
+        !Object.prototype.hasOwnProperty.call(tokenResponse, 'token_type') ||
         tokenResponse.token_type !== 'Bearer' ||
         tokenResponse.scope !== scopes
     ) {

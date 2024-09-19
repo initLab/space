@@ -1,11 +1,12 @@
 import { Col, Row } from 'react-bootstrap';
-import { sensors } from '../../config';
-import SensorReading from '../SensorReading/SensorReading';
 import { useTranslation } from 'react-i18next';
+import { useNetworkState } from '@uidotdev/usehooks';
+
+import { sensors } from '../../config.js';
+import SensorReading from '../SensorReading/SensorReading.jsx';
 import { useGetStatusQuery } from '../../features/apiSlice.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
 import ErrorMessage from '../ErrorMessage.jsx';
-import { useNetworkState } from '@uidotdev/usehooks';
 
 const SensorReadingsWrapper = () => {
     const { t } = useTranslation();
@@ -41,7 +42,7 @@ const SensorReadingsWrapper = () => {
             </Col>
         </Row>}
         {isSuccess && <Row className="row-cols-1 row-cols-lg-3 g-3">
-            {Object.entries(sensors).filter(([topic]) => data.hasOwnProperty(topic)).map(([topic, sensor]) =>
+            {Object.entries(sensors).filter(([topic]) => Object.prototype.hasOwnProperty.call(data, topic)).map(([topic, sensor]) =>
                 <SensorReading key={topic} {...sensor} {...data[topic]} />
             )}
         </Row>}

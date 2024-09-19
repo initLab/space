@@ -12,7 +12,7 @@ export function useCurrentUser() {
     return {
         hasAccessToken,
         user,
-        isLoggedIn: user.hasOwnProperty('id'),
+        isLoggedIn: Object.prototype.hasOwnProperty.call(user, 'id'),
         ...queryResult,
     };
 }

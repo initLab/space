@@ -1,12 +1,13 @@
+import { Col, Row } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 import { useCurrentUser } from '../../hooks/useCurrentUser.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
 import RedirectToLogin from '../RedirectToLogin.jsx';
-import React from 'react';
-import { Col, Row } from 'react-bootstrap';
 
-export function RequireLoggedIn({
+const RequireLoggedIn = ({
     children,
-}) {
+}) => {
     const {
         isLoading,
         isError,
@@ -30,4 +31,10 @@ export function RequireLoggedIn({
     }
 
     return children;
-}
+};
+
+RequireLoggedIn.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
+export default RequireLoggedIn;

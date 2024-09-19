@@ -1,4 +1,3 @@
-import React from 'react';
 import { getDoorActions } from '../utils/device.js';
 import Devices from './Devices.jsx';
 

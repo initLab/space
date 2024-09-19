@@ -1,6 +1,8 @@
 import { Button, ButtonGroup, Card, Col, Image, Row } from 'react-bootstrap';
-import './PresentUsers.scss';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+
+import './PresentUsers.scss';
 
 const PresentUsers = ({
     users,
@@ -43,6 +45,16 @@ const PresentUsers = ({
             <h5 className="mt-2">{t('views.users.everybodys_gone')}</h5>
         </Col>
     </Row>);
+};
+
+PresentUsers.propTypes = {
+    users: PropTypes.arrayOf(PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        picture: PropTypes.string.isRequired,
+        twitter: PropTypes.string,
+        github: PropTypes.string,
+        url: PropTypes.string,
+    }).isRequired).isRequired,
 };
 
 export default PresentUsers;

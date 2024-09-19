@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
+
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import { getAccessToken, getRefreshToken, useAuthStorage } from '../hooks/useAuthStorage.js';
 import { useRememberPage } from '../hooks/useRememberPage.js';
-import { useNavigate } from 'react-router-dom';
 import { revokeToken } from '../oauth.js';
 
 const Logout = () => {

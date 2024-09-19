@@ -1,10 +1,11 @@
+import { useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import PresentUsers from '../PresentUsers/PresentUsers';
 import { useTranslation } from 'react-i18next';
+import { format, formatISO } from 'date-fns';
+
+import PresentUsers from '../PresentUsers/PresentUsers';
 import { useGetPresentUsersQuery } from '../../features/apiSlice.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
-import { useMemo } from 'react';
-import { format, formatISO } from 'date-fns';
 import ErrorMessage from '../ErrorMessage.jsx';
 import { useNetworkState } from '@uidotdev/usehooks';
 

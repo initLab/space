@@ -1,8 +1,10 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import './SensorReading.css';
-import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
 import { isValid } from 'date-fns';
+
+import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
+
+import './SensorReading.css';
 
 const units = {
     Temperature: ['°C', 1],

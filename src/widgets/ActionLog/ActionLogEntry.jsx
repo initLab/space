@@ -1,9 +1,11 @@
 import { parseISO } from 'date-fns';
+import PropTypes from 'prop-types';
+
 import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
 
-export default function ActionLogEntry({
+const ActionLogEntry = ({
     entry,
-}) {
+}) => {
     const {
         formatDefault,
         formatDistanceToNow,
@@ -18,4 +20,21 @@ export default function ActionLogEntry({
         <td>{entry.User.name} ({entry.User.username})</td>
         <td>{entry.Application.name}</td>
     </tr>);
-}
+};
+
+ActionLogEntry.propTypes = {
+    entry: PropTypes.shape({
+        createdAt: PropTypes.string.isRequired,
+        deviceId: PropTypes.string.isRequired,
+        action: PropTypes.string.isRequired,
+        User: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            username: PropTypes.string.isRequired,
+        }).isRequired,
+        Application: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+};
+
+export default ActionLogEntry;

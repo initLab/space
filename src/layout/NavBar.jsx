@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+
 import './NavBar.css';
 import initLabLogo from '../assets/initlab/logo.svg';
 import colibriLogo from '../assets/colibri/logo.png';
-import { useTranslation } from 'react-i18next';
-import { NavLink, useLocation } from 'react-router-dom';
 import DoorClosedIcon from '../widgets/icons/DoorClosedIcon.jsx';
-import { useEffect } from 'react';
 import i18n from '../i18n.js';
 import { useVariant } from '../hooks/useVariant.js';
 import { useCurrentUser } from '../hooks/useCurrentUser.js';

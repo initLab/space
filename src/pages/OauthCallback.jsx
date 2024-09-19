@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+
 import { exchangeForAccessToken } from '../oauth.js';
 import { useAuthStorage } from '../hooks/useAuthStorage.js';
-import { Col, Row } from 'react-bootstrap';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import { useRememberPage } from '../hooks/useRememberPage.js';
 

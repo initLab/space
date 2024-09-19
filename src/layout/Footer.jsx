@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
-import './Footer.scss';
 import { useTranslation } from 'react-i18next';
+
+import './Footer.scss';
 
 const Footer = () => {
     const {t} = useTranslation();

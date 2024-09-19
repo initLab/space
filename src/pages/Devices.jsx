@@ -1,13 +1,14 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import { useNetworkState } from '@uidotdev/usehooks';
+
 import { useGetDevicesQuery } from '../features/apiSlice.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
-import { useTranslation } from 'react-i18next';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import { useVariant } from '../hooks/useVariant.js';
-import PropTypes from 'prop-types';
-import { useNetworkState } from '@uidotdev/usehooks';
 
 const Devices = ({
     deviceType,
