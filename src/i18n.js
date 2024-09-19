@@ -3,7 +3,7 @@ import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 import { load } from 'js-yaml';
 
-i18n
+await i18n
     .use(Backend)
     .use(initReactI18next)
     .init({
