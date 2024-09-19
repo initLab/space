@@ -24,7 +24,4 @@ export default defineConfig({
         react(),
         viteCompression(),
     ],
-    server: {
-        open: true,
-    },
 });
