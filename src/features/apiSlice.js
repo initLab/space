@@ -5,15 +5,6 @@ import { refreshTokenIfNeeded } from '../oauth.js';
 const apiBaseUrl = import.meta.env.OIDC_AUTHORITY_URL + 'api/';
 const deviceApiBaseUrl = import.meta.env.PORTIER_URL + 'api/';
 
-const anonymousBaseQuery = fetchBaseQuery({
-    baseUrl: apiBaseUrl,
-    prepareHeaders: headers => {
-        headers.set('accept', 'application/json');
-
-        return headers;
-    },
-});
-
 const authenticatedBaseQuery = fetchBaseQuery({
     baseUrl: apiBaseUrl,
     prepareHeaders: headers => {
@@ -76,14 +67,6 @@ const query = builder => url => builder.query({
     query: () => url,
 });
 
-export const anonymousApiSlice = createApi({
-    reducerPath: 'anonymousApi',
-    baseQuery: anonymousBaseQuery,
-    endpoints: builder => ({
-        getPresentUsers: query(builder)('users/present'),
-    }),
-});
-
 export const authenticatedApiSlice = createApi({
     reducerPath: 'authenticatedApi',
     baseQuery: authenticatedBaseQueryWithReauth,
@@ -108,10 +91,6 @@ export const authenticatedDeviceApiSlice = createApi({
         }),
     }),
 });
-
-export const {
-    useGetPresentUsersQuery,
-} = anonymousApiSlice;
 
 export const {
     useGetCurrentUserQuery,

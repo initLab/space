@@ -19,6 +19,7 @@ export default defineConfig({
         'OIDC_CLIENT_ID',
         'PORTIER_URL',
         'MQTT_PROXY_URL',
+        'PRESENCE_URL',
     ],
     plugins: [
         react(),
