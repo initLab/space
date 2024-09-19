@@ -7,6 +7,13 @@ export default defineConfig({
     build: {
         sourcemap: true,
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+            },
+        },
+    },
     envPrefix: [
         'BACKEND_URL',
         'DEVICE_BACKEND_URL',
