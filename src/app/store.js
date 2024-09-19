@@ -1,17 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import {
-    authenticatedApiSlice,
     authenticatedDeviceApiSlice
 } from '../features/apiSlice';
 
 export const store = configureStore({
     reducer: {
-        [authenticatedApiSlice.reducerPath]: authenticatedApiSlice.reducer,
         [authenticatedDeviceApiSlice.reducerPath]: authenticatedDeviceApiSlice.reducer,
     },
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(authenticatedApiSlice.middleware).concat(authenticatedDeviceApiSlice.middleware),
+        getDefaultMiddleware().concat(authenticatedDeviceApiSlice.middleware),
 });
 
 setupListeners(store.dispatch);

@@ -16,19 +16,17 @@ const NavBar = () => {
     const {t} = useTranslation();
     const backendUrl = import.meta.env.OIDC_AUTHORITY_URL;
     const {
-        hasAccessToken,
-        user,
-        isSuccess,
+        data: user,
     } = useCurrentUser();
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
     const isColibri = variant === 'colibri';
 
     useEffect(function() {
-        if (isSuccess) {
+        if (user?.locale) {
             i18n.changeLanguage(user.locale).then(() => {});
         }
-    }, [user.locale, isSuccess]);
+    }, [user]);
 
     const location = useLocation();
 
@@ -102,7 +100,7 @@ const NavBar = () => {
                             {t('views.navigation.labbers')}
                         </Nav.Link>
                     </RequireRole>
-                    {hasAccessToken ? <NavDropdown title={<>
+                    {user ? <NavDropdown title={<>
                             <i className="fa-solid fa-user" />{' '}
                             {t('views.navigation.account')}
                         </>} className="ms-0 ms-lg-auto">

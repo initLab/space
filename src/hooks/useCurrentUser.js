@@ -1,18 +1,5 @@
-import { useAuthStorage } from './useAuthStorage.js';
-import { useGetCurrentUserQuery } from '../features/apiSlice.js';
+import { useAuthenticatedSWR } from './useAuthenticatedSWR.js';
 
 export function useCurrentUser() {
-    const { accessToken } = useAuthStorage();
-    const hasAccessToken = !!accessToken;
-    const queryResult = useGetCurrentUserQuery(undefined, {
-        skip: !hasAccessToken,
-    });
-    const user = queryResult.isSuccess ? queryResult.data : {};
-
-    return {
-        hasAccessToken,
-        user,
-        isLoggedIn: Object.prototype.hasOwnProperty.call(user, 'id'),
-        ...queryResult,
-    };
+    return useAuthenticatedSWR(import.meta.env.OIDC_AUTHORITY_URL.concat('api/current_user'));
 }

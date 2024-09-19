@@ -6,7 +6,7 @@ const RequireRole = ({
     roles,
 }) => {
     const {
-        user,
+        data: user,
     } = useCurrentUser();
 
     const searchRoles = typeof roles === 'string' ? [roles] : Array.from(roles);
