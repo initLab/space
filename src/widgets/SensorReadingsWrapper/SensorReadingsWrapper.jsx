@@ -11,7 +11,7 @@ const SensorReadingsWrapper = () => {
     const { t } = useTranslation();
 
     const {
-        data,
+        data: mqttStatus,
         error,
         isLoading,
     } = useMqttStatus({
@@ -34,9 +34,9 @@ const SensorReadingsWrapper = () => {
                 <ErrorMessage error={error} />
             </Col>
         </Row>}
-        {data && <Row className="row-cols-1 row-cols-lg-3 g-3">
-            {Object.entries(sensors).filter(([topic]) => Object.prototype.hasOwnProperty.call(data, topic)).map(([topic, sensor]) =>
-                <SensorReading key={topic} {...sensor} {...data[topic]} />
+        {mqttStatus && <Row className="row-cols-1 row-cols-lg-3 g-3">
+            {Object.entries(sensors).filter(([topic]) => Object.prototype.hasOwnProperty.call(mqttStatus, topic)).map(([topic, sensor]) =>
+                <SensorReading key={topic} {...sensor} {...mqttStatus[topic]} />
             )}
         </Row>}
     </>);
