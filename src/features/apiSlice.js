@@ -33,29 +33,19 @@ const authenticatedDeviceBaseQueryWithReauth = async (args, api, extraOptions) =
     return result;
 };
 
-const query = builder => url => builder.query({
-    query: () => url,
-});
-
 export const authenticatedDeviceApiSlice = createApi({
     reducerPath: 'authenticatedDeviceApi',
     baseQuery: authenticatedDeviceBaseQueryWithReauth,
     endpoints: builder => ({
-        getDevices: query(builder)('devices'),
         deviceAction: builder.mutation({
             query: params => ({
                 url: 'device/' + params.deviceId + '/' + params.action,
                 method: 'POST',
             }),
         }),
-        getActionLog: builder.query({
-            query: params => 'actionLog/' + params.offset + '/' + params.limit,
-        }),
     }),
 });
 
 export const {
-    useGetDevicesQuery,
     useDeviceActionMutation,
-    useGetActionLogQuery,
 } = authenticatedDeviceApiSlice;

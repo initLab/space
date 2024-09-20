@@ -2,9 +2,8 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { useNetworkState } from '@uidotdev/usehooks';
 
-import { useGetDevicesQuery } from '../features/apiSlice.js';
+import { useDevices } from '../hooks/useDevices.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton.jsx';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
@@ -17,21 +16,15 @@ const Devices = ({
     const { t } = useTranslation();
 
     const {
-        online,
-    } = useNetworkState();
-
-    const {
         data: devices,
         error,
         isLoading,
-        isSuccess,
-        isError,
-    } = useGetDevicesQuery(undefined, {
-        pollingInterval: online === false ? 0 : 2_000,
+    } = useDevices({
+        refreshInterval: 2_000,
     });
 
     const filteredDevices = useMemo(() =>
-        isSuccess ? devices.filter(device => device.type === deviceType) : [], [deviceType, devices, isSuccess]);
+        devices ? devices.filter(device => device.type === deviceType) : [], [deviceType, devices]);
 
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
@@ -40,7 +33,7 @@ const Devices = ({
         {isLoading && <Col className="text-center">
             <LoadingIcon large />
         </Col>}
-        {isSuccess && <>
+        {devices && <>
             {filteredDevices.length > 0 ? filteredDevices.map(device => {
                 const deviceActions = deviceActionMapper(device);
                 const isUnavailable = device?.statuses?.available === false;
@@ -70,7 +63,7 @@ const Devices = ({
                 </Card>
             </Col>}
         </>}
-        {isError && <Col>
+        {error && <Col>
             <ErrorMessage error={error} />
         </Col>}
     </Row>);

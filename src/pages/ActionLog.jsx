@@ -1,10 +1,9 @@
 import { Col, Row, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
-import { useNetworkState } from '@uidotdev/usehooks';
 
 import { useVariant } from '../hooks/useVariant.js';
-import { useGetActionLogQuery } from '../features/apiSlice.js';
+import { useActionLog } from '../hooks/useActionLog.js';
 import LoadingIcon from '../widgets/icons/LoadingIcon.jsx';
 import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import ActionLogEntry from '../widgets/ActionLog/ActionLogEntry.jsx';
@@ -12,23 +11,15 @@ import ActionLogEntry from '../widgets/ActionLog/ActionLogEntry.jsx';
 const ActionLog = () => {
     const { t } = useTranslation();
 
-    const {
-        online,
-    } = useNetworkState();
-
     const variant = useVariant();
     const hasAccess = variant === 'initlab';
 
     const {
-        isLoading,
-        isSuccess,
-        isError,
-        data,
+        data: actionLog,
         error,
-    } = useGetActionLogQuery({
-    }, {
-        skip: !hasAccess,
-        pollingInterval: online === false ? 0 : 60_000,
+        isLoading,
+    } = useActionLog({
+        refreshInterval: 60_000,
     });
 
     if (!hasAccess) {
@@ -44,8 +35,8 @@ const ActionLog = () => {
         <Row className="row-cols row-cols-1">
             <Col>
                 {isLoading && <LoadingIcon large />}
-                {isError && <ErrorMessage error={error} />}
-                {isSuccess && <Table>
+                {error && <ErrorMessage error={error} />}
+                {actionLog && <Table>
                     <thead>
                         <tr>
                             <th>{t('views.action_log.columns.date_time')}</th>
@@ -56,7 +47,7 @@ const ActionLog = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
+                        {actionLog.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
                     </tbody>
                 </Table>}
             </Col>
