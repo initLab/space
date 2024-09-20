@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
-import { useDeviceActionMutation } from '../../features/apiSlice.js';
+import useDeviceAction from '../../hooks/useDeviceAction.js';
 import RedirectToLogin from '../RedirectToLogin.jsx';
 import { sleep } from '../../utils/time.js';
 
@@ -42,10 +42,10 @@ const DeviceActionButton = ({
 }) => {
     const [ disabled, setDisabled ] = useState(false);
 
-    const [ execute, {
-        isError,
+    const {
+        execute,
         error,
-    } ] = useDeviceActionMutation();
+    } = useDeviceAction(deviceId, action);
 
     const {t} = useTranslation();
     const type = types?.[action] || {
@@ -55,12 +55,7 @@ const DeviceActionButton = ({
 
     async function handleClick() {
         setDisabled(true);
-
-        await execute({
-            deviceId,
-            action,
-        });
-
+        await execute();
         await sleep(3000);
         setDisabled(false);
     }
@@ -74,7 +69,7 @@ const DeviceActionButton = ({
             <i className={icon} />
             <div>{label}</div>
         </Button>
-        {isError && [401, 403].includes(error.status) && <RedirectToLogin />}
+        {error?.status && [401, 403].includes(error.status) && <RedirectToLogin />}
     </>);
 };
 
