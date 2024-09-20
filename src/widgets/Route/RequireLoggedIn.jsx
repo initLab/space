@@ -10,7 +10,6 @@ const RequireLoggedIn = ({
 }) => {
     const {
         data: user,
-        error,
         isLoading,
     } = useCurrentUser();
 
@@ -22,7 +21,7 @@ const RequireLoggedIn = ({
         </Row>);
     }
 
-    if (!user || error) {
+    if (!user) {
         return (<RedirectToLogin />);
     }
 
