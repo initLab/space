@@ -16,6 +16,34 @@ const units = {
 
 const temperatureThresholds = [18, 24, 26, 32];
 
+/**
+* @see https://fontawesome.com/search?q=battery&o=r&m=free
+**/
+function getBatteryState(level) {
+    if (!level) {
+        return 0;
+    }
+
+    if (level >= 100) {
+        return 5;
+    }
+
+    if (level >= 75) {
+        return 4;
+    }
+
+    if (level >= 50) {
+        return 3;
+    }
+
+    if (level >= 25) {
+        return 2;
+    }
+
+    // show full by default
+    return 5;
+}
+
 const SensorReading = ({
     label,
     values: rawValues,
@@ -31,6 +59,7 @@ const SensorReading = ({
         ...value,
         dt: new Date(value.timestamp),
         thermometerState: type === 'temperature' ? temperatureThresholds.filter(threshold => threshold < value.value).length : 0,
+        batteryState: type === 'battery' ? getBatteryState(value.value) : 0,
         unit: units[type],
     }]).map(([type, value]) => [type, {
         ...value,
@@ -48,7 +77,7 @@ const SensorReading = ({
     }
 
     const isCurrent = values?.temperature?.isCurrent || values?.humidity?.isCurrent;
-    const thermometerState = values?.temperature?.thermometerState;
+    const thermometerState = values?.temperature?.thermometerState || 0;
 
     return (<Col>
         <Card bg="primary" text={isCurrent ? 'white' : 'secondary'}>
@@ -64,7 +93,11 @@ const SensorReading = ({
                                 {values?.temperature && values?.humidity && ' '}
                                 {values?.humidity && <SensorReadingValue {...values.humidity} />}
                             </div>
-                            <div>{label}</div>
+                            <div>
+                                {values?.battery && <i className={'fa-solid fa-battery-' + values.battery.batteryState}
+                                    title={values.battery.formattedTimestamp} />}
+                                {' '}{label}
+                            </div>
                         </Col>
                     </Row>
                 </Container>
