@@ -14,7 +14,7 @@ const units = {
     battery: '%',
 };
 
-const thresholds = [18, 24, 26, 32];
+const temperatureThresholds = [18, 24, 26, 32];
 
 const SensorReading = ({
     label,
@@ -30,7 +30,7 @@ const SensorReading = ({
     ).map(([type, value]) => [type, {
         ...value,
         dt: new Date(value.timestamp),
-        thermometerState: type === 'temperature' ? thresholds.filter(threshold => threshold < value).length : 0,
+        thermometerState: type === 'temperature' ? temperatureThresholds.filter(threshold => threshold < value.value).length : 0,
         unit: units[type],
     }]).map(([type, value]) => [type, {
         ...value,
