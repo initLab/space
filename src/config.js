@@ -14,6 +14,9 @@ export const sensors = {
     'sensors/kitchen': {
         label: 'Kitchen',
     },
+    'sensors/outside': {
+        label: 'Outside',
+    },
 };
 
 export const grafana = {

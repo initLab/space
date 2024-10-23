@@ -43,7 +43,7 @@ const SensorReadingsWrapper = () => {
                 <ErrorMessage error={error} />
             </Col>
         </Row>}
-        {mqttStatus && <Row className="row-cols-1 row-cols-lg-3 g-3">
+        {mqttStatus && <Row className="row-cols-1 row-cols-md-2 row-cols-xxl-4 g-3">
             {sensorReadings.map(sensorReading =>
                 <SensorReading key={sensorReading.label} {...sensorReading} />
             )}
