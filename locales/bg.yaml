@@ -111,7 +111,7 @@ network_devices:
     edit_network_device: Редакция на мрежово устройство
 views:
   dashboard:
-    sensor_readings: Температура на въздуха
+    sensor_readings: Температура и влажност на въздуха
     loading: Зареждане на данните...
     colibri_message_info: |
       Моля изберете Врати или Осветление от менюто на приложението. Ако не ги виждате, е необходимо първо да влезе в
@@ -220,8 +220,6 @@ views:
     are_you_sure: 'Сигурни ли сте?'
   sensors:
     title: Показания на сензорите
-    temperature: Температура
-    humidity: Относителна влажност
   action_log:
     title: Лог на действията
     columns:
