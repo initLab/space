@@ -105,7 +105,7 @@ network_devices:
     edit_network_device: Edit network device
 views:
   dashboard:
-    sensor_readings: Temperature readings
+    sensor_readings: Air temperature and humidity
     loading: Loading data...
     colibri_message_info: |
       Please choose Doors or Lights from the application menu. In case they are not visualised, you need to login first.
@@ -212,8 +212,6 @@ views:
     are_you_sure: 'Are you shnur?'
   sensors:
     title: Sensor readings
-    temperature: Temperature
-    humidity: Humidity
   action_log:
     title: Action logs
     columns:
