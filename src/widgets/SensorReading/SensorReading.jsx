@@ -5,42 +5,50 @@ import { isValid } from 'date-fns';
 import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
 
 import './SensorReading.css';
+import { useMemo } from 'react';
+import SensorReadingValue from './SensorReadingValue.jsx';
 
 const units = {
-    Temperature: ['°C', 1],
-    Humidity: ['%', 1],
+    temperature: '°C',
+    humidity: '%',
+    battery: '%',
 };
 
 const thresholds = [18, 24, 26, 32];
 
 const SensorReading = ({
-    type,
     label,
-    timestamp,
-    value,
+    values: rawValues,
 }) => {
     const {
         formatDefault,
         formatDistanceToNow,
     } = useDateTimeFormatter();
 
-    if (!isValid(timestamp) || typeof value !== 'number') {
+    const values = useMemo(() => Object.fromEntries(Object.entries(rawValues).filter(([type, value]) =>
+        Object.prototype.hasOwnProperty.call(units, type) && isValid(value.timestamp) && typeof value.value === 'number'
+    ).map(([type, value]) => [type, {
+        ...value,
+        dt: new Date(value.timestamp),
+        thermometerState: type === 'temperature' ? thresholds.filter(threshold => threshold < value).length : 0,
+        unit: units[type],
+    }]).map(([type, value]) => [type, {
+        ...value,
+        formattedTimestamp: formatDefault(value.dt) + ' (' + formatDistanceToNow(value.dt) + ')',
+        formattedValue: value.value.toFixed() + value.unit,
+        readingAge: Date.now() - value.dt,
+    }]).map(([type, value]) => [type, {
+        ...value,
+        isCurrent: value.readingAge <= 7_200_000,
+        isVisible: value.readingAge <= 86_400_000,
+    }]).filter(([, value]) => value.isVisible)), [formatDefault, formatDistanceToNow, rawValues]);
+
+    if (Object.keys(values).length < 1) {
         return null;
     }
 
-    const lastUpdate = new Date(timestamp);
-    const formattedTimestamp = formatDefault(lastUpdate) + ' (' + formatDistanceToNow(lastUpdate) + ')';
-    const unit = units[type];
-    const formattedValue = value.toFixed(unit[1]) + unit[0];
-    const readingAge = Date.now() - timestamp;
-    const isCurrent = readingAge <= 7_200_000;
-    const isVisible = readingAge <= 86_400_000;
-    // TODO: only for type === Temperature
-    const thermometerState = thresholds.filter(threshold => threshold < value).length;
-
-    if (!isVisible) {
-        return null;
-    }
+    const isCurrent = values?.temperature?.isCurrent || values?.humidity?.isCurrent;
+    const thermometerState = values?.temperature?.thermometerState;
 
     return (<Col>
         <Card bg="primary" text={isCurrent ? 'white' : 'secondary'}>
@@ -51,10 +59,12 @@ const SensorReading = ({
                             <i className={'fa-solid fa-5x fa-thermometer-' + thermometerState} />
                         </Col>
                         <Col xs={9} className="text-end">
-                            <div className={'huge' + (isCurrent ? '' : ' text-decoration-line-through')}>
-                                {formattedValue}
+                            <div className="huge">
+                                {values?.temperature && <SensorReadingValue {...values.temperature} />}
+                                {values?.temperature && values?.humidity && ' '}
+                                {values?.humidity && <SensorReadingValue {...values.humidity} />}
                             </div>
-                            <div title={formattedTimestamp}>{label}</div>
+                            <div>{label}</div>
                         </Col>
                     </Row>
                 </Container>
@@ -64,10 +74,11 @@ const SensorReading = ({
 };
 
 SensorReading.propTypes = {
-    type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    timestamp: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+    values: PropTypes.objectOf(PropTypes.shape({
+        timestamp: PropTypes.number.isRequired,
+        value: PropTypes.number.isRequired,
+    })).isRequired,
 };
 
 export default SensorReading;

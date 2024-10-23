@@ -5,16 +5,13 @@ export const oidc = {
 };
 
 export const sensors = {
-    'sensors/big-room/temperature': {
-        type: 'Temperature',
+    'sensors/big-room': {
         label: 'Big room',
     },
-    'sensors/small-room/temperature': {
-        type: 'Temperature',
+    'sensors/small-room': {
         label: 'Small room',
     },
-    'sensors/kitchen/temperature': {
-        type: 'Temperature',
+    'sensors/kitchen': {
         label: 'Kitchen',
     },
 };

@@ -6,17 +6,26 @@ import SensorReading from '../SensorReading/SensorReading.jsx';
 import { useMqttStatus } from '../../hooks/useMqttStatus.js';
 import LoadingIcon from '../icons/LoadingIcon.jsx';
 import ErrorMessage from '../ErrorMessage.jsx';
+import { useMemo } from 'react';
 
 const SensorReadingsWrapper = () => {
     const { t } = useTranslation();
 
     const {
-        data: mqttStatus,
+        data: mqttStatus = {},
         error,
         isLoading,
     } = useMqttStatus({
         refreshInterval: 60_000,
     });
+
+    const sensorReadings = useMemo(() => Object.entries(sensors).map(([topicPrefix, config]) => ({
+        label: config.label,
+        values: Object.fromEntries(Object.entries(mqttStatus).filter(([topic]) => topic.startsWith(topicPrefix)).map(([topic, reading]) => [
+            topic.substring(topicPrefix.length + 1),
+            reading,
+        ])),
+    })), [mqttStatus]);
 
     return (<>
         <Row>
@@ -35,8 +44,8 @@ const SensorReadingsWrapper = () => {
             </Col>
         </Row>}
         {mqttStatus && <Row className="row-cols-1 row-cols-lg-3 g-3">
-            {Object.entries(sensors).filter(([topic]) => Object.prototype.hasOwnProperty.call(mqttStatus, topic)).map(([topic, sensor]) =>
-                <SensorReading key={topic} {...sensor} {...mqttStatus[topic]} />
+            {sensorReadings.map(sensorReading =>
+                <SensorReading key={sensorReading.label} {...sensorReading} />
             )}
         </Row>}
     </>);
