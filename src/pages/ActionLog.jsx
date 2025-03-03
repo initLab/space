@@ -56,4 +56,6 @@ const ActionLog = () => {
     </>);
 };
 
-export default withAuthenticationRequired(ActionLog);
+const AuthenticatedActionLog = withAuthenticationRequired(ActionLog);
+
+export default AuthenticatedActionLog;

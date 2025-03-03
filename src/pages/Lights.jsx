@@ -6,4 +6,6 @@ const Lights = () => {
     return (<Devices deviceType="light" deviceActionMapper={getLightActions} />);
 };
 
-export default withAuthenticationRequired(Lights);
+const AuthenticatedLights = withAuthenticationRequired(Lights);
+
+export default AuthenticatedLights;

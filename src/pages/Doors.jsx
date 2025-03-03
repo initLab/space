@@ -6,4 +6,6 @@ const Doors = () => {
     return (<Devices deviceType="door" deviceActionMapper={getDoorActions} />);
 };
 
-export default withAuthenticationRequired(Doors);
+const AuthenticatedDoors = withAuthenticationRequired(Doors);
+
+export default AuthenticatedDoors;
