@@ -1,4 +1,8 @@
-function addTokenHeader(args, token) {
+function addTokenHeader(args = {}, token) {
+    if (!token) {
+        return args;
+    }
+
     const authHeader = {
         authorization: 'Bearer '.concat(token),
     };
@@ -18,23 +22,29 @@ function addTokenHeader(args, token) {
             },
         };
     }
+
+    return args;
 }
 
 export const fetcher = async (...args) => {
     const response = await fetch(...args);
 
     if (!response.ok) {
-        const error = new Error('HTTP error '.concat(response.status));
+        const error = new Error(`HTTP error ${response.status.toString(10)} (${response.statusText})`);
         error.status = response.status;
         error.statusText = response.statusText;
         throw error;
     }
 
+    if (response.status === 204) {
+        return true;
+    }
+
     return await response.json();
 };
 
-export const authenticatedFetcher = token => async (...args) => {
-    addTokenHeader(args, token);
+export const authenticatedFetcher = async ([key, token, ...options]) => {
+    const args = addTokenHeader([key, ...options], token);
 
     return await fetcher(...args);
 };
