@@ -60,7 +60,7 @@ const DeviceActionButton = ({
     const [ disabled, setDisabled ] = useState(false);
 
     const {
-        execute,
+        trigger,
     } = useDeviceAction(device.id, action);
 
     const {t} = useTranslation();
@@ -71,7 +71,7 @@ const DeviceActionButton = ({
 
     async function handleClick() {
         setDisabled(true);
-        await execute();
+        await trigger();
         await sleep(3000);
         setDisabled(false);
     }
