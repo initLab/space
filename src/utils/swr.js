@@ -1,8 +1,4 @@
-import { getAccessToken, isAccessTokenExpired } from '../hooks/useAuthStorage.js';
-import { refreshTokenIfNeeded } from '../oauth.js';
-
-function addTokenHeader(args) {
-    const token = getAccessToken();
+function addTokenHeader(args, token) {
     const authHeader = {
         authorization: 'Bearer '.concat(token),
     };
@@ -36,26 +32,8 @@ export const fetcher = async (...args) => {
     return await response.json();
 };
 
-export const authenticatedFetcher = async (...args) => {
-    if (isAccessTokenExpired()) {
-        const refreshed = await refreshTokenIfNeeded();
+export const authenticatedFetcher = token => async (...args) => {
+    addTokenHeader(args, token);
 
-        if (!refreshed) {
-            return Promise.reject();
-        }
-    }
-
-    addTokenHeader(args);
-
-    try {
-        return await fetcher(...args);
-    }
-    catch (e) {
-        if (e?.status === 401 && await refreshTokenIfNeeded()) {
-            addTokenHeader(args);
-            return await fetcher(...args);
-        }
-
-        throw e;
-    }
+    return await fetcher(...args);
 };
