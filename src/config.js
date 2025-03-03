@@ -11,6 +11,7 @@ export const oidc = {
     userStore: new WebStorageStateStore({
         store: window.localStorage,
     }),
+    loadUserInfo: true,
 };
 
 export const sensors = {
