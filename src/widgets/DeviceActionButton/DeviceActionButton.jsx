@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import useDeviceAction from '../../hooks/useDeviceAction.js';
-import RedirectToLogin from '../RedirectToLogin.jsx';
 import { sleep } from '../../utils/time.js';
 
 import './DeviceActionButton.scss';
@@ -62,7 +61,6 @@ const DeviceActionButton = ({
 
     const {
         execute,
-        error,
     } = useDeviceAction(device.id, action);
 
     const {t} = useTranslation();
@@ -87,7 +85,6 @@ const DeviceActionButton = ({
             <i className={icon} />
             <div>{label}</div>
         </Button>
-        {error?.status && [401, 403].includes(error.status) && <RedirectToLogin />}
     </>);
 };
 

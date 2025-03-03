@@ -7,14 +7,12 @@ import NavBar from './layout/NavBar.jsx';
 import Footer from './layout/Footer.jsx';
 import Sensors from './pages/Sensors.jsx';
 import Doors from './pages/Doors.jsx';
-import OauthCallback from './pages/OauthCallback.jsx';
-import Logout from './pages/Logout.jsx';
-import Login from './pages/Login.jsx';
-import RequireLoggedIn from './widgets/Route/RequireLoggedIn.jsx';
 import ActionLog from './pages/ActionLog.jsx';
 import Lights from './pages/Lights.jsx';
 import Hvac from './pages/Hvac.jsx';
 import { useVariant } from './hooks/useVariant.js';
+import { useAuth } from 'react-oidc-context';
+import i18n from './i18n.js';
 
 function App() {
     const variant = useVariant();
@@ -25,26 +23,27 @@ function App() {
         }
     }, [variant]);
 
+    const auth = useAuth();
+    // TODO
+    console.log(auth);
+    useEffect(function() {
+        if (auth.isAuthenticated) {
+            // TODO
+            i18n.changeLanguage(auth.user.profile?.preferredLanguage || 'bg').then(() => {});
+        }
+    }, [auth]);
+
     return (<>
         <NavBar />
         <main>
             <Container as="section" className="mt-4">
                 <Routes>
                     <Route path="/" element={<Dashboard />} />
-                    <Route path="/doors" element={<RequireLoggedIn>
-                        <Doors />
-                    </RequireLoggedIn>} />
-                    <Route path="/lights" element={<RequireLoggedIn>
-                        <Lights />
-                    </RequireLoggedIn>} />
-                    <Route path="/hvac" element={<RequireLoggedIn>
-                        <Hvac />
-                    </RequireLoggedIn>} />
+                    <Route path="/doors" element={<Doors />} />
+                    <Route path="/lights" element={<Lights />} />
+                    <Route path="/hvac" element={<Hvac />} />
                     <Route path="/sensors" element={<Sensors />} />
                     <Route path="/action-log" element={<ActionLog />} />
-                    <Route path="/oauth-callback" element={<OauthCallback />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/logout" element={<Logout />} />
                 </Routes>
             </Container>
         </main>

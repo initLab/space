@@ -1,10 +1,10 @@
 import useSWR from 'swr';
 import { authenticatedFetcher } from '../utils/swr.js';
-import { useAuthStorage } from './useAuthStorage.js';
+import { useAuth } from 'react-oidc-context';
 
 export function useAuthenticatedSWR(key, config) {
-    const { accessToken } = useAuthStorage();
-    const hasAccessToken = !!accessToken;
+    const auth = useAuth();
+    const token = auth.isAuthenticated ? auth.user?.access_token : null;
 
-    return useSWR(hasAccessToken ? key : null, authenticatedFetcher, config);
+    return useSWR(token ? key : null, authenticatedFetcher(token), config);
 }
