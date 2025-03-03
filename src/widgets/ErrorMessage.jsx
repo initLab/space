@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 const ErrorMessage = ({
     error,
 }) => {
-    return (<>
-        <strong>{error.status}</strong>{' '}
-        <span>{error.error}</span>
-    </>);
+    return (<span>
+        {error.__proto__.name}: <strong>{error.message}</strong>
+    </span>);
 };
 
 ErrorMessage.propTypes = {
     error: PropTypes.shape({
-        status: PropTypes.string.isRequired,
-        error: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired,
     }).isRequired,
 };
 
