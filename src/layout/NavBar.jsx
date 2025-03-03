@@ -90,7 +90,7 @@ const NavBar = () => {
                         </Nav.Link>
                     </RequireRole>
                     <RequireRole roles={['board_member']}>
-                        <Nav.Link href={oidcAuthorityUrl + '/ui/console/users'} target="_blank">
+                        <Nav.Link href={`${oidcAuthorityUrl}ui/console/users`} target="_blank">
                             <i className="fa-solid fa-users" />{' '}
                             {t('views.navigation.labbers')}
                         </Nav.Link>
@@ -101,14 +101,14 @@ const NavBar = () => {
                             <i className="fa-solid fa-user" />{' '}
                             {t('views.navigation.account')}
                         </>} className="ms-0 ms-lg-auto">
-                        <NavDropdown.Item href={oidcAuthorityUrl + '/ui/console/users/me'}>
+                        <NavDropdown.Item href={`${oidcAuthorityUrl}ui/console/users/me`}>
                             {t('views.navigation.view_edit')}
                         </NavDropdown.Item>
                         {isInitLab && <>
                             <NavDropdown.Item href={oidcAuthorityUrl}>
                                 {t('views.navigation.network_devices')}
                             </NavDropdown.Item>
-                            <NavDropdown.Item href={oidcAuthorityUrl + '/ui/console/users/me?id=grants'}>
+                            <NavDropdown.Item href={`${oidcAuthorityUrl}ui/console/users/me?id=grants`}>
                                 {t('views.navigation.oauth_token_management')}
                             </NavDropdown.Item>
                             <NavDropdown.Divider />

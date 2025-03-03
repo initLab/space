@@ -9,7 +9,7 @@ i18n
     .init({
         fallbackLng: 'bg',
         backend: {
-            loadPath: import.meta.env.BASE_URL + 'locales/{{lng}}.yaml',
+            loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}.yaml`,
             parse: data => load(data),
         },
         interpolation: {

@@ -78,7 +78,7 @@ const DeviceActionButton = ({
 
     const variant = isDoorOpen ? 'warning' : type.variant;
     const icon = (isDoorOpen ? 'fa-solid fa-door-open' : type.icon);
-    const label = t(isDoorOpen ? 'views.door.open' : 'views.devices.' + action);
+    const label = t(isDoorOpen ? 'views.door.open' : `views.devices.${action}`);
 
     return (<>
         <Button variant={variant} className="device-action-button" onClick={handleClick} disabled={disabled}>

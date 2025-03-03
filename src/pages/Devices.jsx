@@ -58,7 +58,7 @@ const Devices = ({
             }) : <Col>
                 <Card>
                     <Card.Body className="d-flex flex-column flex-lg-row gap-4">
-                        {t('views.' + deviceType + '.no_access')}
+                        {t(`views.${deviceType}.no_access`)}
                     </Card.Body>
                 </Card>
             </Col>}
