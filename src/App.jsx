@@ -31,7 +31,7 @@ function App() {
         }
 
         (async () => {
-            await i18n.changeLanguage(auth.user.profile?.preferredLanguage ?? 'bg');
+            await i18n.changeLanguage(auth.user.profile?.locale ?? 'bg');
         })();
     }, [auth]);
 
