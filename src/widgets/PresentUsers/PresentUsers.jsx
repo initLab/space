@@ -22,11 +22,11 @@ const PresentUsers = ({
                             {user.username}
                         </h5>
                         <ButtonGroup>
-                            {user.twitter && <Button href={'https://twitter.com/' + user.twitter} target="_blank">
+                            {user.twitter && <Button href={`https://twitter.com/${user.twitter}`} target="_blank">
                                 <i className="fab fa-twitter fa-2x"></i>
                             </Button>}
                             {user.github &&
-                                <Button variant="default" href={'https://github.com/' + user.github} target="_blank">
+                                <Button variant="default" href={`https://github.com/${user.github}`} target="_blank">
                                     <i className="fab fa-github fa-2x"></i>
                                 </Button>}
                             {user.url && <Button variant="info" href={user.url} target="_blank">

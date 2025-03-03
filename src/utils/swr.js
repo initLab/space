@@ -4,7 +4,7 @@ function addTokenHeader(args = {}, token) {
     }
 
     const authHeader = {
-        authorization: 'Bearer '.concat(token),
+        authorization: `Bearer ${token}`,
     };
 
     if (typeof args[0] === 'object') {
