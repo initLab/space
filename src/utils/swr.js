@@ -26,6 +26,7 @@ export const fetcher = async (...args) => {
     if (!response.ok) {
         const error = new Error('HTTP error '.concat(response.status));
         error.status = response.status;
+        error.statusText = response.statusText;
         throw error;
     }
 
