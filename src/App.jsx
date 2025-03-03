@@ -24,13 +24,15 @@ function App() {
     }, [variant]);
 
     const auth = useAuth();
-    // TODO
-    console.log(auth);
+
     useEffect(function() {
-        if (auth.isAuthenticated) {
-            // TODO
-            i18n.changeLanguage(auth.user.profile?.preferredLanguage || 'bg').then(() => {});
+        if (!auth.isAuthenticated) {
+            return ;
         }
+
+        (async () => {
+            await i18n.changeLanguage(auth.user.profile?.preferredLanguage ?? 'bg');
+        })();
     }, [auth]);
 
     return (<>
