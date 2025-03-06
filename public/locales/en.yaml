@@ -118,8 +118,8 @@ views:
     unlock: unlock
     open: open
     open_alternative: open
-    turn_on: turn on
     turn_off: turn off
+    turn_on: turn on
     turn_on_cooling: cooling
     turn_on_heating: heating
     offline: Device is currently offline

@@ -29,13 +29,13 @@ const types = {
         },
     },
     light: {
-        turn_on: {
-            variant: 'success',
-            icon: 'fa-solid fa-lightbulb',
-        },
         turn_off: {
             variant: 'danger',
             icon: 'fa-regular fa-lightbulb',
+        },
+        turn_on: {
+            variant: 'success',
+            icon: 'fa-solid fa-lightbulb',
         },
     },
     hvac: {

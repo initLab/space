@@ -125,8 +125,8 @@ views:
     unlock: отключи
     open: отвори
     open_alternative: отвори
-    turn_on: включи
     turn_off: изключи
+    turn_on: включи
     turn_on_cooling: охлаждане
     turn_on_heating: отопление
     offline: В момента няма връзка с устройството
