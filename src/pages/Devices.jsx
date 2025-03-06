@@ -48,7 +48,7 @@ const Devices = ({
                             className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">
                             {isUnavailable ? t('views.devices.offline') : <>
                                 {deviceActions.map(action =>
-                                    <DeviceActionButton key={action} deviceId={device.id} action={action}
+                                    <DeviceActionButton key={action} device={device} action={action}
                                         isDoorOpen={action === 'open' && isOpen} />)}
                                 {deviceActions.length === 0 && <LoadingIcon large />}
                             </>}

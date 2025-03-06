@@ -10,33 +10,37 @@ import { sleep } from '../../utils/time.js';
 import './DeviceActionButton.scss';
 
 const types = {
-    open: {
-        variant: 'success',
-        icon: 'fa-solid fa-right-to-bracket',
+    door: {
+        open: {
+            variant: 'success',
+            icon: 'fa-solid fa-right-to-bracket',
+        },
+        open_alternative: {
+            variant: 'success',
+            icon: 'fa-solid fa-right-to-bracket',
+        },
+        lock: {
+            variant: 'danger',
+            icon: 'fa-solid fa-lock',
+        },
+        unlock: {
+            variant: 'info',
+            icon: 'fa-solid fa-lock-open',
+        },
     },
-    open_alternative: {
-        variant: 'success',
-        icon: 'fa-solid fa-right-to-bracket',
-    },
-    lock: {
-        variant: 'danger',
-        icon: 'fa-solid fa-lock',
-    },
-    unlock: {
-        variant: 'info',
-        icon: 'fa-solid fa-lock-open',
-    },
-    turn_on: {
-        variant: 'success',
-        icon: 'fa-solid fa-lightbulb',
-    },
-    turn_off: {
-        variant: 'danger',
-        icon: 'fa-regular fa-lightbulb',
+    light: {
+        turn_on: {
+            variant: 'success',
+            icon: 'fa-solid fa-lightbulb',
+        },
+        turn_off: {
+            variant: 'danger',
+            icon: 'fa-regular fa-lightbulb',
+        },
     },
 };
 const DeviceActionButton = ({
-    deviceId,
+    device,
     action,
     isDoorOpen = false,
 }) => {
@@ -45,10 +49,10 @@ const DeviceActionButton = ({
     const {
         execute,
         error,
-    } = useDeviceAction(deviceId, action);
+    } = useDeviceAction(device.id, action);
 
     const {t} = useTranslation();
-    const type = types?.[action] || {
+    const type = types?.[device.type]?.[action] || {
         variant: '',
         icon: '',
     };
@@ -74,7 +78,10 @@ const DeviceActionButton = ({
 };
 
 DeviceActionButton.propTypes = {
-    deviceId: PropTypes.string.isRequired,
+    device: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+    }).isRequired,
     action: PropTypes.string.isRequired,
     isDoorOpen: PropTypes.bool,
 };
