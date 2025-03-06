@@ -120,6 +120,8 @@ views:
     open_alternative: open
     turn_on: turn on
     turn_off: turn off
+    turn_on_cooling: cooling
+    turn_on_heating: heating
     offline: Device is currently offline
   door:
     locked: Locked
@@ -132,6 +134,10 @@ views:
   light:
     no_access: |
       You don't have the necessary rights to control the lights. Please contact an init Lab board member at
+      us@initlab.org to request access.
+  hvac:
+    no_access: |
+      You don't have the necessary rights to control the HVACs. Please contact an init Lab board member at
       us@initlab.org to request access.
   navigation:
     view_edit: View/edit
@@ -150,6 +156,7 @@ views:
     members_fee: Membership fee
     network_devices: Network devices
     lights: Lights
+    hvac: HVAC
     sensors: Sensors
     oauth_application_management: OAuth integration
     oauth_token_management: Authorized applications

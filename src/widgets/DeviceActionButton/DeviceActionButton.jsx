@@ -38,6 +38,20 @@ const types = {
             icon: 'fa-regular fa-lightbulb',
         },
     },
+    hvac: {
+        turn_off: {
+            variant: 'secondary',
+            icon: 'fa-solid fa-power-off',
+        },
+        turn_on_cooling: {
+            variant: 'primary',
+            icon: 'fa-solid fa-snowflake',
+        },
+        turn_on_heating: {
+            variant: 'danger',
+            icon: 'fa-solid fa-sun',
+        },
+    },
 };
 const DeviceActionButton = ({
     device,

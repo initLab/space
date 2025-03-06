@@ -1,3 +1,7 @@
+export function getDeviceActions(device) {
+    return device.supported_actions;
+}
+
 export function getDoorActions(door) {
     const lockStatus = door?.statuses?.lock;
     const validLockStatus = typeof lockStatus === 'string';

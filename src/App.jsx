@@ -13,6 +13,7 @@ import Login from './pages/Login.jsx';
 import RequireLoggedIn from './widgets/Route/RequireLoggedIn.jsx';
 import ActionLog from './pages/ActionLog.jsx';
 import Lights from './pages/Lights.jsx';
+import Hvac from './pages/Hvac.jsx';
 import { useVariant } from './hooks/useVariant.js';
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
                     </RequireLoggedIn>} />
                     <Route path="/lights" element={<RequireLoggedIn>
                         <Lights />
+                    </RequireLoggedIn>} />
+                    <Route path="/hvac" element={<RequireLoggedIn>
+                        <Hvac />
                     </RequireLoggedIn>} />
                     <Route path="/sensors" element={<Sensors />} />
                     <Route path="/action-log" element={<ActionLog />} />

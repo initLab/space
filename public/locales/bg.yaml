@@ -127,6 +127,8 @@ views:
     open_alternative: отвори
     turn_on: включи
     turn_off: изключи
+    turn_on_cooling: охлаждане
+    turn_on_heating: отопление
     offline: В момента няма връзка с устройството
   door:
     locked: Заключено
@@ -139,6 +141,10 @@ views:
   light:
     no_access: |
       Нямате права за управление на осветлението. Моля, свържете се с представител на Управителния съвет на Инит Лаб на
+      адрес us@initlab.org, за да заявите достъп.
+  hvac:
+    no_access: |
+      Нямате права за управление на климатиците. Моля, свържете се с представител на Управителния съвет на Инит Лаб на
       адрес us@initlab.org, за да заявите достъп.
   navigation:
     view_edit: Преглед/редакция
@@ -157,6 +163,7 @@ views:
     members_fee: Членски внос
     network_devices: Мрежови устройства
     lights: Осветление
+    hvac: Климатици
     sensors: Графики
     oauth_application_management: OAuth интеграция
     oauth_token_management: Упълномощени приложения
