@@ -23,6 +23,7 @@ const PresentUsersWrapper = () => {
     const [ fulfilledTime, setFulfilledTime ] = useState();
 
     const usersCount = users ? users.length : 0;
+    const sortedUsers = [...(users ?? [])].sort((a, b) => a.id - b.id);
 
     return (<>
         <Row as="header" className="row-cols row-cols-1 row-cols-lg-2 mt-2">
@@ -45,7 +46,7 @@ const PresentUsersWrapper = () => {
                 <LoadingIcon large />
             </Col>
         </Row>}
-        {users && <PresentUsers users={users} />}
+        {users && <PresentUsers users={sortedUsers} />}
         {error && <Row className="mb-3">
             <Col>
                 <ErrorMessage error={error} />
