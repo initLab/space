@@ -52,6 +52,7 @@ const types = {
         },
     },
 };
+
 const DeviceActionButton = ({
     device,
     action,
