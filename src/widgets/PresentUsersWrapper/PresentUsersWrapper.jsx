@@ -23,7 +23,11 @@ const PresentUsersWrapper = () => {
     const [ fulfilledTime, setFulfilledTime ] = useState();
 
     const usersCount = users ? users.length : 0;
-    const sortedUsers = [...(users ?? [])].sort((a, b) => a.id - b.id);
+    const sortedUsers = [...(users ?? [])].sort((a, b) =>
+        a.id === null ? 1 : (
+            b.id === null ? -1 : a.id - b.id
+        )
+    );
 
     return (<>
         <Row as="header" className="row-cols row-cols-1 row-cols-lg-2 mt-2">
