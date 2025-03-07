@@ -82,7 +82,7 @@ const NavBar = () => {
                             {t('views.navigation.lights')}
                         </Nav.Link>
                     </RequireRole>
-                    <RequireRole roles={['board_member', 'infra']}>
+                    <RequireRole roles={['trusted_member', 'board_member', 'infra']}>
                         <Nav.Link as={NavLink} to="/hvac">
                             <i className="fa-solid fa-fan" />{' '}
                             {t('views.navigation.hvac')}
