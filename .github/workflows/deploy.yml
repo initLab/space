@@ -1,10 +1,7 @@
 #file: noinspection YAMLSchemaValidation
 name: Deploy
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   build:
