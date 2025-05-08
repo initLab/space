@@ -2,10 +2,14 @@ import { parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 
 import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
+import { Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 const ActionLogEntry = ({
     entry,
 }) => {
+    const { t } = useTranslation();
+
     const {
         formatDefault,
         formatDistanceToNow,
@@ -13,13 +17,28 @@ const ActionLogEntry = ({
 
     const dateTime = parseISO(entry.createdAt);
 
-    return (<tr>
-        <td>{formatDefault(dateTime)} ({formatDistanceToNow(dateTime)})</td>
-        <td>{entry.deviceId}</td>
-        <td>{entry.action}</td>
-        <td>{entry.User.name} ({entry.User.username})</td>
-        <td>{entry.Application.name}</td>
-    </tr>);
+    return (<Row className="row-cols-1 row-cols-lg-5 border-top pt-1 mb-1">
+        <Col>
+            <strong className="d-lg-none">{t('views.action_log.columns.date_time')}: </strong>
+            {formatDefault(dateTime)} ({formatDistanceToNow(dateTime)})
+        </Col>
+        <Col>
+            <strong className="d-lg-none">{t('views.action_log.columns.device')}: </strong>
+            {entry.deviceId}
+        </Col>
+        <Col>
+            <strong className="d-lg-none">{t('views.action_log.columns.action')}: </strong>
+            {entry.action}
+        </Col>
+        <Col>
+            <strong className="d-lg-none">{t('views.action_log.columns.user')}: </strong>
+            {entry.User.name} ({entry.User.username})
+        </Col>
+        <Col>
+            <strong className="d-lg-none">{t('views.action_log.columns.application')}: </strong>
+            {entry.Application.name}
+        </Col>
+    </Row>);
 };
 
 ActionLogEntry.propTypes = {

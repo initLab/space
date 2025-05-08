@@ -1,4 +1,4 @@
-import { Col, Row, Table } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
@@ -36,20 +36,16 @@ const ActionLog = () => {
             <Col>
                 {isLoading && <LoadingIcon large />}
                 {error && <ErrorMessage error={error} />}
-                {actionLog && <Table>
-                    <thead>
-                        <tr>
-                            <th>{t('views.action_log.columns.date_time')}</th>
-                            <th>{t('views.action_log.columns.device')}</th>
-                            <th>{t('views.action_log.columns.action')}</th>
-                            <th>{t('views.action_log.columns.user')}</th>
-                            <th>{t('views.action_log.columns.application')}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {actionLog.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
-                    </tbody>
-                </Table>}
+                {actionLog && <>
+                    <Row className="row-cols-1 row-cols-lg-5 d-none d-lg-flex fw-bold">
+                        <Col>{t('views.action_log.columns.date_time')}</Col>
+                        <Col>{t('views.action_log.columns.device')}</Col>
+                        <Col>{t('views.action_log.columns.action')}</Col>
+                        <Col>{t('views.action_log.columns.user')}</Col>
+                        <Col>{t('views.action_log.columns.application')}</Col>
+                    </Row>
+                    {actionLog.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
+                </>}
             </Col>
         </Row>
     </>);
