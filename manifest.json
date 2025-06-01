@@ -1,14 +1,8 @@
 {
   "short_name": "Space",
   "name": "Hackerspace management system",
-  "start_url": "./",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#2196f3",
-  "background_color": "#ffffff",
-  "icons": [
-    {
-      "src": "/initlab-logo.svg",
-      "sizes": "any"
-    }
-  ]
+  "background_color": "#ffffff"
 }
