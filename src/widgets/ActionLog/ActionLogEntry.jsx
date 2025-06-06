@@ -2,7 +2,7 @@ import { parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 
 import { useDateTimeFormatter } from '../../utils/useDateTimeFormatter.js';
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 const ActionLogEntry = ({
@@ -17,28 +17,29 @@ const ActionLogEntry = ({
 
     const dateTime = parseISO(entry.createdAt);
 
-    return (<Row className="row-cols-1 row-cols-lg-5 border-top pt-1 mb-1">
-        <Col>
+    return (<>
+        <div className="w-100 border-top my-1" />
+        <Col lg={4}>
             <strong className="d-lg-none">{t('views.action_log.columns.date_time')}: </strong>
             {formatDefault(dateTime)} ({formatDistanceToNow(dateTime)})
         </Col>
-        <Col>
+        <Col lg={2}>
             <strong className="d-lg-none">{t('views.action_log.columns.device')}: </strong>
             {entry.deviceId}
         </Col>
-        <Col>
+        <Col lg={1}>
             <strong className="d-lg-none">{t('views.action_log.columns.action')}: </strong>
             {entry.action}
         </Col>
-        <Col>
+        <Col lg={3}>
             <strong className="d-lg-none">{t('views.action_log.columns.user')}: </strong>
             {entry.User.name} ({entry.User.username})
         </Col>
-        <Col>
+        <Col lg={2}>
             <strong className="d-lg-none">{t('views.action_log.columns.application')}: </strong>
             {entry.Application.name}
         </Col>
-    </Row>);
+    </>);
 };
 
 ActionLogEntry.propTypes = {

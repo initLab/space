@@ -32,19 +32,19 @@ const ActionLog = () => {
                 <h2>{t('views.action_log.title')}</h2>
             </Col>
         </Row>
-        <Row className="row-cols row-cols-1">
+        <Row>
             <Col>
                 {isLoading && <LoadingIcon large />}
                 {error && <ErrorMessage error={error} />}
                 {actionLog && <>
-                    <Row className="row-cols-1 row-cols-lg-5 d-none d-lg-flex fw-bold">
-                        <Col>{t('views.action_log.columns.date_time')}</Col>
-                        <Col>{t('views.action_log.columns.device')}</Col>
-                        <Col>{t('views.action_log.columns.action')}</Col>
-                        <Col>{t('views.action_log.columns.user')}</Col>
-                        <Col>{t('views.action_log.columns.application')}</Col>
+                    <Row className="row-cols-1">
+                        <Col lg={4} className="d-none d-lg-block fw-bold">{t('views.action_log.columns.date_time')}</Col>
+                        <Col lg={2} className="d-none d-lg-block fw-bold">{t('views.action_log.columns.device')}</Col>
+                        <Col lg={1} className="d-none d-lg-block fw-bold">{t('views.action_log.columns.action')}</Col>
+                        <Col lg={3} className="d-none d-lg-block fw-bold">{t('views.action_log.columns.user')}</Col>
+                        <Col lg={2} className="d-none d-lg-block fw-bold">{t('views.action_log.columns.application')}</Col>
+                        {actionLog.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
                     </Row>
-                    {actionLog.map(entry => <ActionLogEntry key={entry.id} entry={entry} />)}
                 </>}
             </Col>
         </Row>
