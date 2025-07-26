@@ -1,8 +1,8 @@
-import { getDeviceActions } from '../utils/device.js';
+import { getHvacActions } from '../utils/device.js';
 import Devices from './Devices.jsx';
 
 const Hvac = () => {
-    return (<Devices deviceType="hvac" deviceActionMapper={getDeviceActions} />);
+    return (<Devices deviceGroup="hvac" deviceActionMapper={getHvacActions} />);
 };
 
 export default Hvac;

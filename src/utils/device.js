@@ -42,3 +42,11 @@ export function getLightActions(light) {
 
     return actions.filter(action => action !== (activityStatus ? 'turn_on' : 'turn_off'));
 }
+
+export function getHvacActions(device) {
+    if (device.type === 'switch') {
+        return getLightActions(device);
+    }
+
+    return getDeviceActions(device);
+}

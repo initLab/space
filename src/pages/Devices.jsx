@@ -10,7 +10,7 @@ import ErrorMessage from '../widgets/ErrorMessage.jsx';
 import { useVariant } from '../hooks/useVariant.js';
 
 const Devices = ({
-    deviceType,
+    deviceGroup,
     deviceActionMapper,
 }) => {
     const { t } = useTranslation();
@@ -24,7 +24,7 @@ const Devices = ({
     });
 
     const filteredDevices = useMemo(() =>
-        devices ? devices.filter(device => device.type === deviceType) : [], [deviceType, devices]);
+        devices ? devices.filter(device => device.group === deviceGroup) : [], [deviceGroup, devices]);
 
     const variant = useVariant();
     const isInitLab = variant === 'initlab';
@@ -58,7 +58,7 @@ const Devices = ({
             }) : <Col>
                 <Card>
                     <Card.Body className="d-flex flex-column flex-lg-row gap-4">
-                        {t('views.' + deviceType + '.no_access')}
+                        {t('views.' + deviceGroup + '.no_access')}
                     </Card.Body>
                 </Card>
             </Col>}
@@ -70,7 +70,7 @@ const Devices = ({
 };
 
 Devices.propTypes = {
-    deviceType: PropTypes.string.isRequired,
+    deviceGroup: PropTypes.string.isRequired,
     deviceActionMapper: PropTypes.func.isRequired,
 };
 
