@@ -44,7 +44,7 @@ export function getLightActions(light) {
 }
 
 export function getHvacActions(device) {
-    if (device.type === 'switch') {
+    if (device.type === 'fan') {
         return getLightActions(device);
     }
 
