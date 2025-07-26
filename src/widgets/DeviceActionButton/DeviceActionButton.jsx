@@ -38,6 +38,16 @@ const types = {
             icon: 'fa-solid fa-lightbulb',
         },
     },
+    fan: {
+        turn_off: {
+            variant: 'danger',
+            icon: 'fa-solid fa-power-off',
+        },
+        turn_on: {
+            variant: 'success',
+            icon: 'fa-solid fa-fan',
+        },
+    },
     hvac: {
         turn_off: {
             variant: 'secondary',
