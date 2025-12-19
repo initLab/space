@@ -1,0 +1,62 @@
+import { useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { format, formatISO } from 'date-fns';
+
+import PresentUsersTable from './PresentUsersTable.tsx';
+import { usePresentUsers } from '../../hooks/useEndpoints.ts';
+import LoadingIcon from '../LoadingIcon.tsx';
+import ErrorMessage from '../ErrorMessage.tsx';
+
+const PresentUsers = () => {
+    const { t } = useTranslation();
+
+    const {
+        data: users,
+        error,
+        isLoading,
+    } = usePresentUsers({
+        refreshInterval: 60_000,
+        onSuccess: () => setFulfilledTime(new Date()),
+    });
+
+    const [ fulfilledTime, setFulfilledTime ] = useState<Date>();
+
+    const usersCount = users ? users.length : 0;
+    const sortedUsers = [...(users ?? [])].sort((a, b) =>
+        a.id === null ? 1 : (
+            b.id === null ? -1 : a.id - b.id
+        )
+    );
+
+    return (<>
+        <Row as="header" className="row-cols row-cols-1 row-cols-lg-2 mt-2">
+            <Col>
+                <h2>{t('views.users.whos_in_the_lab')}</h2>
+            </Col>
+            <Col className="text-end">
+                {isLoading && <LoadingIcon />}
+                {users && fulfilledTime && <h2>
+                    <div className="small text-muted">
+                        {t('views.users.people_at_about_html.' + (usersCount === 1 ? 'one' : 'other'))
+                            .replace('%{count}', usersCount.toString(10))}{' '}
+                        <time dateTime={formatISO(fulfilledTime)}>{format(fulfilledTime, 'HH:mm')}</time>
+                    </div>
+                </h2>}
+            </Col>
+        </Row>
+        {isLoading && <Row className="mb-3">
+            <Col className="text-center">
+                <LoadingIcon large />
+            </Col>
+        </Row>}
+        {users && <PresentUsersTable users={sortedUsers} />}
+        {error && <Row className="mb-3">
+            <Col>
+                <ErrorMessage error={error} />
+            </Col>
+        </Row>}
+    </>);
+};
+
+export default PresentUsers;
