@@ -1,17 +1,13 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import viteCompression from 'vite-plugin-compression';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    build: {
-        sourcemap: true,
-    },
+    build: {sourcemap: true,},
     css: {
         preprocessorOptions: {
-            scss: {
-                api: 'modern-compiler',
-            },
+            scss: {api: 'modern-compiler',},
         },
     },
     envPrefix: [
