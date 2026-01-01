@@ -55,13 +55,13 @@ const DeviceActionButton = (
     const icon = isDoorOpen ? 'fa-solid fa-door-open' : type.icon;
     const label = t(isDoorOpen ? 'views.door.open' : 'views.devices.' + action);
 
-    return (<>
+    return <>
         <Button variant={variant} className="device-action-button" onClick={handleClick} disabled={disabled}>
             <i className={icon}/>
             <div>{label}</div>
         </Button>
         {error?.status && [401, 403].includes(error.status) && <RedirectToLogin/>}
-    </>);
+    </>;
 };
 
 export default DeviceActionButton;
