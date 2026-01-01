@@ -29,7 +29,7 @@ const Devices = ({
     // const variant = useVariant();
     const variantName = useVariantName();
 
-    return (<Row className="row-cols row-cols-1 gap-4">
+    return (<Row className="row-cols row-cols-1 row-cols-xl-2 gy-4">
         {isLoading && <Col className="text-center">
             <LoadingIcon large/>
         </Col>}
