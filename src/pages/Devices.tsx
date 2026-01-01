@@ -29,7 +29,7 @@ const Devices = ({
     // const variant = useVariant();
     const variantName = useVariantName();
 
-    return (<Row className="row-cols row-cols-1 row-cols-xl-2 gy-4">
+    return (<Row className="row-cols row-cols-1 row-cols-xl-2 gy-4 justify-content-center">
         {isLoading && <Col className="text-center">
             <LoadingIcon large/>
         </Col>}
@@ -39,7 +39,7 @@ const Devices = ({
                 const isUnavailable = device?.statuses?.available === false;
                 const isOpen = device?.statuses?.open === true;
 
-                return (<Col key={device.id}>
+                return (<Col key={device.id} className={`col-xl-${2*deviceActions.length}`}>
                     <Card>
                         <Card.Header
                             className={'text-start' + (variantName === "initlab" ? ' bg-primary text-light' : '')}>
