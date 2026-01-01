@@ -48,6 +48,9 @@ export const variants: {[variant: string]: VariantConfig} = {
 }
 
 export const grafana = {
-    dashboard: {id: 'SGAb0ZXMk', name: 'temperature-and-humidity',},
-    panels: [4, 5, 10],
+    urls: [
+        'https://stats.initlab.org/d-solo/SGAb0ZXMk/temperature-and-humidity?orgId=1&refresh=1m&panelId=4',
+        'https://stats.initlab.org/d-solo/SGAb0ZXMk/temperature-and-humidity?orgId=1&refresh=1m&panelId=5',
+        'https://stats.initlab.org/d-solo/SGAb0ZXMk/temperature-and-humidity?orgId=1&refresh=1m&panelId=10',
+    ]
 };

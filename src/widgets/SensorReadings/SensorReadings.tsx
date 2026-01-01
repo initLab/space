@@ -35,7 +35,6 @@ const SensorReadings = () => {
             for (const [topic, config] of Object.entries(sensors)) {
                 const readings = Object.entries(mqttStatus)
                     .filter(([t]) => t.startsWith(topic))
-                    // const values = readings.mapToObj((t,r) => [t.substring(topic.length + 1), r])
                     .mapToObj(
                         ([t]) => t.substring(topic.length + 1),
                         ([, r]) => r

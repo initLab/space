@@ -39,7 +39,9 @@ export default [
             ...react.configs.recommended.rules,
             ...react.configs['jsx-runtime'].rules,
             ...reactHooks.configs.recommended.rules,
+            ...tseslint.configs.recommended.rules,
             '@typescript-eslint/no-unused-vars': 'error',
+            '@typescript-eslint/no-explicit-any': 'off',
             'no-unused-vars': 'off',
             'react/jsx-no-target-blank': 'off',
             'react-refresh/only-export-components': [
