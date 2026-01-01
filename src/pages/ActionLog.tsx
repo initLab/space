@@ -1,6 +1,5 @@
 import {Col, Row} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
-import {Navigate} from 'react-router-dom';
 
 import {useActionLog} from '../hooks/useEndpoints.ts';
 import LoadingIcon from '../widgets/LoadingIcon.tsx';

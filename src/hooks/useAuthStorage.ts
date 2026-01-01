@@ -11,7 +11,7 @@ const hasAll = (obj: any, ...props: string[]) => {
     }
     return true;
 }
-const requiredTokenProps = <const> ['access_token', 'created_at', 'expires_in', 'refresh_token', 'scope', 'token_type'];
+const requiredTokenProps = ['access_token', 'created_at', 'expires_in', 'refresh_token', 'scope', 'token_type'];
 
 type FaunaTokenError = {
     error: string,
@@ -32,8 +32,8 @@ function parseTokenResponse(response: FaunaResponse): SpaceAccessToken {
 
     return {
         accessToken: token.access_token,
-        accessTokenExpire: (token.created_at!! + token.expires_in) * 1_000,
-        refreshToken: token.refresh_token!!,
+        accessTokenExpire: (token.created_at! + token.expires_in) * 1_000,
+        refreshToken: token.refresh_token!,
     };
 }
 
