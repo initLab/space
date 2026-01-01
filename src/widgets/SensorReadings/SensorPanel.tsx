@@ -5,6 +5,7 @@ import {useDateTimeFormatter} from '../../utils/useDateTimeFormatter.ts';
 import './SensorPanel.css';
 import {useMemo, useState} from 'react';
 import type {MqttReading} from "../../types";
+import type {RawMqttReading} from "../../portier-types";
 
 const temperatureThresholds = [18, 24, 26, 32];
 
@@ -23,81 +24,85 @@ function batteryState(level?: number) {
     return 5;
 }
 
+function isCurrent(now: number, readingTime: number): boolean {
+    return now - readingTime <= 2 * MS_TO_H;
+}
+
+function isVisible(now: number, readingTime: number): boolean {
+    return now - readingTime <= 24 * MS_TO_H;
+}
+
 function temperatureState(temperature: number = 0) {
     return temperatureThresholds.filter(threshold => threshold < temperature).length;
 }
 
-const SensorReadingValue = (
-    {isCurrent, timestamp, value}: { isCurrent: boolean, timestamp: string, value: any }) =>
-    <span
-        className={'huge' + (isCurrent ? '' : ' text-decoration-line-through')}
-        title={timestamp}>
-        {value}
+const SensorReadingValue = ({reading, valueFormat}: {
+    reading: RawMqttReading,
+    valueFormat: (v: any) => string
+}) => {
+    const {formatTimestamp} = useDateTimeFormatter();
+    const [loadTime] = useState<number>(Date.now);
+
+
+    return <span
+        className={'huge' + (isCurrent(loadTime, reading.timestamp) ? '' : ' text-decoration-line-through')}
+        title={formatTimestamp(reading.timestamp)}>
+        {valueFormat(reading.value)}
     </span>;
-
-// function readingValid(reading: MqttReading) {
-//     return Object.prototype.hasOwnProperty.call(units, type) && isValid(reading.timestamp) && typeof reading.value === 'number';
-// }
-
+}
 
 const SensorPanel = ({label, readings}: MqttReading) => {
-        const {formatDefault, formatDistanceToNow} = useDateTimeFormatter();
 
-        const formatTimestampDate = (ts: Date) => `${formatDefault(ts)} (${formatDistanceToNow(ts)})`;
-        const formatTimestamp = (ts: number) => formatTimestampDate(new Date(ts));
-
-    const formatTemperature = (t: number) => Math.round(t) + '°C'
-    const formatHumidity = (h: number) => Math.round(h) + '%'
+        const formatTemperature = (t: number) => Math.round(t) + '°C'
+        const formatHumidity = (h: number) => Math.round(h) + '%'
         const [loadTime] = useState<number>(Date.now);
+        const {formatTimestamp} = useDateTimeFormatter();
 
         // console.log(label, readings);
 
-        const values = useMemo(() => {
-            const lastValue = Math.max(...Object.values(readings).map(x => x.timestamp));
-            const readingAge = loadTime - lastValue;
-            const {temperature, humidity, battery} = readings;
+        const state = useMemo(() => {
+            const lastTimestamp = Math.max(...Object.values(readings).map(x => x.timestamp));
 
             return {
-                isCurrent: readingAge <= 2 * MS_TO_H,
-                isVisible: readingAge <= 24 * MS_TO_H,
-                temperature, humidity, battery,
+                lastTimestamp: lastTimestamp,
+                readings
             }
-        }, [loadTime, readings]);
+        }, [readings]);
 
-        if (Object.keys(values).length < 1) {
+        if (Object.keys(state).length < 1) {
             return null;
         }
 
+        if (!isVisible(loadTime, state.lastTimestamp)) return <></>;
+
         return (<Col>
-            <Card bg="primary" text={values.isCurrent ? 'white' : 'secondary'}>
+            <Card bg="primary" text={isCurrent(loadTime, state.lastTimestamp) ? 'white' : 'secondary'}>
                 <Card.Body>
                     <Container>
                         <Row>
                             <Col xs={3}>
-                                {values.temperature &&
-                                    <i className={'fa-solid fa-5x fa-thermometer-' + temperatureState(values.temperature.value)}/>
+                                {state.readings.temperature &&
+                                    <i className={'fa-solid fa-5x fa-thermometer-' + temperatureState(state.readings.temperature.value)}/>
                                 }
                             </Col>
                             <Col xs={9} className="text-end">
                                 <div className="huge">
-                                    {values.temperature &&
+                                    {state.readings.temperature &&
                                         <SensorReadingValue
-                                            value={formatTemperature(values.temperature.value)}
-                                            timestamp={formatTimestamp(values.temperature.timestamp)}
-                                            isCurrent={values.isCurrent}
+                                            reading={state.readings.temperature}
+                                            valueFormat={formatTemperature}
                                         />}
-                                    {values.temperature && values.humidity && ' '}
-                                    {values.humidity &&
+                                    {state.readings.temperature && state.readings.humidity && ' '}
+                                    {state.readings.humidity &&
                                         <SensorReadingValue
-                                            value={formatHumidity(values.temperature.value)}
-                                            timestamp={formatTimestamp(values.humidity.timestamp)}
-                                            isCurrent={values.isCurrent}
+                                            reading={state.readings.humidity}
+                                            valueFormat={formatHumidity}
                                         />}
                                 </div>
                                 <div>
-                                    {values.battery &&
-                                        <i className={'fa-solid fa-battery-' + batteryState(values.battery.value)}
-                                           title={formatTimestamp(values.battery.timestamp)}
+                                    {state.readings.battery &&
+                                        <i className={'fa-solid fa-battery-' + batteryState(state.readings.battery.value)}
+                                           title={formatTimestamp(state.readings.battery.timestamp)}
                                         />} {' '}
                                     {label}
                                 </div>
