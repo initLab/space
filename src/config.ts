@@ -13,10 +13,10 @@ export const oidc = {
 
 export type MqttConfig = {[topic: string]: {label: string}}
 export const sensors: MqttConfig = {
-    'sensors/big-room': {label: 'Big room',},
-    'sensors/small-room': {label: 'Small room',},
-    'sensors/kitchen': {label: 'Kitchen',},
-    'sensors/outside': {label: 'Outside',},
+    'sensors/big-room/test': {label: 'big-room'},
+    'sensors/small-room/test': {label: 'small-room',},
+    'sensors/kitchen/test': {label: 'kitchen',},
+    'sensors/outside/test': {label: 'outside',},
 };
 
 export const variantHosts: {[hostname: string]: string} = {
@@ -46,11 +46,3 @@ export const variants: {[variant: string]: VariantConfig} = {
         title: 'Casa Libri',
     },
 }
-
-export const grafana = {
-    urls: [
-        'https://stats.initlab.org/d-solo/SGAb0ZXMk/temperature-and-humidity?orgId=1&refresh=1m&panelId=4',
-        'https://stats.initlab.org/d-solo/SGAb0ZXMk/temperature-and-humidity?orgId=1&refresh=1m&panelId=5',
-        'https://stats.initlab.org/d-solo/SGAb0ZXMk/temperature-and-humidity?orgId=1&refresh=1m&panelId=10',
-    ]
-};
