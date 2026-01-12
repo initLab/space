@@ -6,6 +6,7 @@ import './SensorPanel.css';
 import {useMemo, useState} from 'react';
 import type {MqttReading} from "../../types";
 import type {RawMqttReading} from "../../portier-types";
+import {useTranslation} from "react-i18next";
 
 const temperatureThresholds = [18, 24, 26, 32];
 
@@ -52,7 +53,7 @@ const SensorReadingValue = ({reading, valueFormat}: {
 }
 
 const SensorPanel = ({label, readings}: MqttReading) => {
-
+    const {t} = useTranslation();
         const formatTemperature = (t: number) => Math.round(t) + '°C'
         const formatHumidity = (h: number) => Math.round(h) + '%'
         const [loadTime] = useState<number>(Date.now);
@@ -104,7 +105,7 @@ const SensorPanel = ({label, readings}: MqttReading) => {
                                         <i className={'fa-solid fa-battery-' + batteryState(state.readings.battery.value)}
                                            title={formatTimestamp(state.readings.battery.timestamp)}
                                         />} {' '}
-                                    {label}
+                                    {t(`rooms.${label}`)}
                                 </div>
                             </Col>
                         </Row>

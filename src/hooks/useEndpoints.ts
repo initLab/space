@@ -33,6 +33,10 @@ export function useMqttStatus(config?: SWRConfiguration) {
     return useCheckSWR<{ [topic: string]: RawMqttReading }>(import.meta.env.MQTT_PROXY_URL.concat('status'), config);
 }
 
+export function useMqttHistory(config?: SWRConfiguration) {
+    return useCheckSWR<{ [sensor: string]: {[metric: string]: [[number, number]]} }>(import.meta.env.MQTT_PROXY_URL.concat('sensors/'), config);
+}
+
 export function useActionLog(config?: SWRConfiguration) {
     return useAuthSWR<PortierActionLogEntry[]>(import.meta.env.PORTIER_URL.concat('api/actionLog/0/0'), config);
 }
