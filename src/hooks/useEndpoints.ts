@@ -2,7 +2,7 @@ import useSWR, {type Fetcher, type SWRConfiguration} from 'swr';
 import {authenticatedFetcher, fetcher} from '../utils/swr.js';
 import {useAuthStorage} from './useAuthStorage.ts';
 import type {FaunaPresentUser, FaunaUser} from "../fauna-types";
-import type {PortierActionLogEntry, PortierDevice, RawMqttReading} from "../portier-types";
+import type {MqttSensorHistory, PortierActionLogEntry, PortierDevice, RawMqttReading} from "../portier-types";
 
 function useAuthSWR<TResult>(key: URL | string, config?: SWRConfiguration) {
     const {accessToken} = useAuthStorage();
@@ -34,7 +34,9 @@ export function useMqttStatus(config?: SWRConfiguration) {
 }
 
 export function useMqttHistory(config?: SWRConfiguration) {
-    return useCheckSWR<{ [sensor: string]: {[metric: string]: [[number, number]]} }>(import.meta.env.MQTT_PROXY_URL.concat('sensors/'), config);
+    return useCheckSWR<{
+        [sensor: string]: MqttSensorHistory
+    }>(import.meta.env.MQTT_PROXY_URL.concat('sensors/'), config);
 }
 
 export function useActionLog(config?: SWRConfiguration) {

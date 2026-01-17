@@ -124,7 +124,7 @@ views:
     colibri_message_contact: |
       Ако имате проблем с ползването му, или е нужно да заявите достъп за нови служители, моля свържете се с Инит Лаб на
       имейл us@initlab.org.
-    colibri_message_emergency: При неотложни случаи, моля обадете се на тел. 0883 433 990 (Венцислав).
+    colibri_message_emergency: При неотложни случаи, моля обадете се на тел. 02 422 54 36.
   devices:
     lock: заключи
     unlock: отключи
@@ -170,6 +170,8 @@ views:
     lights: Осветление
     hvac: Климатици
     sensors: Графики
+    dark_mode: Тъмна тема
+    language: Език
     oauth_application_management: OAuth интеграция
     oauth_token_management: Упълномощени приложения
   registrations:

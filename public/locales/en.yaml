@@ -117,7 +117,7 @@ views:
     colibri_message_contact: |
       In case of technical difficulties, or you need to request access for new employees, please contact init Lab
       at us@initlab.org.
-    colibri_message_emergency: In case of major malfunction, please call +359 883 433 990 (Vencislav).
+    colibri_message_emergency: In case of major malfunction, please call +359 2 422 54 36.
   devices:
     lock: lock
     unlock: unlock
@@ -163,6 +163,8 @@ views:
     lights: Lights
     hvac: HVAC
     sensors: Sensors
+    dark_mode: Dark Mode
+    language: Language
     oauth_application_management: OAuth integration
     oauth_token_management: Authorized applications
   registrations:

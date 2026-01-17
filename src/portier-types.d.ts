@@ -27,3 +27,5 @@ export type PortierActionLogEntry = {
     User?: { name: string, username: string, },
     Application?: { name: string, },
 }
+
+export type MqttSensorHistory = { [metric: string]: [[number, number, number, number]] }

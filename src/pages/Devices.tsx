@@ -12,7 +12,7 @@ import type {PortierDevice} from "../portier-types";
 const Devices = ({
                      deviceGroup,
                      deviceActionMapper,
-                 }: {deviceGroup: string, deviceActionMapper: (d: PortierDevice) => string[]}) => {
+                 }: { deviceGroup: string, deviceActionMapper: (d: PortierDevice) => string[] }) => {
     const {t} = useTranslation();
 
     const {
@@ -36,11 +36,11 @@ const Devices = ({
         {devices && <>
             {filteredDevices.length > 0 ? filteredDevices.map(device => {
                 const deviceActions = deviceActionMapper(device);
-                const isUnavailable = device?.statuses?.available === false;
-                const isOpen = device?.statuses?.open === true;
+                const isUnavailable = !device?.statuses?.available;
+                const isOpen = !!device?.statuses?.open;
 
-                return (<Col key={device.id} className={`col-xl-${2*deviceActions.length}`}>
-                    <Card>
+                return (<Col key={device.id} className={`col-xl-${2 * deviceActions.length}`}>
+                    <Card border="secondary">
                         <Card.Header
                             className={'text-start' + (variantName === "initlab" ? ' bg-primary text-light' : '')}>
                             {device.name}
