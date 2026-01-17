@@ -1,4 +1,4 @@
-import {createElement} from 'react';
+import {createElement, useEffect} from 'react';
 import {Container} from 'react-bootstrap';
 import {Route, Routes} from 'react-router-dom';
 
@@ -14,10 +14,13 @@ import {useVariant} from './hooks/useVariant.ts';
 import {getDoorActions, getHvacActions, getLightActions} from "./utils/device.ts";
 import Devices from "./pages/Devices.tsx";
 import {useDocumentTitle} from '@uidotdev/usehooks';
+import {useTheme} from './hooks/useTheme.ts';
 
 function App() {
     const variant = useVariant();
     useDocumentTitle(variant.title);
+    const [theme] = useTheme();
+    useEffect(() => document.documentElement.setAttribute('data-bs-theme', theme), [theme]);
 
     return (<>
         <NavBar/>

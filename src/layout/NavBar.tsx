@@ -1,29 +1,36 @@
-import {useEffect} from 'react';
 import {NavLink, useLocation} from 'react-router-dom';
 import {Container, Image, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {useTranslation} from 'react-i18next';
 
 import './NavBar.css';
-import i18n from '../i18n.ts';
 import {useVariant} from '../hooks/useVariant.ts';
 import {useCurrentUser} from '../hooks/useEndpoints.ts';
+import {useTheme} from '../hooks/useTheme.ts';
 import RequireRole from '../widgets/RequireRole.tsx';
 import RequireVariant from "../widgets/RequireVariant.tsx";
+import {useLocale} from '../hooks/useLocale.ts';
 
 const NavBar = () => {
     const {t} = useTranslation();
+    const [locale, setLocale] = useLocale();
     const backendUrl = import.meta.env.OIDC_AUTHORITY_URL;
     const {
         data: user,
     } = useCurrentUser();
     const variant = useVariant();
 
-    useEffect(function () {
-        if (user?.locale) {
-            i18n.changeLanguage(user.locale).then(() => {
-            });
-        }
-    }, [user]);
+    const [theme, setTheme] = useTheme();
+    const changeLanguage = async () =>
+        setLocale((!locale || locale == 'bg') ? 'en' : 'bg');
+
+    const changeTheme = () => setTheme(theme == 'light' ? 'dark' : 'light');
+
+//    useEffect(function () {
+//       if (user?.locale) {
+//            i18n.changeLanguage(user.locale).then(() => {
+//            });
+//        }
+//    }, [user]);
 
     const location = useLocation();
 
@@ -71,6 +78,12 @@ const NavBar = () => {
                             {t('views.navigation.labbers')}
                         </Nav.Link>
                     </RequireRole>
+                </Nav>
+                <Nav>
+                    <Nav.Link onClick={changeLanguage}><i className="fa-solid fa-language"/>{' '}<span
+                        className={'d-lg-none'}>{t('views.navigation.language')}</span></Nav.Link>
+                    <Nav.Link onClick={changeTheme}><i className="fa-solid fa-circle-half-stroke"/>{' '}<span
+                        className={'d-lg-none'}>{t('views.navigation.dark_mode')}</span></Nav.Link>
                     {user ? <NavDropdown title={<>
                         <i className="fa-solid fa-user"/>{' '}
                         {t('views.navigation.account')}
