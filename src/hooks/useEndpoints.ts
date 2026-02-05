@@ -36,7 +36,7 @@ export function useMqttStatus(config?: SWRConfiguration) {
 export function useMqttHistory(config?: SWRConfiguration) {
     return useCheckSWR<{
         [sensor: string]: MqttSensorHistory
-    }>(import.meta.env.MQTT_PROXY_URL.concat('sensors/'), config);
+    }>(import.meta.env.MQTT_PROXY_URL.concat('sensors'), config);
 }
 
 export function useActionLog(config?: SWRConfiguration) {

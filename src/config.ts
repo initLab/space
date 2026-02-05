@@ -13,10 +13,10 @@ export const oidc = {
 
 export type MqttConfig = {[topic: string]: {label: string}}
 export const sensors: MqttConfig = {
-    'sensors/big-room/test': {label: 'big-room'},
-    'sensors/small-room/test': {label: 'small-room',},
-    'sensors/kitchen/test': {label: 'kitchen',},
-    'sensors/outside/test': {label: 'outside',},
+    'sensors/big-room': {label: 'big-room'},
+    'sensors/small-room': {label: 'small-room',},
+    'sensors/kitchen': {label: 'kitchen',},
+    'sensors/outside': {label: 'outside',},
 };
 
 export const variantHosts: {[hostname: string]: string} = {
@@ -41,7 +41,7 @@ export const variants: {[variant: string]: VariantConfig} = {
     },
     'colibri': {
         dashboard: ColibriDashboard,
-        navbar: {bg: 'light',},
+        navbar: {bg: 'body-tertiary',},
         logo: {url: colibriLogo, alt: 'colibri logo',},
         title: 'Casa Libri',
     },

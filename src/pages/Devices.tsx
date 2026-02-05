@@ -36,7 +36,7 @@ const Devices = ({
         {devices && <>
             {filteredDevices.length > 0 ? filteredDevices.map(device => {
                 const deviceActions = deviceActionMapper(device);
-                const isUnavailable = !device?.statuses?.available;
+                const isUnavailable = device?.statuses?.available === false;
                 const isOpen = !!device?.statuses?.open;
 
                 return (<Col key={device.id} className={`col-xl-${2 * deviceActions.length}`}>
