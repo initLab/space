@@ -25,7 +25,7 @@ function parseTokenResponse(response: FaunaResponse): SpaceAccessToken {
     if ((response as FaunaTokenError).error)
         throw new Error((response as FaunaTokenError).error_description);
 
-    let token = response as FaunaTokenResponse;
+    const token = response as FaunaTokenResponse;
     if (!hasAll(response, ...requiredTokenProps) || token.token_type !== 'Bearer' || token.scope !== scopes
     )
         throw new Error('Incomplete response, missing fields');
