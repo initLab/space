@@ -126,14 +126,14 @@ views:
       имейл us@initlab.org.
     colibri_message_emergency: При неотложни случаи, моля обадете се на тел. 02 422 54 36.
   devices:
-    lock: заключи
-    unlock: отключи
-    open: отвори
-    open_alternative: отвори
-    turn_off: изключи
-    turn_on: включи
-    turn_on_cooling: охлаждане
-    turn_on_heating: отопление
+    lock: Заключи
+    unlock: Отключи
+    open: Отвори
+    open_alternative: Отвори
+    turn_off: Изключи
+    turn_on: Включи
+    turn_on_cooling: Охлаждане
+    turn_on_heating: Отопление
     offline: В момента няма връзка с устройството
   door:
     locked: Заключено

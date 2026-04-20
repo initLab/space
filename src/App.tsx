@@ -1,7 +1,8 @@
-import {createElement, useEffect} from 'react';
+import {createElement, useEffect, Suspense} from 'react';
 import {Container} from 'react-bootstrap';
 import {Route, Routes} from 'react-router-dom';
 
+import LoadingIcon from './widgets/LoadingIcon.tsx';
 import NavBar from './layout/NavBar.tsx';
 import Footer from './layout/Footer.tsx';
 import Sensors from './pages/Sensors.tsx';
@@ -22,7 +23,7 @@ function App() {
     const [theme] = useTheme();
     useEffect(() => document.documentElement.setAttribute('data-bs-theme', theme), [theme]);
 
-    return (<>
+    return (<Suspense fallback={<LoadingIcon/>}>
         <NavBar/>
         <main>
             <Container as="section" className="mt-4">
@@ -46,7 +47,7 @@ function App() {
             </Container>
         </main>
         <Footer/>
-    </>);
+    </Suspense>);
 }
 
 export default App;

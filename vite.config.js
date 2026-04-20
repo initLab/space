@@ -1,10 +1,11 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import viteCompression from 'vite-plugin-compression';
+import i18nextLoader from 'vite-plugin-i18next-loader';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    build: {sourcemap: true,},
+    build: {sourcemap: true, assetsInlineLimit: 0,},
     css: {
         preprocessorOptions: {
             scss: {api: 'modern-compiler',},
@@ -20,5 +21,6 @@ export default defineConfig({
     plugins: [
         react(),
         viteCompression(),
+        i18nextLoader({ paths: ['./src/locales'] }),
     ],
 });

@@ -119,14 +119,14 @@ views:
       at us@initlab.org.
     colibri_message_emergency: In case of major malfunction, please call +359 2 422 54 36.
   devices:
-    lock: lock
-    unlock: unlock
-    open: open
-    open_alternative: open
-    turn_off: turn off
-    turn_on: turn on
-    turn_on_cooling: cooling
-    turn_on_heating: heating
+    lock: Lock
+    unlock: Unlock
+    open: Open
+    open_alternative: Open
+    turn_off: Turn off
+    turn_on: Turn on
+    turn_on_cooling: Cooling
+    turn_on_heating: Heating
     offline: Device is currently offline
   door:
     locked: Locked
