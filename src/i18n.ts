@@ -1,12 +1,14 @@
-import i18n from 'i18next';
+import i18next from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
 import resources from 'virtual:i18next-loader';
+import LanguageDetector from "i18next-browser-languagedetector";
 
-i18n
+i18next
     .use(initReactI18next)
-    .on('failedLoading', (lng, ns, msg) => console.error(msg))
+    .use(LanguageDetector)
     .init({
+        debug: true,
         interpolation: {
             escapeValue: false,
         },
@@ -15,7 +17,15 @@ i18n
         detection: {
             supportedLanguages: ["en", "bg"],
         },
+        react: {
+            wait: true,
+            useSuspense: true,
+        }
+    }, (err, t) => {
+        if(err) console.error(err);
     })
     .then();
 
-export default i18n;
+i18next.on("failedLoading", (lng, ns, msg) => console.error(msg));
+
+export default i18next;
