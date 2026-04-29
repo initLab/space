@@ -9,7 +9,8 @@ import './i18n.ts';
 import App from './App.tsx';
 
 import '@fortawesome/fontawesome-free/css/all.css';
-import 'bootswatch/dist/materia/bootstrap.css';
+//import 'bootswatch/dist/materia/bootstrap.css';
+import "bootstrap/scss/bootstrap.scss";
 
 createRoot(document.getElementById('root') as Container).render(
     <StrictMode>

@@ -21,6 +21,5 @@
 //    "jsx": "react-jsx"
   },
   "types": ["vite/client"],
-  "include": ["src"],
-//  "exclude": ["tsconfig.json"]
+  "include": ["src"]
 }
