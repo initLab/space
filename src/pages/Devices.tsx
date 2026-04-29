@@ -8,12 +8,14 @@ import DeviceActionButton from '../widgets/DeviceActionButton/DeviceActionButton
 import ErrorMessage from '../widgets/ErrorMessage.tsx';
 import {useVariantName} from '../hooks/useVariant.ts';
 import type {PortierDevice} from "../portier-types";
+import { useLocale } from "../hooks/useLocale.ts";
 
 const Devices = ({
                      deviceGroup,
                      deviceActionMapper,
                  }: { deviceGroup: string, deviceActionMapper: (d: PortierDevice) => string[] }) => {
     const {t} = useTranslation();
+    const [locale] = useLocale();
 
     const {
         data: devices,
@@ -43,7 +45,7 @@ const Devices = ({
                     <Card border="secondary">
                         <Card.Header
                             className={'text-start' + (variantName === "initlab" ? ' bg-primary text-light' : '')}>
-                            {device.name}
+                            {locale ? (device.localized_names[locale] ?? device.name) : device.name}
                         </Card.Header>
                         <Card.Body
                             className="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-4">

@@ -6,6 +6,7 @@ export type PortierDevice = {
     number: number,
     public: boolean,
     supported_actions: string[],
+    localized_names: {[lang: string]: string },
     statuses: { [status: string]: string | boolean },
 };
 
