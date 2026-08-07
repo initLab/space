@@ -4,11 +4,12 @@ import {initReactI18next} from 'react-i18next';
 import resources from 'virtual:i18next-loader';
 import LanguageDetector from "i18next-browser-languagedetector";
 
+
 i18next
     .use(initReactI18next)
     .use(LanguageDetector)
     .init({
-        debug: true,
+        debug: !import.meta.env.PROD,
         interpolation: {
             escapeValue: false,
         },
@@ -21,7 +22,7 @@ i18next
             wait: true,
             useSuspense: true,
         }
-    }, (err, t) => {
+    }, (err) => {
         if(err) console.error(err);
     })
     .then();
